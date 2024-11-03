@@ -24,8 +24,6 @@ Agent City Hall serves as the human layer for existing city simulations, introdu
 
 ## Getting Started
 
-## Getting Started
-
 1. **Install Dependencies**: Make sure to install the required packages.
    ```bash
    pip install -r requirements.txt
