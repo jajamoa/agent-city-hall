@@ -1,6 +1,37 @@
 context:
   policy: |
-    This public hearing framework is designed to ensure an open, fair, and constructive environment for all stakeholders. Agents must adhere to respectful communication, follow procedural rules, and work collaboratively to address concerns. The goal is to balance community interests with potential development benefits while fostering transparency, accountability, and mutual understanding.
+    Policy Proposal: Affordable and Workforce Housing Development in Kendall Square
+
+    Objective:
+    To develop affordable and workforce housing units within Kendall Square to accommodate the needs of diverse residents, including low- to middle-income families, local employees, and students, while maintaining the area’s vibrant, innovative character.
+
+    Background:
+    Kendall Square is known for its concentration of technology firms, research institutions, and thriving startups. However, the rising cost of living has made it challenging for middle- and low-income residents to live near where they work, study, or contribute to the local economy. This policy aims to address housing affordability to sustain a diverse community and support the economic vitality of Kendall Square.
+
+    Key Components of the Policy:
+
+    Affordable Housing Allocation
+
+    Goal: 30% of all new residential developments in Kendall Square must be designated as affordable housing, accessible to households earning 60-80% of the Area Median Income (AMI).
+    Funding: Developers will be required to contribute to an Affordable Housing Fund managed by the city to support this goal or provide in-kind units within their developments.
+    Workforce Housing Incentives
+
+    Eligibility: Workforce housing units will target households earning between 80-120% of the AMI.
+    Incentives for Developers: Tax credits and zoning flexibility will be provided to developers who designate at least 20% of units for workforce housing.
+    Priority for Local Workers: Workforce housing will prioritize applicants who work within Kendall Square, such as employees of nearby research institutions, retail staff, educators, and healthcare workers.
+    Community Benefits and Services
+
+    Public Amenities: Developments must include or contribute to public spaces such as parks, community centers, or recreational facilities that benefit both residents and the broader Kendall Square community.
+    Supportive Services: Partnerships with local nonprofits and organizations will provide resources such as financial counseling, tenant support, and affordable childcare for residents in affordable and workforce housing units.
+    Sustainable and Transit-Oriented Development
+
+    Green Building Standards: All new developments will meet LEED Silver certification or higher to promote environmental sustainability.
+    Transit Accessibility: Developers must prioritize housing within walking distance of public transit hubs and include dedicated bike parking to encourage sustainable commuting.
+    Community Engagement and Accountability
+
+    Quarterly Reporting: Developers must report quarterly on the progress of affordable housing and workforce unit allocations.
+    Community Feedback: A community advisory committee will be formed to provide ongoing feedback on the policy’s impact and address resident concerns related to housing developments.
+    Annual Review: The city will review the policy annually to assess its effectiveness and make adjustments based on community feedback, housing market conditions, and changes in AMI levels.
 
 agents:
   government:
