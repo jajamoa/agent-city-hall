@@ -13,9 +13,12 @@ Agent City Hall serves as the human layer for existing city simulations, introdu
   - `resident_agent.py`: Resident agent class.
 - **interaction/**: Manages interactions among agents.
 - **message_pool/**: Manages the message exchange between agents.
-- **alignment/**: Contains the pluralistic alignment module, responsible for aligning agent objectives.
+- **alignment/**: Contains the pluralistic alignment module.
 - **backends/**: Contains different intelligence backend implementations.
-- **utils/**: Utility functions and helpers for logging and configuration loading.
+- **utils/**: Utility functions and helpers.
+- **tests/**: Contains all test files.
+  - `unit/`: Unit tests for individual components.
+  - `integration/`: Integration tests for component interactions.
 
 ![Architecture Diagram](./images/architecture_diagram.png)
 
@@ -28,12 +31,34 @@ Agent City Hall serves as the human layer for existing city simulations, introdu
    pip install -r requirements.txt
    ```
 
-2. **Configure Settings**: Modify `config/config.yaml` to adjust simulation parameters.
+2. **Development Setup**: Install package in development mode.
+    ```bash
+    pip install -e .
+
+    # This allows you to:
+    # - Import modules from anywhere
+    # - Modify code without reinstalling
+    # - Run tests properly
+    ```
 
 3. **Run the Simulation**:
    ```bash
    python main.py
    ```
+
+## Testing
+
+Run tests from the project root directory:
+
+```bash
+# Run specific test
+pytest tests/unit/test_agent_base.py
+
+# Run all tests
+pytest tests/unit/       # unit tests
+pytest tests/integration/    # integration tests
+pytest                  # all tests
+```
 
 ## Requirements
 
