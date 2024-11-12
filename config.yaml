@@ -38,22 +38,43 @@ agents:
     name: "Government Representative"
     department_name: "NA"
     instruction: |
-      You are a Government Representative in a public hearing. Your key responsibilities:
-      1. Ensure fair process and regulatory compliance
-      2. Evaluate project proposals against public interest
-      3. Coordinate between stakeholders
-      4. Make evidence-based decisions
-      5. Maintain professional and neutral stance
+      You need to decide whether the updated proposal from the developer should be approved or not based on the conversation history betwwen developer and community members.
 
   developer:
     name: "Real Estate Developer"
     development_proposal: |
-      You are a Real Estate Developer presenting your project. Your key responsibilities:
-      1. Present project details clearly
-      2. Address community concerns
-      3. Highlight benefits while being honest about impacts
-      4. Propose solutions to concerns raised
-      5. Work towards viable compromises
+      We plan to build a huge apartment. The detailed plan includes:
+      
+      Project Location and Scope
+      The apartment complex will be located in Downtown Edge District, approximately 2 miles from the city center and adjacent to a new transit corridor.
+      The complex will span 10 acres, with 4 buildings each consisting of 12 floors, accommodating approximately 500 residential units. The units will vary in size: 200 studios, 150 one-bedrooms, 100 two-bedrooms, and 50 three-bedrooms.
+      
+      Design and Architecture
+      The buildings will have a contemporary architectural style with energy-efficient glass façades and green building materials.
+      Smart home technology, including automated lighting, temperature control, and security systems, will be standard in each unit to enhance comfort and sustainability.
+      A 1-acre communal park with landscaped gardens, a playground, and walking paths will serve as the central recreational space for residents.
+      
+      Community Amenities
+      The complex will feature a 24/7 fitness center, a rooftop garden on each building, a coworking space for remote professionals, and a communal lounge and event hall for residents.
+      5,000 square feet of retail space on the ground floor will include a grocery store, a coffee shop, and essential services, creating a mini-neighborhood within the complex.
+      
+      Transportation and Accessibility
+      Designed for eco-friendly commuting, the complex will have bicycle storage areas and dedicated bike lanes connecting to nearby paths.
+      300 parking spaces will be available for residents, including 50 spaces with electric vehicle (EV) charging stations.
+      A free shuttle service will connect the complex to the central metro station, running every 30 minutes during peak hours.
+      
+      Environmental Considerations
+      The buildings will incorporate solar panels on the rooftops, designed to generate 20% of the complex's total energy requirements.
+      Rainwater harvesting and greywater recycling systems will reduce water consumption by an estimated 30%, contributing to sustainability.
+      The complex will pursue LEED Gold Certification, adhering to strict environmental standards.
+      
+      Budget and Funding
+      The estimated project budget is $120 million, with $60 million from private investors, $40 million through bank financing, and $20 million from government incentives for green construction.
+      
+      Timeline and Phases
+      Phase 1 (site preparation and foundational work) will begin in March 2025.
+      Phase 2 (structural development) will start in September 2025 and conclude by December 2026.
+      Phase 3 (interiors, amenities, and landscaping) will commence in January 2027, with the full project completion and resident move-in expected by September 2027.
 
   citizens:
     citizen1:
