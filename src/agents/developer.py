@@ -8,7 +8,7 @@ from src.prompts import DEVELOPER_STAGE_1_PROMPT_TEMPLATE, DEVELOPER_STAGE_2_PRO
 class DeveloperAgent(Agent):
     def respond(self, message_pool: MessagePool, stage: str) -> None:
         # 1. prepare data
-        development_proposal = self.data.get("development_proposal")
+        development_proposal = self.data["development_proposal"]
         conversation_history = message_pool.get_conversation()
 
         # 2. format prompt

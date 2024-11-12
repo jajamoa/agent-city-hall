@@ -8,8 +8,8 @@ from src.prompts import COMMUNITY_MEMBER_PROMPT_TEMPLATE
 class CommunityMemberAgent(Agent):
     def respond(self, message_pool: MessagePool, **kwargs: Any) -> None:
         # 1. prepare data
-        role = self.data.get("role")
-        instruction = self.data.get("instruction")
+        role = self.data["role"]
+        instruction = self.data["instruction"]
         conversation_history = message_pool.get_conversation()
 
         # 2. format prompt

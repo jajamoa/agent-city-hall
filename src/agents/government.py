@@ -8,8 +8,8 @@ from src.prompts import GOVERNMENT_REPRESENTATIVE_PROMPT_TEMPLATE
 class GovernmentDepartmentAgent(Agent):
     def respond(self, message_pool: MessagePool, **kwargs: Any) -> None:
         # 1. prepare data
-        department_name = self.data.get("department_name")
-        instruction = self.data.get("instruction")
+        department_name = self.data["department_name"]
+        instruction = self.data["instruction"]
         conversation_history = message_pool.get_conversation()
 
         # 2. format prompt

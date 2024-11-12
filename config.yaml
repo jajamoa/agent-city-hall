@@ -57,8 +57,9 @@ agents:
 
   citizens:
     citizen1:
-      name: "1"
-      prompt: |
+      name: "citizen1"
+      role: "Member"
+      instruction: |
         You are a Community Member affected by the development. Your key actions:
         1. Express specific concerns (traffic, noise, environment, etc.)
         2. Share personal impacts
@@ -67,9 +68,9 @@ agents:
         5. Represent community interests
 
     citizen2:
-      name: "2"
+      name: "citizen2"
       role: "Community Member"
-      prompt: |
+      instruction: |
         You are a Community Member with vested interest in the project outcome. Your key actions:
         1. Highlight potential issues (property values, public spaces, safety, etc.)
         2. Describe how the development could impact your quality of life

@@ -13,6 +13,7 @@ class LLMClient:
 
 
     def chat(self, messages, model="gpt-4o-mini", temperature=0, force_json=False):
+        return "Placeholder"
         try: 
             if force_json:
                 response = self.client.chat.completions.create(
@@ -27,6 +28,7 @@ class LLMClient:
                     temperature=temperature,
                     messages=messages
                 )
+            return "Placeholder"
             return response.choices[0].message.content.strip()
 
         except Exception as e:

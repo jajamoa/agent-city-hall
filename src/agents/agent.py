@@ -9,7 +9,7 @@ class Agent(ABC):
     def __init__(self,
                  data: dict[str, Any],
                  llm_client: LLMClient):               
-        self.name = data.get("name")
+        self.name = data["name"]
         self.data = data
         self.llm_client = llm_client
 
