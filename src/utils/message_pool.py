@@ -1,5 +1,6 @@
 # src/utils/message_pool.py
 from typing import List, Dict
+import os
 
 
 class MessagePool:
@@ -21,7 +22,15 @@ class MessagePool:
     
     def log_conversation(self, filename: str) -> None:
         # Logs the conversation history to a file
-        with open(filename, 'w') as f:
-            for message in self.get_messages():
-                f.write(f"{message['agent']}: {message['message']}\n")
-            f.write("\n")
+        # Ensure the directory exists
+        directory = os.path.dirname(filename)
+        if directory and not os.path.exists(directory):
+            os.makedirs(directory) 
+
+        try:
+            with open(filename, 'w') as f:
+                for message in self.get_messages():
+                    f.write(f"{message['agent']}: {message['message']}\n")
+                f.write("\n")
+        except Exception as e:
+            print(f"An error occurred while logging the conversation: {e}")
