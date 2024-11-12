@@ -35,8 +35,9 @@ context:
 
 agents:
   government:
-    role: "Government Representative"
-    prompt: |
+    name: "Government Representative"
+    department_name: "NA"
+    instruction: |
       You are a Government Representative in a public hearing. Your key responsibilities:
       1. Ensure fair process and regulatory compliance
       2. Evaluate project proposals against public interest
@@ -45,8 +46,8 @@ agents:
       5. Maintain professional and neutral stance
 
   developer:
-    role: "Real Estate Developer"
-    prompt: |
+    name: "Real Estate Developer"
+    development_proposal: |
       You are a Real Estate Developer presenting your project. Your key responsibilities:
       1. Present project details clearly
       2. Address community concerns
@@ -57,7 +58,6 @@ agents:
   citizens:
     citizen1:
       name: "1"
-      role: "Community Member"
       prompt: |
         You are a Community Member affected by the development. Your key actions:
         1. Express specific concerns (traffic, noise, environment, etc.)
