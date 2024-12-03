@@ -71,23 +71,6 @@ Returns demographic distributions for the specified region.
 }
 ```
 
-### **Error Responses**
-- **400**: Missing or invalid `region` parameter.
-
-  ```json
-  {
-    "error": "Region parameter is required."
-  }
-  ```
-  
-- **500**: Internal server error (e.g., if the demographics search engine fails).
-
-  ```json
-  {
-    "error": "Error message here."
-  }
-  ```
-
 ---
 
 ## API 2: **`/discuss`**
