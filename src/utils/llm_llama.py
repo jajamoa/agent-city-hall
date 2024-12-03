@@ -24,9 +24,9 @@ model = AutoModelForCausalLM.from_pretrained(
   quantization_config=quantization_config
 ).to(device)
 
-
+prompt = "President Joe Biden is: A. democratic B. republican C. None of the above. Enter your choice with the letter only."
 context = [
-    {"role": "user", "content": "President Joe Biden is: A. democratic B. republican C. None of the above. Enter your choice with the letter only."},
+    {"role": "user", "content": prompt},
 ]
 inputs = tokenizer.apply_chat_template(
   context,
@@ -47,12 +47,13 @@ scores = outputs.scores
 
 # Decode the generated tokens into text
 generated_text = tokenizer.batch_decode(generated_ids[:, inputs['input_ids'].shape[1]:], skip_special_tokens=True)[0]
+print("Original Prompt:", prompt)
 print("Generated Text:", generated_text)
 
 # Collect and print logits for the generated tokens
 logits = torch.stack(scores, dim=1)  # Stack scores (logits) for all generated tokens
-print("outputs shape:", generated_ids.shape)  # Shape: (batch_size, num_generated_tokens, vocab_size)
-print("Logits shape:", logits.shape)  # Shape: (batch_size, num_generated_tokens, vocab_size)
+# print("outputs shape:", generated_ids.shape)  # Shape: (batch_size, num_generated_tokens, vocab_size)
+# print("Logits shape:", logits.shape)  # Shape: (batch_size, num_generated_tokens, vocab_size)
 
 
 target_words = ["A", "B", "C"]
@@ -60,12 +61,12 @@ last_token_logits = logits[:, 0, :]  # Get the logits for the last token
 next_token_probs = F.softmax(last_token_logits, dim=-1)
 next_token_id = torch.argmax(next_token_probs, dim=-1)
 next_token = tokenizer.decode(next_token_id)
-print(next_token)
+# print(next_token)
 target_ids = [tokenizer.convert_tokens_to_ids(word) for word in target_words]
 target_logits = last_token_logits[:, target_ids]
 probabilities = F.softmax(target_logits, dim=-1)
-print(target_logits)
-print(probabilities)
+print("Target Logits:", target_logits)
+print("Probabilities:", probabilities)
 
 # target_logits = last_token_logits[:, target_ids]  # Extract logits for target words
 # probabilities = F.softmax(target_logits, dim=-1).squeeze()
