@@ -2,7 +2,7 @@ import os
 from openai import OpenAI
 from dotenv import load_dotenv
 
-class LLMClient:
+class OpenAIClient:
     def __init__(self):
         load_dotenv()
         openai_key = os.getenv('OPENAI_API_KEY')
@@ -12,7 +12,7 @@ class LLMClient:
         self.client = OpenAI(api_key=openai_key)
 
 
-    def chat(self, messages, model="gpt-4o-mini", temperature=0, force_json=False):
+    def chat(self, messages, model="gpt-4o-mini", temperature=1, force_json=False):
         try: 
             if force_json:
                 response = self.client.chat.completions.create(

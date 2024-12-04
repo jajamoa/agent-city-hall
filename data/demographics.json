@@ -1,15 +1,15 @@
 {
-    "boston": {
+    "kendall square": {
         "age_distribution": {
-            "18-25": 20,
-            "26-40": 50,
-            "41-60": 20,
+            "18-25": 22,
+            "26-40": 47,
+            "41-60": 17,
             "60+": 10
         },
         "income_distribution": {
-            "low_income": 30,
-            "middle_income": 50,
-            "high_income": 20
+            "low_income": 29,
+            "middle_income": 40,
+            "high_income": 31
         },
         "education_distribution": {
             "high_school_or_below": 30,
@@ -17,8 +17,8 @@
             "postgraduate": 30
         },
         "occupation_distribution": {
-            "blue_collar": 30,
-            "white_collar": 50,
+            "blue_collar": 14.2,
+            "white_collar": 65.8,
             "self_employed": 10,
             "retired": 10
         },
@@ -33,11 +33,11 @@
             "other": 10
         },
         "race_distribution": {
-            "white": 50,
-            "black": 20,
-            "asian": 15,
-            "hispanic": 10,
-            "other": 5
+            "white": 45,
+            "black": 21,
+            "asian": 24,
+            "hispanic": 7,
+            "other": 3
         }
     },
     "new_york": {
