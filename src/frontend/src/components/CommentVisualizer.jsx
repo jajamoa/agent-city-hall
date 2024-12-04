@@ -5,7 +5,8 @@ import axios from "axios";
 import DetailPanel from "./DetailPanel";
 import InfoPanel from './InfoPanel';
 
-const API_URL = "http://localhost:5050";
+// const API_URL = "http://localhost:5050";
+const API_URL = "http://172.25.184.18:5050";
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiamFqYW1vYSIsImEiOiJjbDhzeDI4aHgwMXh6M3hrbmVxbG9vcDlyIn0.cdD4-PP7QcxegAsxlhC3mA"; 
 
