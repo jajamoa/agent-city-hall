@@ -5,7 +5,7 @@ import './styles/CommentVisualizer.css';
 function App() {
   return (
     <div className="App">
-      <h1>BPDA Public Comments Visualization</h1>
+      <h1>Agent City Hall</h1>
       <CommentVisualizer />
     </div>
   );
