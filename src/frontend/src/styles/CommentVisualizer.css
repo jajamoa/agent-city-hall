@@ -216,7 +216,7 @@ circle:hover {
 }
 
 .marker.selected::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -522,4 +522,12 @@ select.dark-input option {
   font-weight: 600;
   color: #d1d5db;
   font-size: 13px;
+}
+
+.mapboxgl-ctrl-bottom-right {
+  display: none;
+}
+
+.mapboxgl-ctrl-bottom-left {
+  display: none;
 }
