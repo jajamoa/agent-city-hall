@@ -9,7 +9,7 @@ proposal = {
 
 params = {"region": region}
 headers = {"Content-Type": "application/json"}
-response = requests.post("http://localhost:5050/lookup_demographics", params=params, headers=headers)
+response = requests.post("http://172.25.184.18:5050/lookup_demographics", params=params, headers=headers)
 if response.status_code != 200:
     print("Error:", response.json())
     exit()

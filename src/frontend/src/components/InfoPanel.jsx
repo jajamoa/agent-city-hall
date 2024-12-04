@@ -39,6 +39,22 @@ const InfoPanel = ({ data, selectedPoint, filters, setFilters }) => {
 
   const stats = getFilteredStats();
 
+  // 获取所有唯一的选项值
+  const getUniqueOptions = (field) => {
+    if (!data?.comments) return [];
+    const uniqueValues = new Set(
+      data.comments
+        .filter(comment => comment.agent && comment.agent[field])
+        .map(comment => comment.agent[field])
+    );
+    return Array.from(uniqueValues).sort();
+  };
+
+  // 获取每个筛选器的选项
+  const ageOptions = getUniqueOptions('age');
+  const educationOptions = getUniqueOptions('education');
+  const occupationOptions = getUniqueOptions('occupation');
+
   return (
     <div className="info-panel">
       {/* Demographic Filters */}
@@ -51,10 +67,9 @@ const InfoPanel = ({ data, selectedPoint, filters, setFilters }) => {
             onChange={(e) => setFilters({...filters, age: e.target.value})}
           >
             <option value="all">All Ages</option>
-            <option value="18-25">18-25</option>
-            <option value="26-35">26-35</option>
-            <option value="36-50">36-50</option>
-            <option value="51+">51+</option>
+            {ageOptions.map(age => (
+              <option key={age} value={age}>{age}</option>
+            ))}
           </select>
 
           <select 
@@ -63,9 +78,11 @@ const InfoPanel = ({ data, selectedPoint, filters, setFilters }) => {
             onChange={(e) => setFilters({...filters, education: e.target.value})}
           >
             <option value="all">All Education Levels</option>
-            <option value="high_school_or_below">High School or Below</option>
-            <option value="bachelor">Bachelor's</option>
-            <option value="postgraduate">Postgraduate</option>
+            {educationOptions.map(education => (
+              <option key={education} value={education}>
+                {formatString(education)}
+              </option>
+            ))}
           </select>
 
           <select 
@@ -74,11 +91,11 @@ const InfoPanel = ({ data, selectedPoint, filters, setFilters }) => {
             onChange={(e) => setFilters({...filters, occupation: e.target.value})}
           >
             <option value="all">All Occupations</option>
-            <option value="student">Student</option>
-            <option value="employed">Employed</option>
-            <option value="self_employed">Self Employed</option>
-            <option value="unemployed">Unemployed</option>
-            <option value="blue_collar">Blue Collar</option>
+            {occupationOptions.map(occupation => (
+              <option key={occupation} value={occupation}>
+                {formatString(occupation)}
+              </option>
+            ))}
           </select>
         </div>
       </div>
