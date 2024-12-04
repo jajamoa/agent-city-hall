@@ -203,9 +203,12 @@ const CommentVisualizer = () => {
           disabled={isLoading}
         >
           {isLoading ? (
-            <div className="spinner">
-              <div className="spinner-inner"></div>
-            </div>
+            <>
+              <div className="spinner">
+                <div className="spinner-inner"></div>
+              </div>
+              Loading
+            </>
           ) : (
             "Simulate"
           )}
