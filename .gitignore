@@ -162,3 +162,11 @@ cython_debug/
 #.idea/
 
 data/log/
+
+.DS_Store
+
+node_modules/
+build/
+*.log
+*.env
+*.cache
