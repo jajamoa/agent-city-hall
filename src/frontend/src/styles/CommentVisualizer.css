@@ -1,0 +1,530 @@
+/* src/styles/CommentVisualizer.css */
+body {
+  background-color: black;
+  color: #d1d5db;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+}
+
+.visualizer-container {
+  display: flex;
+  height: 100vh;
+  gap: 20px;
+  padding: 20px;
+  background-color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+}
+
+.left-panel {
+  width: 320px;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.left-panel h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #d1d5db;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #a1a1a1;
+  margin: -20px 0 0 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.dark-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: #d1d5db;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.dark-input::placeholder {
+  color: #9ca3af;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.description-box {
+  height: 250px;
+  resize: vertical;
+  min-height: 120px;
+  max-height: 400px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.dark-button {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #d1d5db;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: all 0.2s ease;
+}
+
+.dark-button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dark-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Main Visualization Area */
+.main-content {
+  flex: 1;
+  height: 100%;
+  position: relative;
+}
+
+/* SVG Scatter Plot */
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+circle {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+circle:hover {
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+/* Detail Panel */
+.detail-panel {
+  width: 300px;
+  flex-shrink: 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 6px;
+}
+
+/* Override Material-UI Card styles */
+.MuiCard-root {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #d1d5db !important;
+  border-radius: 8px !important;
+}
+
+.MuiTypography-root {
+  color: #d1d5db !important;
+}
+
+.MuiTypography-h6 {
+  font-size: 1.25rem !important;
+  font-weight: bold !important;
+  margin-bottom: 1rem !important;
+}
+
+/* App Header */
+.App h1 {
+  text-align: center;
+  color: #d1d5db;
+  margin: 20px 0;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .visualizer-container {
+    grid-template-columns: 250px 1fr 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  .visualizer-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: auto;
+  }
+
+  .filter-panel,
+  .detail-panel {
+    padding: 1rem;
+  }
+}
+
+/* Statistics Display */
+.stats-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #d1d5db;
+  font-style: italic;
+}
+
+/* Error State */
+.error-message {
+  color: #ef4444;
+  padding: 1rem;
+  text-align: center;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: 4px;
+  margin: 1rem;
+}
+
+.marker {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* 选中状态的光晕效果 */
+.marker.selected {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
+}
+
+.marker.selected::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.marker.selected.support::after {
+  border-color: #4ade80;
+}
+
+.marker.selected.neutral::after {
+  border-color: #9ca3af;
+}
+
+.marker.selected.oppose::after {
+  border-color: #f87171;
+}
+
+@keyframes pulse {
+  0% {
+    width: 16px;
+    height: 16px;
+    opacity: 1;
+  }
+  100% {
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+  }
+}
+
+/* 原有的标记样式保持不变 */
+.marker:hover {
+  transform: scale(1.2);
+}
+
+.marker.support {
+  background-color: #4ade80;
+}
+
+.marker.neutral {
+  background-color: #9ca3af;
+}
+
+.marker.oppose {
+  background-color: #f87171;
+}
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.spinner-inner {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: 2px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 优化下拉框选项样式 */
+select.dark-input option {
+  background-color: #1a1a1a;
+  color: #d1d5db;
+  padding: 8px;
+}
+
+/* 禁用时的样式 */
+.dark-button.loading {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 信息面板样式 */
+.info-panel {
+  width: 320px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.panel-section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
+}
+
+.panel-section:last-child {
+  border-bottom: none;
+}
+
+.panel-section h3 {
+  font-size: 16px;
+  margin: 0 0 16px 0;
+  color: #d1d5db;
+}
+
+.stats-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-bar {
+  height: 8px;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  background-color: #4ade80;
+}
+
+.stat-bar.support {
+  background-color: #4ade80;
+}
+
+.stat-bar.neutral {
+  background-color: #9ca3af;
+}
+
+.stat-bar.oppose {
+  background-color: #f87171;
+}
+
+.stat-value {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.comment-details {
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  padding: 12px;
+}
+
+.opinion-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.opinion-tag.support {
+  background-color: rgba(74, 222, 128, 0.2);
+  color: #4ade80;
+}
+
+.opinion-tag.neutral {
+  background-color: rgba(156, 163, 175, 0.2);
+  color: #9ca3af;
+}
+
+.opinion-tag.oppose {
+  background-color: rgba(248, 113, 113, 0.2);
+  color: #f87171;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.filter-group select.dark-input {
+  width: 100%;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: #d1d5db;
+  font-size: 13px;
+  padding: 0 12px;
+}
+
+.filter-group select.dark-input option {
+  background-color: #1a1a1a;
+  padding: 8px;
+}
+
+.agent-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.agent-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agent-name {
+  font-weight: bold;
+  color: #d1d5db;
+}
+
+.opinion-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.comment-text {
+  margin-top: 16px;
+}
+
+.label {
+  font-weight: bold;
+  color: #d1d5db;
+}
+
+/* 代理名称行样式 */
+.agent-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.agent-id {
+  color: #9ca3af;
+  font-size: 12px;
+  font-family: monospace;
+}
+
+/* 意见行样式 */
+.opinion-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+/* 人口统计信息样式 */
+.demographics-section {
+  margin-top: 12px;
+}
+
+.demographics-title {
+  font-size: 13px;
+  color: #d1d5db;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.agent-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* 评论部分样式 */
+.comment-section {
+  margin-top: 16px;
+}
+
+.comment-text {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #d1d5db;
+  line-height: 1.5;
+}
+
+.label {
+  font-weight: 600;
+  color: #d1d5db;
+  font-size: 13px;
+}

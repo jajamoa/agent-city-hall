@@ -1,3 +1,4 @@
+
 # Agent City Hall
 
 Agent City Hall serves as the human layer for existing city simulations, introducing social alignment to the model. This framework integrates diverse agents—such as government, developers, and residents—to enable social dynamics modeling and policy evaluation, enriching urban planning simulations with a focus on human-centric perspectives.
