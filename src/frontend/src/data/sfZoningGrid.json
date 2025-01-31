@@ -1,0 +1,27 @@
+{
+  "gridConfig": {
+    "cellSize": 100,
+    "bounds": {
+      "north": 37.8120,
+      "south": 37.7080,
+      "east": -122.3549,
+      "west": -122.5157
+    }
+  },
+  "heightLimits": {
+    "default": 0,
+    "options": [40, 65, 80, 85, 105, 130, 140, 240, 300]
+  },
+  "cells": {
+    "10_15": {
+      "heightLimit": 65,
+      "category": "residential",
+      "lastUpdated": "2024-02-20"
+    },
+    "10_16": {
+      "heightLimit": 85,
+      "category": "mixed_use",
+      "lastUpdated": "2024-02-20"
+    }
+  }
+} 
