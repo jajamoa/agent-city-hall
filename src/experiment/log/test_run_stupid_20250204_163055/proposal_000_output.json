@@ -1,0 +1,77 @@
+{
+  "summary": {
+    "support": 0,
+    "neutral": 0,
+    "oppose": 100
+  },
+  "comments": [
+    {
+      "id": 1,
+      "agent": {
+        "age": "41-60",
+        "income_level": "low_income",
+        "education_level": "bachelor",
+        "occupation": "white_collar",
+        "gender": "female",
+        "religion": null,
+        "race": null
+      },
+      "opinion": "oppose",
+      "comment": "As a professional female in her mid-forties with a bachelor's degree and a lower income, I oppose the rezoning proposal due to concerns about increased traffic, noise, and potential decrease in property value.",
+      "cell_id": "10_15",
+      "location": {
+        "lat": 37.764606,
+        "lng": -122.49296
+      }
+    },
+    {
+      "id": 2,
+      "agent": {
+        "age": "18-25",
+        "income_level": "low_income",
+        "education_level": "postgraduate",
+        "occupation": "student",
+        "gender": "male",
+        "religion": null,
+        "race": null
+      },
+      "opinion": "oppose",
+      "comment": "As a student living nearby, I am concerned about the impact of increased height limits on the community character and property values.",
+      "cell_id": "10_15",
+      "location": {
+        "lat": 37.718457,
+        "lng": -122.514926
+      }
+    },
+    {
+      "id": 3,
+      "agent": {
+        "age": "18-25",
+        "income_level": "middle_income",
+        "education_level": "some_college",
+        "occupation": "white_collar",
+        "gender": "female",
+        "religion": null,
+        "race": null
+      },
+      "opinion": "oppose",
+      "comment": "I oppose the rezoning proposal as it may lead to increased traffic, noise, and overshadowing of nearby properties.",
+      "cell_id": "10_15",
+      "location": {
+        "lat": 37.773265,
+        "lng": -122.447924
+      }
+    }
+  ],
+  "key_themes": {
+    "support": [],
+    "oppose": [
+      "traffic",
+      "property values",
+      "noise",
+      "property value",
+      "concern",
+      "community character"
+    ]
+  }
+}
