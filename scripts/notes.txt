@@ -1,5 +1,6 @@
 
-Age and Gender: 
-Occupation: Industry by Occupation for the Civilian Employed Population 16 Years and Over
+Age and Gender: Sex by Age
+Occupation: Industry by Occupation for the Civilian Employed Population 16 Years and Over; Detailed Occupation for the Full-Time, Year-Round Civilian Employed Male Population 16 Years and Over
 Tenure: Tenure by Selected Physical and Financial Conditions
-Mobility: Geographical Mobility in the Past Year
+
+(optional)Mobility: Geographical Mobility in the Past Year
