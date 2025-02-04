@@ -1,20 +1,21 @@
 # Agent City Hall
 
-An agent-based simulation system for evaluating public opinions on urban development proposals.
+Simulation framework for evaluating zoning proposals through agent-based modeling.
 
 ## Project Structure
 
 ```
 src/
-├── backend/          # Flask-based API service
-├── experiment/       # Evaluation framework
-│   ├── scripts/     # Experiment runners
-│   └── eval/        # Test data and metrics
-├── models/          # Simulation models
-│   ├── m00_template/  # Model template
-│   ├── m01_basic/    # Basic simulation
-│   └── m02_stupid/   # LLM-powered agents
-└── frontend/        # React-based web interface
+├── backend/           # Flask-based API service
+├── frontend/         # React-based web interface
+│
+├── models/           # Simulation models
+│   └── ...          # Different model implementations
+│
+└── experiment/       # Evaluation framework
+    ├── eval/        # Test data and metrics
+    ├── log/         # Experiment results
+    └── scripts/     # Experiment runners
 ```
 
 ## Module Relationships
@@ -40,7 +41,7 @@ echo "OPENAI_API_KEY=your-key-here" > .env
 - `models/`: Opinion simulation model implementations
 - `frontend/`: React-based web interface for proposal visualization
 - `backend/`: RESTful API service for proposal evaluation
-- 
+  
 For detailed documentation, please refer to the README in each module directory.
 
 ## License
