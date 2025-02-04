@@ -2,13 +2,6 @@
 
 An agent-based simulation system for evaluating public opinions on urban development proposals.
 
-## Features
-
-- Agent-based opinion simulation with demographic considerations
-- LLM-powered agent reasoning and comment generation
-- RESTful API for proposal evaluation
-- Comprehensive experiment and validation framework
-
 ## Project Structure
 
 ```
@@ -17,17 +10,23 @@ src/
 ├── experiment/       # Evaluation framework
 │   ├── scripts/     # Experiment runners
 │   └── eval/        # Test data and metrics
-└── models/          # Simulation models
-    ├── m00_template/  # Model template
-    ├── m01_basic/    # Basic simulation
-    └── m02_stupid/   # LLM-powered agents
+├── models/          # Simulation models
+│   ├── m00_template/  # Model template
+│   ├── m01_basic/    # Basic simulation
+│   └── m02_stupid/   # LLM-powered agents
+└── frontend/        # React-based web interface
 ```
+
+## Module Relationships
+
+![Architecture Diagram](./assets/architecture_diagram.png)
 
 ## Quick Start
 
 1. Install dependencies:
 ```bash
 pip install -e .
+cd src/frontend && npm install
 ```
 
 2. Set up OpenAI API key:
@@ -35,22 +34,19 @@ pip install -e .
 echo "OPENAI_API_KEY=your-key-here" > .env
 ```
 
-3. Run model validation:
+3. Start frontend development server:
 ```bash
-python src/experiment/scripts/validate_model.py \
-    --model-path models.m02_stupid.model.StupidAgentModel
+cd src/frontend && npm start
 ```
 
-4. Start backend service:
-```bash
-python src/backend/app.py
-```
+## Project Modules
 
-## Development
+- `backend/`: RESTful API service for proposal evaluation
+- `experiment/`: Testing and validation framework
+- `models/`: Opinion simulation model implementations
+- `frontend/`: React-based web interface for proposal visualization
 
-- Use the model template in `src/models/m00_template/` for new models
-- Run experiments with `src/experiment/scripts/run_experiment.py`
-- Test models with `src/experiment/scripts/validate_model.py`
+For detailed documentation, please refer to the README in each module directory.
 
 ## License
 
