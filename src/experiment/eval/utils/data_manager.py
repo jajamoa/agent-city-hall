@@ -1,6 +1,6 @@
 """Data management utilities for experiments."""
 from pathlib import Path
-from typing import Optional, Dict, Any, Tuple
+from typing import Optional, Dict, Any, Tuple, Union
 import json
 from datetime import datetime
 import sys
@@ -15,7 +15,7 @@ class DataManager:
         """Initialize data manager with directory structure."""
         self.base_dir = Path(base_dir)
         self.eval_dir = self.base_dir / "eval"
-        self.inputs_dir = self.eval_dir / "data/inputs/proposals"
+        self.inputs_dir = self.eval_dir / "data/inputs"
         self.ground_truth_dir = self.eval_dir / "data/ground_truth"
         self.log_dir = self.base_dir / "log"
         self._init_directories()
@@ -40,31 +40,31 @@ class DataManager:
     
     def save_metadata(self, 
                      exp_dir: Path,
-                     args: Dict[str, Any],
+                     args: Union[Dict[str, Any], Any],
                      start_time: datetime,
-                     end_time: datetime,
-                     additional_info: Optional[Dict[str, Any]] = None) -> None:
+                     end_time: datetime) -> None:
         """Save experiment metadata including runtime information and parameters."""
-        metadata = {
-            "parameters": {
-                "model": args.model,
-                "population": args.population,
-                "name": args.name
-            },
-            "runtime": {
-                "start_time": start_time.isoformat(),
-                "end_time": end_time.isoformat(),
-                "duration_seconds": (end_time - start_time).total_seconds()
-            },
-            "environment": {
-                "python_version": sys.version,
-                "command": " ".join(sys.argv),
-                "working_directory": os.getcwd()
+        if isinstance(args, dict):
+            metadata = args
+        else:
+            # Handle legacy argparse.Namespace format
+            metadata = {
+                "parameters": {
+                    "model": args.model,
+                    "population": args.population,
+                    "name": args.name
+                },
+                "runtime": {
+                    "start_time": start_time.isoformat(),
+                    "end_time": end_time.isoformat(),
+                    "duration_seconds": (end_time - start_time).total_seconds()
+                },
+                "environment": {
+                    "python_version": sys.version,
+                    "command": " ".join(sys.argv),
+                    "working_directory": os.getcwd()
+                }
             }
-        }
-        
-        if additional_info:
-            metadata.update(additional_info)
         
         with open(exp_dir / "experiment_metadata.json", "w") as f:
             json.dump(metadata, f, indent=2)
@@ -86,18 +86,21 @@ class DataManager:
                              proposal_id: str,
                              model_name: str):
         """Save experiment input, output and metrics."""
+        # Extract number from proposal_id (e.g., "proposal_000" -> "000")
+        file_id = proposal_id.split("_")[-1]
+        
         # Save input proposal
-        input_path = exp_dir / f"{proposal_id}_input.json"
+        input_path = exp_dir / f"{file_id}_input.json"
         with open(input_path, "w") as f:
             json.dump(proposal.model_dump(), f, indent=2)
         
         # Save output result
-        output_path = exp_dir / f"{proposal_id}_output.json"
+        output_path = exp_dir / f"{file_id}_output.json"
         with open(output_path, "w") as f:
             json.dump(result.model_dump(), f, indent=2)
         
         # Load ground truth and calculate metrics
-        ground_truth = self.load_ground_truth(proposal_id)
+        ground_truth = self.load_ground_truth(file_id)
         
         # 配置要计算的分布指标
         distribution_configs = [
@@ -124,15 +127,16 @@ class DataManager:
             "agent.gender"
         ]
         
-        # 计算指标
-        metrics = calculate_metrics(
-            result,
-            ground_truth=ground_truth,
-            distribution_configs=distribution_configs,
-            similarity_fields=similarity_fields if ground_truth else None
-        )
-        
-        # Save metrics
-        metrics_path = exp_dir / f"{proposal_id}_metrics.json"
-        with open(metrics_path, "w") as f:
-            json.dump(metrics, f, indent=2) 
+        # Calculate metrics if ground truth exists
+        if ground_truth:
+            metrics = calculate_metrics(
+                result,
+                ground_truth=ground_truth,
+                distribution_configs=distribution_configs,
+                similarity_fields=similarity_fields
+            )
+            
+            # Save metrics
+            metrics_path = exp_dir / f"{file_id}_metrics.json"
+            with open(metrics_path, "w") as f:
+                json.dump(metrics, f, indent=2) 
