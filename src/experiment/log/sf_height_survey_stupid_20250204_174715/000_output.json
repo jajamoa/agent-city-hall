@@ -1,0 +1,59 @@
+{
+  "summary": {
+    "support": 50,
+    "neutral": 0,
+    "oppose": 50
+  },
+  "comments": [
+    {
+      "id": 1,
+      "agent": {
+        "age": "26-40",
+        "income_level": "high_income",
+        "education_level": "some_college",
+        "occupation": "student",
+        "gender": "other",
+        "religion": null,
+        "race": null
+      },
+      "opinion": "oppose",
+      "comment": "As a student living nearby, I value the current height limit as it maintains the neighborhood's charm and character. Increasing it could lead to overcrowding and overshadowing of existing buildings.",
+      "cell_id": "10_15",
+      "location": {
+        "lat": 37.738757,
+        "lng": -122.469942
+      }
+    },
+    {
+      "id": 2,
+      "agent": {
+        "age": "18-25",
+        "income_level": "middle_income",
+        "education_level": "postgraduate",
+        "occupation": "retired",
+        "gender": "male",
+        "religion": null,
+        "race": null
+      },
+      "opinion": "support",
+      "comment": "The resident would likely oppose the rezoning proposal due to the increased height limit in a nearby residential zone, potentially impacting property value and community character.",
+      "cell_id": "10_15",
+      "location": {
+        "lat": 37.746814,
+        "lng": -122.478005
+      }
+    }
+  ],
+  "key_themes": {
+    "support": [
+      "community character",
+      "opposition",
+      "property value"
+    ],
+    "oppose": [
+      "community character",
+      "overcrowding",
+      "neighborhood charm"
+    ]
+  }
+}

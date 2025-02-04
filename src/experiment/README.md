@@ -1,59 +1,67 @@
 # Experiment Module
 
-Evaluation framework for zoning proposal simulation models.
+This directory contains the experiment framework for evaluating agent opinions on zoning proposals.
 
-## Structure
+## Directory Structure
 
 ```
 experiment/
+├── protocols/           # Experiment protocols
+│   └── sample_protocol.yaml
 ├── eval/
 │   ├── data/
-│   │   ├── inputs/       # Input proposals
-│   │   └── ground_truth/ # Ground truth data
-│   └── utils/
+│   │   ├── inputs/     # Input proposals
+│   │   └── ground_truth/
+│   │       ├── sample_group_distribution_gt.json
+│   │       └── sample_individual_gt.json
+│   └── utils/          # Evaluation utilities
+│       ├── data_manager.py   # Data I/O and management
 │       ├── data_models.py    # Data structures
-│       ├── data_manager.py   # Data I/O
-│       └── experiment_utils.py # Experiment utilities
-├── log/                  # Experiment results
-└── scripts/
-    ├── run_experiment.py     # Run experiments
-    └── validate_model.py     # Validate models
+│       └── metrics.py        # Metrics calculation
+├── log/                # Experiment results
+└── scripts/            # Experiment runners
 ```
 
-## Usage
+## Running Experiments
 
-### Run Experiment
-
-Run simulation experiments with specified model:
+To run an experiment:
 
 ```bash
-python src/experiment/scripts/run_experiment.py \
-    --name <experiment_name> \
-    --model <model_name> \
-    --population <num_agents>
+python scripts/run_experiment.py --protocol protocols/sample_protocol.yaml
 ```
 
-Example:
-```bash
-python src/experiment/scripts/run_experiment.py \
-    --name test_run \
-    --model stupid \
-    --population 30
+## Protocol Format
+
+Protocols define experiment parameters in YAML format:
+
+```yaml
+name: "experiment_name"
+description: "Experiment description"
+
+model: "stupid"    # which model to use for simulation
+population: 2      # number of agents to simulate
+
+input:
+  proposals:       # list of input proposal files
+    - "sample_proposal.json"
+
+region: "san_francisco"    # target region
+
+evaluation:
+  metrics:
+    - type: "group_distribution"
+      ground_truth: "sample_group_distribution_gt.json"
+    - type: "individual_match"
+      ground_truth: "sample_individual_gt.json"
 ```
 
-### Validate Model
+## Output Structure
 
-Validate model implementation against required format:
+Each experiment run creates a directory under `log/` with:
 
-```bash
-python src/experiment/scripts/validate_model.py \
-    --model-path <model_path> \
-    --population <num_agents>
-```
-
-Example:
-```bash
-python src/experiment/scripts/validate_model.py \
-    --model-path models.m02_stupid.model.StupidAgentModel \
-    --population 30
-``` 
+- `protocol.yaml`: Copy of the experiment protocol
+- `experiment_metadata.json`: Runtime information
+- For each proposal:
+  - `{id}_input.json`: Input proposal
+  - `{id}_output.json`: Simulation results
+  - `{id}_metrics.json`: Evaluation metrics (if ground truth exists) 
