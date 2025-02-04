@@ -1,0 +1,37 @@
+{
+    "metadata": {
+        "type": "individual_match",
+        "question": "Would you support building more housing in your neighborhood?",
+        "individuals": {
+            "person_1": {
+                "age": 25,
+                "income": "medium",
+                "education": "college"
+            },
+            "person_2": {
+                "age": 45,
+                "income": "high",
+                "education": "graduate"
+            },
+            "person_3": {
+                "age": 65,
+                "income": "medium",
+                "education": "college"
+            }
+        }
+    },
+    "responses": {
+        "person_1": {
+            "opinion": "support",
+            "reasoning": "Need more affordable housing options for young professionals"
+        },
+        "person_2": {
+            "opinion": "neutral",
+            "reasoning": "Depends on the specific development plans and impact"
+        },
+        "person_3": {
+            "opinion": "oppose",
+            "reasoning": "Concerned about increased traffic and noise"
+        }
+    }
+} 

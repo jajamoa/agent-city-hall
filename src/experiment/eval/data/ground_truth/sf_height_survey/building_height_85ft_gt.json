@@ -1,0 +1,47 @@
+{
+    "metadata": {
+        "type": "distribution_by_group",
+        "group_by": "agent.age",
+        "question": "Would you support buildings of 85ft (~8 stories) height in your neighborhood?",
+        "context": "Survey participants were asked about their support for different building heights (40ft/4 stories, 65ft/6 stories, 85ft/8 stories, 140ft/14 stories, 240ft/24 stories, and 300ft/30 stories) in their neighborhood.",
+        "groups": {
+            "39_and_under": {
+                "min": 0,
+                "max": 39,
+                "sample_size": 165
+            },
+            "40_to_59": {
+                "min": 40,
+                "max": 59,
+                "sample_size": 383
+            },
+            "60_and_older": {
+                "min": 60,
+                "max": 999,
+                "sample_size": 154
+            }
+        }
+    },
+    "distributions": {
+        "39_and_under": {
+            "support": 0.85,
+            "neutral": 0.10,
+            "oppose": 0.05
+        },
+        "40_to_59": {
+            "support": 0.50,
+            "neutral": 0.30,
+            "oppose": 0.20
+        },
+        "60_and_older": {
+            "support": 0.30,
+            "neutral": 0.30,
+            "oppose": 0.40
+        },
+        "overall": {
+            "support": 0.52,
+            "neutral": 0.25,
+            "oppose": 0.23
+        }
+    }
+} 
