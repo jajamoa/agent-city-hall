@@ -78,9 +78,13 @@ class StupidAgentModel(BaseModel):
                     "occupation": self._convert_occupation(raw_agent["agent"]["occupation"]),
                     "gender": raw_agent["agent"]["gender"]
                 },
+                "location": {
+                    "lat": raw_agent["coordinates"]["lat"],
+                    "lng": raw_agent["coordinates"]["lng"]
+                },
+                "cell_id": nearest_cell_id,
                 "opinion": opinion,
-                "comment": comment,
-                "cell_id": nearest_cell_id
+                "comment": comment
             }
             agents.append(agent)
             

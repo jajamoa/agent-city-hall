@@ -1,68 +1,57 @@
-
 # Agent City Hall
 
-Agent City Hall serves as the human layer for existing city simulations, introducing social alignment to the model. This framework integrates diverse agents—such as government, developers, and residents—to enable social dynamics modeling and policy evaluation, enriching urban planning simulations with a focus on human-centric perspectives.
+An agent-based simulation system for evaluating public opinions on urban development proposals.
+
+## Features
+
+- Agent-based opinion simulation with demographic considerations
+- LLM-powered agent reasoning and comment generation
+- RESTful API for proposal evaluation
+- Comprehensive experiment and validation framework
 
 ## Project Structure
 
-- **main.py**: Main script to initialize and run the simulation.
-- **config/**: Contains configuration files, such as `config.yaml`, for setting parameters.
-- **agents/**: Defines different types of agents involved in the simulation.
-  - `agent_base.py`: Base class for agents.
-  - `government_agent.py`: Government agent class.
-  - `developer_agent.py`: Developer agent class.
-  - `resident_agent.py`: Resident agent class.
-- **interaction/**: Manages interactions among agents.
-- **message_pool/**: Manages the message exchange between agents.
-- **alignment/**: Contains the pluralistic alignment module.
-- **backends/**: Contains different intelligence backend implementations.
-- **utils/**: Utility functions and helpers.
-- **tests/**: Contains all test files.
-  - `unit/`: Unit tests for individual components.
-  - `integration/`: Integration tests for component interactions.
-
-![Architecture Diagram](./images/architecture_diagram.png)
-
-## Getting Started
-
-1. **Install Dependencies**: Make sure to install the required packages.
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. **Development Setup**: Install package in development mode.
-    ```bash
-    pip install -e .
-
-    # This allows you to:
-    # - Import modules from anywhere
-    # - Modify code without reinstalling
-    # - Run tests properly
-    ```
-
-3. **Run the Simulation**:
-   ```bash
-   python main.py
-   ```
-
-## Testing
-
-Run tests from the project root directory:
-
-```bash
-# Run specific test
-pytest tests/unit/test_agent_base.py
-
-# Run all tests
-pytest tests/unit/       # unit tests
-pytest tests/integration/    # integration tests
-pytest                  # all tests
+```
+src/
+├── backend/          # Flask-based API service
+├── experiment/       # Evaluation framework
+│   ├── scripts/     # Experiment runners
+│   └── eval/        # Test data and metrics
+└── models/          # Simulation models
+    ├── m00_template/  # Model template
+    ├── m01_basic/    # Basic simulation
+    └── m02_stupid/   # LLM-powered agents
 ```
 
-## Requirements
+## Quick Start
 
-The project dependencies are listed in `requirements.txt`.
+1. Install dependencies:
+```bash
+pip install -e .
+```
+
+2. Set up OpenAI API key:
+```bash
+echo "OPENAI_API_KEY=your-key-here" > .env
+```
+
+3. Run model validation:
+```bash
+python src/experiment/scripts/validate_model.py \
+    --model-path models.m02_stupid.model.StupidAgentModel
+```
+
+4. Start backend service:
+```bash
+python src/backend/app.py
+```
+
+## Development
+
+- Use the model template in `src/models/m00_template/` for new models
+- Run experiments with `src/experiment/scripts/run_experiment.py`
+- Test models with `src/experiment/scripts/validate_model.py`
 
 ## License
 
-This project is licensed under the MIT License.
+MIT
