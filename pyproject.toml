@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-city-hall"
+version = "0.1.0"
+description = "Agent-based simulation for urban development proposals"
+dependencies = [
+    "flask",
+    "flask-cors",
+    "openai>=1.0.0",
+    "numpy"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"] 
