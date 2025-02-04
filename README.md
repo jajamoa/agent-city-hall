@@ -34,18 +34,13 @@ cd src/frontend && npm install
 echo "OPENAI_API_KEY=your-key-here" > .env
 ```
 
-3. Start frontend development server:
-```bash
-cd src/frontend && npm start
-```
-
 ## Project Modules
 
-- `backend/`: RESTful API service for proposal evaluation
 - `experiment/`: Testing and validation framework
 - `models/`: Opinion simulation model implementations
 - `frontend/`: React-based web interface for proposal visualization
-
+- `backend/`: RESTful API service for proposal evaluation
+- 
 For detailed documentation, please refer to the README in each module directory.
 
 ## License
