@@ -2,6 +2,10 @@
 
 This directory contains the experiment framework for evaluating agent opinions on zoning proposals.
 
+## Data Flow
+
+![Evaluation Module Data Flow Diagram](../../assets/eval_dataflow.png)
+
 ## Directory Structure
 
 ```
