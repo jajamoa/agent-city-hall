@@ -170,3 +170,35 @@ build/
 *.log
 *.env
 *.cache
+
+# Python build and distribution
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environment
+.env
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Experiment outputs
+eval/data/experiments/*
+!eval/data/experiments/.gitkeep

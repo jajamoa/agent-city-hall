@@ -7,16 +7,16 @@ import { MAPBOX_TOKEN, CITY_COORDINATES } from '../constants/config';
 import { generateRandomPoints } from '../utils/mapUtils';
 import { api } from '../services/api';
 
-const CommentVisualizer = ({ defaultRegion = 'boston' }) => {
+const BostonProposalVisualizer = () => {
   const [data, setData] = useState(null);
   const [selectedPoint, setSelectedPoint] = useState(null);
   const [proposal, setProposal] = useState({
     title: "",
     description: "",
   });
-  const [region, setRegion] = useState(defaultRegion);
+  const [region, setRegion] = useState('boston');
   const [viewState, setViewState] = useState({
-    ...CITY_COORDINATES[defaultRegion],
+    ...CITY_COORDINATES['boston'],
     padding: { top: 0, bottom: 0, left: 0, right: 0 },
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -82,18 +82,22 @@ const CommentVisualizer = ({ defaultRegion = 'boston' }) => {
   return (
     <div className="visualizer-container">
       <div className="left-panel">
-        <h3>Urban Development Proposal</h3>
+        <h3>Boston Urban Development Proposal</h3>
         <p className="subtitle">Provide details about your proposal</p>
         <select
           value={region}
           onChange={(e) => setRegion(e.target.value)}
           className="dark-input"
         >
-          {Object.keys(CITY_COORDINATES).map((city) => (
-            <option key={city} value={city}>
-              {city.charAt(0).toUpperCase() + city.slice(1)}
-            </option>
-          ))}
+          {Object.keys(CITY_COORDINATES)
+            .filter(city => city.includes('boston') || 
+                          ['allston', 'brighton', 'charlestown', 'dorchester', 
+                           'fenway', 'roxbury', 'downtown'].includes(city))
+            .map((city) => (
+              <option key={city} value={city}>
+                {city.charAt(0).toUpperCase() + city.slice(1)}
+              </option>
+            ))}
         </select>
         <input
           type="text"
@@ -152,4 +156,4 @@ const CommentVisualizer = ({ defaultRegion = 'boston' }) => {
   );
 };
 
-export default CommentVisualizer;
+export default BostonProposalVisualizer; 

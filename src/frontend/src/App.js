@@ -1,13 +1,21 @@
 import React from 'react';
-import CommentVisualizer from './components/CommentVisualizer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BostonPage from './pages/BostonPage';
+import SFPage from './pages/SFPage';
 import './styles/CommentVisualizer.css';
+import './styles/darkTheme.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Agent City Hall</h1>
-      <CommentVisualizer />
-    </div>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/boston" element={<BostonPage />} />
+          <Route path="/sf" element={<SFPage />} />
+          <Route path="/" element={<BostonPage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

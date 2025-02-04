@@ -1,0 +1,27 @@
+export const MAPBOX_TOKEN = "pk.eyJ1IjoiamFqYW1vYSIsImEiOiJjbDhzeDI4aHgwMXh6M3hrbmVxbG9vcDlyIn0.cdD4-PP7QcxegAsxlhC3mA";
+
+export const CITY_COORDINATES = {
+  boston: { longitude: -71.0589, latitude: 42.3601, zoom: 12 },
+  "kendall square": { longitude: -71.0915, latitude: 42.3629, zoom: 15 },
+  allston: { longitude: -71.1256, latitude: 42.3539, zoom: 15 },
+  "back bay": { longitude: -71.0838, latitude: 42.3503, zoom: 15 },
+  brighton: { longitude: -71.1627, latitude: 42.3464, zoom: 15 },
+  charlestown: { longitude: -71.0636, latitude: 42.3782, zoom: 15 },
+  chinatown: { longitude: -71.0622, latitude: 42.3522, zoom: 15 },
+  dorchester: { longitude: -71.0656, latitude: 42.3016, zoom: 15 },
+  downtown: { longitude: -71.0589, latitude: 42.3601, zoom: 15 },
+  "east boston": { longitude: -71.0124, latitude: 42.3702, zoom: 15 },
+  fenway: { longitude: -71.0951, latitude: 42.3458, zoom: 15 },
+  "hyde park": { longitude: -71.1245, latitude: 42.2555, zoom: 15 },
+  "jamaica plain": { longitude: -71.1117, latitude: 42.3097, zoom: 15 },
+  "leather district": { longitude: -71.0578, latitude: 42.3513, zoom: 15 },
+  mattapan: { longitude: -71.0922, latitude: 42.2726, zoom: 15 },
+  "mission hill": { longitude: -71.1106, latitude: 42.3317, zoom: 15 },
+  "north end": { longitude: -71.0542, latitude: 42.3648, zoom: 15 },
+  roslindale: { longitude: -71.1305, latitude: 42.2832, zoom: 15 },
+  roxbury: { longitude: -71.0846, latitude: 42.3241, zoom: 15 },
+  "south boston": { longitude: -71.0502, latitude: 42.3334, zoom: 15 },
+  "south end": { longitude: -71.0726, latitude: 42.3389, zoom: 15 },
+  "west end": { longitude: -71.0661, latitude: 42.3643, zoom: 15 },
+  "west roxbury": { longitude: -71.1587, latitude: 42.2798, zoom: 15 },
+}; 
