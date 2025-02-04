@@ -1,0 +1,5 @@
+
+Age and Gender: 
+Occupation: Industry by Occupation for the Civilian Employed Population 16 Years and Over
+Tenure: Tenure by Selected Physical and Financial Conditions
+Mobility: Geographical Mobility in the Past Year
