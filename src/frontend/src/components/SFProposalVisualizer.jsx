@@ -42,7 +42,7 @@ const TOOLS = {
   },
   // 编辑子工具
   EDIT_SUB: {
-    SELECT: { id: 'select', icon: '⬚', label: 'Select' },
+    SELECT: { id: 'select', icon: '☝️', label: 'Select' },
     BRUSH: { id: 'brush', icon: '🖌️', label: 'Brush' },
     ERASE: { id: 'erase', icon: '🧹', label: 'Erase' }
   }
@@ -88,6 +88,8 @@ const SFProposalVisualizer = () => {
   const MAX_HISTORY = 20; // 最大历史记录数量
   const [pendingChanges, setPendingChanges] = useState({}); // 存储未确认的更改
   const [hasUnappliedChanges, setHasUnappliedChanges] = useState(false);
+  const mapRef = React.useRef(null);
+  const [sourceKey, setSourceKey] = useState(0);
 
   // 初始化时处理 JSON 中的单元格
   useEffect(() => {
@@ -103,24 +105,39 @@ const SFProposalVisualizer = () => {
     });
     setGridCells(initialCells);
     setEditHistory([initialCells]);
+    // 强制更新一次
+    setSourceKey(prev => prev + 1);
   }, []); // 只在组件挂载时运行一次
 
   // 生成网格的GeoJSON数据
   const gridGeoJSON = React.useMemo(() => {
-    if (!gridConfig.bounds) return null;
+    if (!gridConfig.bounds || !showGrid) return null;
     
-    return generateGridGeoJSON(
+    const geojson = generateGridGeoJSON(
       {
         ...gridConfig,
         heightLimits: gridData.heightLimits
       },
       gridCells
     );
-  }, [gridConfig, gridCells]);
+
+    // 为每个 feature 添加 key 属性和时间戳
+    geojson.features = geojson.features.map(feature => ({
+      ...feature,
+      properties: {
+        ...feature.properties,
+        key: `${feature.properties.row}_${feature.properties.col}`,
+        timestamp: Date.now()  // 添加时间戳强制更新
+      }
+    }));
+
+    return geojson;
+  }, [gridConfig, gridCells, showGrid]);
 
   // 应用笔刷编辑
   const applyBrush = useCallback((centerCell) => {
     const { row, col } = centerCell;
+    let updatedCells = { ...gridCells };  // 直接修改 gridCells
     let updatedChanges = { ...pendingChanges };
     
     const radius = Math.floor(brushSize / 2);
@@ -135,19 +152,26 @@ const SFProposalVisualizer = () => {
             gridData.heightLimits.default : 
             selectedHeight;
             
-          if (!updatedChanges[key] || updatedChanges[key].heightLimit !== newHeight) {
-            updatedChanges[key] = {
-              heightLimit: newHeight,
-              isPending: true
-            };
-          }
+          // 更新 gridCells 以立即显示效果
+          updatedCells[key] = {
+            ...updatedCells[key],
+            heightLimit: newHeight,
+            isEdited: true
+          };
+
+          // 记录到 pendingChanges 以便后续存入 history
+          updatedChanges[key] = {
+            heightLimit: newHeight,
+            isPending: true
+          };
         }
       }
     }
     
-    setPendingChanges(updatedChanges);
+    setGridCells(updatedCells);  // 立即更新显示
+    setPendingChanges(updatedChanges);  // 记录待确认的更改
     setHasUnappliedChanges(true);
-  }, [pendingChanges, brushSize, selectedHeight, editMode]);
+  }, [gridCells, pendingChanges, brushSize, selectedHeight, editMode]);
 
   // 处理鼠标移动事件
   const handleMouseMove = useCallback((event) => {
@@ -211,16 +235,59 @@ const SFProposalVisualizer = () => {
     }
   }, [currentTool, editMode, gridCells, gridConfig, applyBrush]);
 
-  // 处理工具切换
+  // 处理单个格子的高度更改
+  const handleHeightChange = (height) => {
+    setSelectedHeight(height);
+    if (height && selectedCell && currentTool === TOOLS.MAIN.EDIT.id && editMode === TOOLS.EDIT_SUB.SELECT.id) {
+      const key = `${selectedCell.row}_${selectedCell.col}`;
+      // 直接更新 gridCells 显示
+      setGridCells(prev => ({
+        ...prev,
+        [key]: {
+          ...prev[key],
+          heightLimit: height,
+          isEdited: true,
+          isPending: true
+        }
+      }));
+      // 记录到 pendingChanges
+      setPendingChanges(prev => ({
+        ...prev,
+        [key]: {
+          heightLimit: height,
+          isPending: true
+        }
+      }));
+      setHasUnappliedChanges(true);
+    }
+  };
+
+  // 丢弃更改
+  const discardChanges = useCallback(() => {
+    // 强制刷新到当前历史状态
+    const currentState = editHistory[historyIndex];
+    setGridCells({...currentState});  // 使用展开运算符确保引用更新
+    setPendingChanges({});
+    setHasUnappliedChanges(false);
+  }, [editHistory, historyIndex]);
+
+  // 更新工具切换逻辑
   const handleToolChange = (toolId) => {
     if (Object.values(TOOLS.MAIN).some(tool => tool.id === toolId)) {
-      // 如果有未应用的更改，先应用它们
-      if (hasUnappliedChanges) {
-        applyChanges();
+      // 如果切换到非编辑工具，自动丢弃更改
+      if (toolId !== TOOLS.MAIN.EDIT.id && hasUnappliedChanges) {
+        discardChanges();
       }
       setCurrentTool(toolId);
       setEditMode(null);
     } else if (Object.values(TOOLS.EDIT_SUB).some(tool => tool.id === toolId)) {
+      // 切换编辑子工具时，确保显示状态与缓存一致
+      if (hasUnappliedChanges) {
+        const currentState = editHistory[historyIndex];
+        setGridCells({...currentState});
+        setPendingChanges({});
+        setHasUnappliedChanges(false);
+      }
       setEditMode(toolId);
     }
   };
@@ -261,44 +328,24 @@ const SFProposalVisualizer = () => {
   // 撤销
   const undo = useCallback(() => {
     if (historyIndex > 0) {
-      // 如果有未应用的更改，先清除它们
-      if (hasUnappliedChanges) {
-        setPendingChanges({});
-        setHasUnappliedChanges(false);
-      }
+      const newState = editHistory[historyIndex - 1];
+      setGridCells({...newState});  // 强制刷新显示
+      setPendingChanges({});
+      setHasUnappliedChanges(false);
       setHistoryIndex(historyIndex - 1);
-      setGridCells(editHistory[historyIndex - 1]);
     }
-  }, [historyIndex, editHistory, hasUnappliedChanges]);
+  }, [historyIndex, editHistory]);
 
   // 重做
   const redo = useCallback(() => {
     if (historyIndex < editHistory.length - 1) {
-      // 如果有未应用的更改，先清除它们
-      if (hasUnappliedChanges) {
-        setPendingChanges({});
-        setHasUnappliedChanges(false);
-      }
+      const newState = editHistory[historyIndex + 1];
+      setGridCells({...newState});  // 强制刷新显示
+      setPendingChanges({});
+      setHasUnappliedChanges(false);
       setHistoryIndex(historyIndex + 1);
-      setGridCells(editHistory[historyIndex + 1]);
     }
-  }, [historyIndex, editHistory, hasUnappliedChanges]);
-
-  // 处理单个格子的高度更改
-  const handleHeightChange = (height) => {
-    setSelectedHeight(height);
-    if (selectedCell && currentTool === TOOLS.MAIN.EDIT.id && editMode === TOOLS.EDIT_SUB.SELECT.id) {
-      const key = `${selectedCell.row}_${selectedCell.col}`;
-      setPendingChanges({
-        ...pendingChanges,
-        [key]: {
-          heightLimit: height,
-          isPending: true
-        }
-      });
-      setHasUnappliedChanges(true);
-    }
-  };
+  }, [historyIndex, editHistory]);
 
   // 更新网格样式以显示编辑状态
   const gridLayerStyle = {
@@ -307,11 +354,16 @@ const SFProposalVisualizer = () => {
     paint: {
       'fill-color': [
         'case',
-        ['all',
-          ['has', 'heightLimit'],
-          ['has', 'isEdited'],
-          ['==', ['get', 'isEdited'], true]
+        // 检查是否是编辑中的格子
+        ['in', ['get', 'key'], ...Object.keys(pendingChanges)],
+        [
+          'match',
+          ['get', 'key'],
+          ...Object.entries(pendingChanges).flatMap(([key, change]) => [key, heightColors[change.heightLimit]]),
+          'transparent'
         ],
+        // 如果不是编辑中的格子，使用当前状态的颜色
+        ['has', 'heightLimit'],
         [
           'match',
           ['get', 'heightLimit'],
@@ -322,25 +374,30 @@ const SFProposalVisualizer = () => {
       ],
       'fill-opacity': [
         'case',
+        // 编辑中的格子使用更高的透明度
+        ['in', ['get', 'key'], ...Object.keys(pendingChanges)],
+        0.8,
+        // hover 的格子
         ['all',
           ['==', ['get', 'row'], hoveredCell?.row],
           ['==', ['get', 'col'], hoveredCell?.col]
         ],
         0.8,
+        // 其他格子
         0.6
       ]
     }
   };
 
-  // 添加编辑状态指示图层（斜线）
+  // 暂时注释掉 pattern 图层，等颜色显示正常后再处理
   const editingLayerStyle = {
     id: 'editing-pattern',
     type: 'fill',
     paint: {
-      'fill-pattern': 'editing-pattern',
-      'fill-opacity': 0.5
+      'fill-color': '#fff',
+      'fill-opacity': 0.1
     },
-    filter: ['in', ['string', ['get', 'key']], ...Object.keys(pendingChanges)]
+    filter: ['in', ['get', 'key'], ...Object.keys(pendingChanges)]
   };
 
   // 添加一个基础网格图层，显示所有网格
@@ -380,6 +437,45 @@ const SFProposalVisualizer = () => {
     [handleMouseMove]
   );
 
+  // 修改 pattern 加载逻辑
+  useEffect(() => {
+    const map = mapRef.current?.getMap();
+    if (!map) return;
+
+    const loadPattern = () => {
+      // 检查 pattern 是否已存在
+      if (map.hasImage('editing-pattern')) return;
+
+      const img = new Image();
+      img.onload = () => {
+        // 确保地图仍然存在
+        if (map.hasImage('editing-pattern')) return;
+        map.addImage('editing-pattern', img);
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(`
+        <svg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2' stroke='rgba(255,255,255,0.5)' stroke-width='1'/>
+        </svg>
+      `);
+    };
+
+    // 如果地图已加载，直接添加 pattern
+    if (map.loaded()) {
+      loadPattern();
+    } else {
+      // 否则等待地图加载完成
+      map.once('load', loadPattern);
+    }
+
+    // 清理函数
+    return () => {
+      const map = mapRef.current?.getMap();
+      if (map && map.hasImage('editing-pattern')) {
+        map.removeImage('editing-pattern');
+      }
+    };
+  }, []);
+
   return (
     <div className="sf-visualizer-container">
       <div className={`toolbar ${toolbarCollapsed ? 'collapsed' : ''}`}>
@@ -399,7 +495,11 @@ const SFProposalVisualizer = () => {
               <label className="tool-label">Grid Visibility</label>
               <button
                 className={`dark-button ${showGrid ? 'active' : ''}`}
-                onClick={() => setShowGrid(!showGrid)}
+                onClick={() => {
+                  setShowGrid(!showGrid);
+                  // 强制触发一次 Source 更新
+                  setSourceKey(prev => prev + 1);
+                }}
               >
                 {showGrid ? 'Hide Grid' : 'Show Grid'}
               </button>
@@ -461,6 +561,22 @@ const SFProposalVisualizer = () => {
                   </div>
                 </div>
 
+                {(editMode === TOOLS.EDIT_SUB.SELECT.id || editMode === TOOLS.EDIT_SUB.BRUSH.id) && (
+                  <div className="tool-section">
+                    <label className="tool-label">Height Limit</label>
+                    <select
+                      value={selectedHeight || ''}
+                      onChange={(e) => handleHeightChange(e.target.value ? parseInt(e.target.value) : null)}
+                      className="dark-input"
+                    >
+                      <option value="">-- Select Height --</option>
+                      {gridData.heightLimits.options.map(height => (
+                        <option key={height} value={height}>{height} feet</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+
                 {(editMode === TOOLS.EDIT_SUB.BRUSH.id || editMode === TOOLS.EDIT_SUB.ERASE.id) && (
                   <div className="tool-section">
                     <label className="tool-label">Brush Size: {brushSize}</label>
@@ -475,29 +591,22 @@ const SFProposalVisualizer = () => {
                   </div>
                 )}
 
-                {editMode === TOOLS.EDIT_SUB.SELECT.id && selectedCell && (
-                  <div className="tool-section">
-                    <label className="tool-label">Selected Cell Height</label>
-                    <select
-                      value={selectedHeight}
-                      onChange={(e) => handleHeightChange(parseInt(e.target.value))}
-                      className="dark-input"
-                    >
-                      {gridData.heightLimits.options.map(height => (
-                        <option key={height} value={height}>{height} feet</option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
                 {hasUnappliedChanges && (
                   <div className="tool-section">
-                    <button
-                      className="dark-button apply-button"
-                      onClick={applyChanges}
-                    >
-                      Apply Changes
-                    </button>
+                    <div className="edit-actions">
+                      <button
+                        className="dark-button apply-button"
+                        onClick={applyChanges}
+                      >
+                        Apply Changes
+                      </button>
+                      <button
+                        className="dark-button"
+                        onClick={discardChanges}
+                      >
+                        Discard Changes
+                      </button>
+                    </div>
                   </div>
                 )}
               </>
@@ -508,6 +617,7 @@ const SFProposalVisualizer = () => {
 
       <div className="main-content">
         <Map
+          ref={mapRef}
           {...viewState}
           onMove={(evt) => currentTool === TOOLS.MAIN.PAN.id && setViewState(evt.viewState)}
           onClick={handleMapClick}
@@ -531,10 +641,14 @@ const SFProposalVisualizer = () => {
           }
         >
           {showGrid && gridGeoJSON && (
-            <Source type="geojson" data={gridGeoJSON}>
+            <Source 
+              key={sourceKey}
+              type="geojson" 
+              data={gridGeoJSON}
+            >
               <Layer {...baseGridLayerStyle} />
               <Layer {...gridLayerStyle} />
-              <Layer {...editingLayerStyle} />
+              {/* <Layer {...editingLayerStyle} /> */}
               <Layer {...gridOutlineStyle} />
             </Source>
           )}

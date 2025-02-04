@@ -76,18 +76,19 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
   color: #d1d5db;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
   cursor: pointer;
   font-size: 14px;
-  padding: 0 16px;
-  transition: background-color 0.2s ease;
+  padding: 0 12px;
+  transition: all 0.2s ease;
 }
 
 .dark-button:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .dark-button.loading {
@@ -97,6 +98,7 @@ body {
 }
 
 .dark-button:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -814,10 +816,10 @@ select.dark-input option {
 
 /* Update existing button styles */
 .dark-button {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.08);
   color: #d1d5db;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
   padding: 0 12px;
   height: 40px;
   display: inline-flex;
@@ -826,18 +828,19 @@ select.dark-input option {
   gap: 6px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
   width: 100%;
   white-space: nowrap;
 }
 
 .dark-button:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .dark-button.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Move legend panel to bottom left */
@@ -967,39 +970,14 @@ select.dark-input option {
   gap: 6px;
 }
 
-/* 统一按钮基础样式 */
-.dark-button {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #d1d5db;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  padding: 0 12px;
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.2s ease;
-  width: 100%;
-  white-space: nowrap;
+/* 编辑操作按钮容器 */
+.edit-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
 }
 
-.dark-button:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-.dark-button.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-}
-
-/* 移除重复的工具按钮样式 */
-.tool-button {
-  display: none;  /* 移除旧的工具按钮样式，统一使用 dark-button */
-}
-
-.tool-icon {
-  font-size: 14px;
+/* 调试状态的颜色 */
+.grid-cell.pending {
+  background-color: rgba(255, 0, 0, 0.3) !important;  /* 红色表示pending状态 */
 }
