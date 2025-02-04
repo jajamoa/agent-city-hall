@@ -7,25 +7,32 @@ import plotly.express as px
 from .schemas import ZoningProposal, EvaluationResult
 from .models.base import BaseModel
 
+def get_project_root() -> Path:
+    """Get the absolute path of the project root directory"""
+    current_file = Path(__file__).resolve()
+    # Search upwards from current file until finding the project root (parent directory containing src)
+    for parent in [current_file, *current_file.parents]:
+        if (parent / 'src').exists():
+            return parent
+    raise RuntimeError("Could not find project root directory")
+
 class Evaluator:
     """Evaluator for comparing model outputs with ground truth"""
     
-    def __init__(self, model: BaseModel, output_dir: str = "eval/data"):
+    def __init__(self, model: BaseModel, output_dir: Optional[str] = None):
         """
         Initialize evaluator
         Args:
             model: Model implementation to use
-            output_dir: Directory for storing results
+            output_dir: Directory for storing results. If None, uses default path in project root.
         """
         self.model = model
-        self.output_dir = Path(output_dir)
-        self._init_directories()
-    
-    def _init_directories(self):
-        """Create necessary directories"""
-        (self.output_dir / "inputs").mkdir(parents=True, exist_ok=True)
-        (self.output_dir / "ground_truth").mkdir(parents=True, exist_ok=True)
-        (self.output_dir / "experiments").mkdir(parents=True, exist_ok=True)
+        if output_dir is None:
+            project_root = get_project_root()
+            self.output_dir = project_root / "src/experiment/log"
+        else:
+            self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
     
     def load_ground_truth(self, proposal_id: str) -> Optional[EvaluationResult]:
         """
@@ -120,10 +127,12 @@ class Evaluator:
         Returns:
             str: Experiment directory path
         """
-        # Create experiment directory
+        # Create experiment directory with timestamp
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         exp_id = f"exp_{timestamp}_{name}"
-        exp_dir = self.output_dir / "experiments" / exp_id
+        exp_dir = self.output_dir / exp_id
+        
+        # Create subdirectories for experiment
         results_dir = exp_dir / "results"
         viz_dir = exp_dir / "viz"
         results_dir.mkdir(parents=True)

@@ -1,0 +1,140 @@
+{
+  "proposal": {
+    "grid_config": {
+      "cellSize": 100,
+      "bounds": {
+        "north": 37.812,
+        "south": 37.708,
+        "east": -122.3549,
+        "west": -122.5157
+      }
+    },
+    "height_limits": {
+      "default": 40,
+      "options": [
+        40,
+        65,
+        80,
+        85,
+        105,
+        130,
+        140,
+        240,
+        300
+      ]
+    },
+    "cells": {
+      "10_15": {
+        "height_limit": 65,
+        "category": "residential",
+        "last_updated": "2024-03-15",
+        "bbox": {
+          "north": 37.7371,
+          "south": 37.7261,
+          "east": -122.4887,
+          "west": -122.4997
+        }
+      }
+    }
+  },
+  "opinion_distribution": {
+    "summary": {
+      "support": 0,
+      "oppose": 100,
+      "neutral": 0
+    },
+    "comments": [
+      {
+        "id": 1,
+        "agent": {
+          "age": "41-60",
+          "income_level": "low_income",
+          "education_level": "some_college",
+          "occupation": "retired",
+          "gender": "other"
+        },
+        "opinion": "oppose",
+        "comment": "I oppose the rezoning proposal because a higher height limit could change the character of the residential area and potentially impact property values negatively.",
+        "cell_id": "10_15"
+      },
+      {
+        "id": 2,
+        "agent": {
+          "age": "26-40",
+          "income_level": "low_income",
+          "education_level": "postgraduate",
+          "occupation": "student",
+          "gender": "male"
+        },
+        "opinion": "oppose",
+        "comment": "As a student with a limited income, I am concerned that increasing the height limit in a nearby residential zone could lead to higher property values, making it even more difficult for me to afford living in the area. I value the current community character and worry that this change could disrupt the neighborhood's charm.",
+        "cell_id": "10_15"
+      },
+      {
+        "id": 3,
+        "agent": {
+          "age": "18-25",
+          "income_level": "middle_income",
+          "education_level": "high_school",
+          "occupation": "other",
+          "gender": "male"
+        },
+        "opinion": "oppose",
+        "comment": "I oppose the rezoning proposal as it could potentially impact the character of our residential area and lead to increased traffic and noise.",
+        "cell_id": "10_15"
+      }
+    ],
+    "key_themes": {
+      "support": [],
+      "oppose": [
+        "noise",
+        "property value",
+        "community character",
+        "traffic",
+        "affordability",
+        "height limit"
+      ]
+    }
+  },
+  "sample_agents": [
+    {
+      "id": 1,
+      "agent": {
+        "age": "41-60",
+        "income_level": "low_income",
+        "education_level": "some_college",
+        "occupation": "retired",
+        "gender": "other"
+      },
+      "opinion": "oppose",
+      "comment": "I oppose the rezoning proposal because a higher height limit could change the character of the residential area and potentially impact property values negatively.",
+      "cell_id": "10_15"
+    },
+    {
+      "id": 2,
+      "agent": {
+        "age": "26-40",
+        "income_level": "low_income",
+        "education_level": "postgraduate",
+        "occupation": "student",
+        "gender": "male"
+      },
+      "opinion": "oppose",
+      "comment": "As a student with a limited income, I am concerned that increasing the height limit in a nearby residential zone could lead to higher property values, making it even more difficult for me to afford living in the area. I value the current community character and worry that this change could disrupt the neighborhood's charm.",
+      "cell_id": "10_15"
+    },
+    {
+      "id": 3,
+      "agent": {
+        "age": "18-25",
+        "income_level": "middle_income",
+        "education_level": "high_school",
+        "occupation": "other",
+        "gender": "male"
+      },
+      "opinion": "oppose",
+      "comment": "I oppose the rezoning proposal as it could potentially impact the character of our residential area and lead to increased traffic and noise.",
+      "cell_id": "10_15"
+    }
+  ]
+}

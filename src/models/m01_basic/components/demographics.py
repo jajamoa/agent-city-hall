@@ -1,16 +1,15 @@
 import json
 import logging
-
-# add data loading path
 import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+from pathlib import Path
 
 class DemographicsSearchEngine:
     def __init__(self):
-        self.data = json.loads(open('data/demographics.json').read())
+        current_dir = Path(__file__).parent.parent
+        data_path = current_dir / "data/demographics.json"
+        self.data = json.loads(open(data_path).read())
         
-    def search(self, region):
+    def search(self, region: str) -> dict:
         if region in self.data:
             return self.data[region]
         else:

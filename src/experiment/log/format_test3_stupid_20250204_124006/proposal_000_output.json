@@ -1,0 +1,63 @@
+{
+  "summary": {
+    "support": 33,
+    "oppose": 66,
+    "neutral": 1
+  },
+  "comments": [
+    {
+      "id": 1,
+      "agent": {
+        "age": "26-40",
+        "income_level": "middle_income",
+        "education_level": "bachelor",
+        "occupation": "retired",
+        "gender": "male"
+      },
+      "opinion": "support",
+      "comment": "As a retired resident, I support the rezoning proposal as it could potentially increase property values and bring more development to the area.",
+      "cell_id": "10_15"
+    },
+    {
+      "id": 2,
+      "agent": {
+        "age": "41-60",
+        "income_level": "low_income",
+        "education_level": "high_school",
+        "occupation": "white_collar",
+        "gender": "male"
+      },
+      "opinion": "oppose",
+      "comment": "As a long-time homeowner in the area, I value the current neighborhood character and worry that increasing the height limit could lead to overcrowding and decreased property values.",
+      "cell_id": "10_15"
+    },
+    {
+      "id": 3,
+      "agent": {
+        "age": "26-40",
+        "income_level": "low_income",
+        "education_level": "high_school",
+        "occupation": "white_collar",
+        "gender": "male"
+      },
+      "opinion": "oppose",
+      "comment": "I prefer to maintain the current height limit in residential areas, as it could impact the overall character and feel of the neighborhood.",
+      "cell_id": "10_15"
+    }
+  ],
+  "key_themes": {
+    "support": [
+      "property value increase",
+      "development",
+      "support"
+    ],
+    "oppose": [
+      "property values",
+      "Community character",
+      "Neighborhood impact",
+      "neighborhood character",
+      "Height limit",
+      "overcrowding"
+    ]
+  }
+}

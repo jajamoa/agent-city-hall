@@ -1,21 +1,40 @@
 # src/simulation/simulate.py
 import os
-import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
 import json
 import numpy as np
+from pathlib import Path
+from typing import Dict, Any, Tuple, List
 
 class SimulationEngine:
     def __init__(self):
-        self.reason_dictionary = json.load(open("data/reasons.json"))
+        current_dir = Path(__file__).parent.parent
+        data_path = current_dir / "data/reasons.json"
+        self.reason_dictionary = json.load(open(data_path))
         
-    def simulate(self, region, population, proposal, demographics):
+    def simulate(self,
+                region: str,
+                population: int,
+                proposal: Dict[str, Any],
+                demographics: Dict[str, Any],
+                num_samples: int = 30) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+        """
+        Simulate opinions for a proposal
+        
+        Args:
+            region: Target region
+            population: Total population size
+            proposal: Proposal details
+            demographics: Demographic information
+            num_samples: Number of sample agents to generate
+            
+        Returns:
+            Tuple of (opinion distribution, sample agents)
+        """
         # generate distribution of opinions
         opinion_distribution = self._simulate_opinion_distribution(population, proposal, demographics)
         
         # generate sample agents (deterministic based on demographics)
-        sample_agents = self._generate_sample_agents(demographics)
+        sample_agents = self._generate_sample_agents(demographics, N=num_samples)
         
         # generate sample comments for each agent
         sample_agents = self._generate_sample_comments(sample_agents, proposal)
