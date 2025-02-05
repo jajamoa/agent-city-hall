@@ -34,6 +34,38 @@ To run an experiment:
 python scripts/run_experiment.py --protocol protocols/sample_protocol.yaml
 ```
 
+Results will be in `log/{experiment_name}_{timestamp}/`.
+
+## Validating Models
+
+Before running experiments, you can validate your model implementation:
+
+```bash
+python scripts/validate_model.py \
+    --model-path models.mNN_your_model_name.model.YourModelName \
+    --population 3
+```
+
+The validator will:
+1. Load your model class
+2. Run a sample simulation
+3. Verify the output format and data types
+4. Check if agent ages are valid integers (18-85)
+
+### Example
+
+```bash
+# Validate basic model
+python scripts/validate_model.py --model-path models.m02_stupid.model.StupidAgentModel --population 3
+```
+
+Expected output:
+```
+✓ Model loaded successfully
+✓ Simulation completed
+✓ All validation checks passed
+```
+
 ## Protocol Format
 
 Protocols define experiment parameters in YAML format:
