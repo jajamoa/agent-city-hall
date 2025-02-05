@@ -50,7 +50,7 @@ class StupidAgentModel(BaseModel):
             opinion, comment, themes = await self._generate_opinion_and_comment(raw_agent, proposal)
             opinion_counts[opinion] += 1
             
-            # 找到最近的 cell
+            # Find nearest cell
             agent_lat = raw_agent['coordinates']['lat']
             agent_lng = raw_agent['coordinates']['lng']
             nearest_cell = None
@@ -68,7 +68,7 @@ class StupidAgentModel(BaseModel):
                     nearest_cell = cell
                     nearest_cell_id = cell_id
             
-            # 转换代理格式以匹配 ground truth
+            # Convert agent format to match ground truth
             agent = {
                 "id": i + 1,
                 "agent": {
@@ -88,18 +88,13 @@ class StupidAgentModel(BaseModel):
             }
             agents.append(agent)
             
-            # 收集主题
+            # Collect themes
             if themes:
                 key_themes[opinion].update(themes)
         
-        # 计算百分比
-        total_agents = len(agents)
+        # Return results with raw counts
         return {
-            "summary": {
-                "support": int(opinion_counts["support"] * 100 / total_agents),
-                "oppose": int(opinion_counts["oppose"] * 100 / total_agents),
-                "neutral": 100 - int(opinion_counts["support"] * 100 / total_agents) - int(opinion_counts["oppose"] * 100 / total_agents)
-            },
+            "summary": opinion_counts,
             "comments": agents,
             "key_themes": {
                 "support": list(key_themes["support"]),

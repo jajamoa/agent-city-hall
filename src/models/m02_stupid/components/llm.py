@@ -1,6 +1,10 @@
 import os
 from openai import AsyncOpenAI
 from typing import Optional
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class OpenAILLM:
     """Simple OpenAI LLM wrapper"""
