@@ -4,6 +4,7 @@ import json
 import numpy as np
 from pathlib import Path
 from typing import Dict, Any, Tuple, List
+import random
 
 class SimulationEngine:
     def __init__(self):
@@ -50,8 +51,14 @@ class SimulationEngine:
             options = list(dist_data.keys())
             p = list(dist_data.values())
             p = np.array(p) / np.sum(p)
-            sampled_value = np.random.choice(options, p=p)
-            return sampled_value
+            
+            if attr_name == "age":
+                # For age, generate a specific number within the selected range
+                age_range = np.random.choice(options, p=p)
+                start_age, end_age = map(int, age_range.split("-"))
+                return random.randint(start_age, end_age)
+            else:
+                return np.random.choice(options, p=p)
         
         attributes = ["age", "income", "education", "occupation", "gender", "religion", "race"]
         sample_agents = {}

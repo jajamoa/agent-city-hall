@@ -107,17 +107,10 @@ class StupidAgentModel(BaseModel):
             }
         }
     
-    def _convert_age(self, age: str) -> str:
+    def _convert_age(self, age: int) -> int:
         """Convert age format"""
-        age_map = {
-            "18-24": "18-25",
-            "25-34": "26-40",
-            "35-44": "26-40",
-            "45-54": "41-60",
-            "55-64": "41-60",
-            "65+": "60+"
-        }
-        return age_map.get(age, "26-40")
+        # age is already an integer from agent_generator
+        return age
     
     def _convert_income(self, income: str) -> str:
         """Convert income format"""
