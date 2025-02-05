@@ -94,79 +94,84 @@ async def run_experiment(protocol: dict):
                     metric_type = metric_config["type"]
                     gt_file = metric_config.get("ground_truth")
                     
-                    if gt_file:
-                        # Load ground truth data
-                        gt_path = data_manager.ground_truth_dir / gt_file
-                        if gt_path.exists():
-                            with open(gt_path) as f:
-                                gt_data = json.load(f)
-                                
-                            # Calculate metrics based on type
-                            if metric_type == "group_distribution":
-                                # Get group_by field from metadata
-                                if "metadata" not in gt_data or "type" not in gt_data["metadata"]:
-                                    print(f"Warning: Invalid ground truth file format: {gt_file}")
-                                    continue
-                                    
-                                if gt_data["metadata"]["type"] != "distribution_by_group":
-                                    print(f"Warning: Mismatched metric type in {gt_file}")
-                                    continue
-                                    
-                                group_field = gt_data["metadata"].get("group_by")
-                                if not group_field:
-                                    print(f"Warning: Missing group_by in metadata: {gt_file}")
-                                    continue
-                                
-                                # Initialize distribution_by_group if not exists
-                                if "distribution_by_group" not in metrics:
-                                    metrics["distribution_by_group"] = {}
-                                
-                                # Use ground truth file name as key
-                                gt_key = gt_file.replace(".json", "")
-                                
-                                # 计算分布指标
-                                distribution_metrics = calculate_metrics(
-                                    result=result,
-                                    ground_truth=gt_data["distributions"],
-                                    metric_type="group_distribution",
-                                    group_field=group_field,
-                                    group_metadata=gt_data["metadata"]["groups"]  # 传入分组规则
-                                )
-                                
-                                metrics["distribution_by_group"][gt_key] = {
-                                    "ground_truth": gt_data["distributions"],
-                                    "predicted": distribution_metrics["predicted_distribution"],
-                                    "group_metrics": distribution_metrics["group_metrics"],
-                                    "average_metrics": distribution_metrics["average_metrics"],
-                                    "metadata": gt_data["metadata"]
-                                }
-                                
-                            elif metric_type == "individual_match":
-                                if ("metadata" not in gt_data or 
-                                    "type" not in gt_data["metadata"] or
-                                    gt_data["metadata"]["type"] != "individual_match"):
-                                    print(f"Warning: Invalid ground truth file format: {gt_file}")
-                                    continue
-                                    
-                                # Initialize individual_match if not exists
-                                if "individual_match" not in metrics:
-                                    metrics["individual_match"] = {}
-                                    
-                                # Use ground truth file name as key
-                                gt_key = gt_file.replace(".json", "")
-                                
-                                # 计算个体匹配指标
-                                individual_metrics = calculate_metrics(
-                                    result=result,
-                                    ground_truth=gt_data["responses"],
-                                    metric_type="individual_match"
-                                )
-                                
-                                metrics["individual_match"][gt_key] = {
-                                    "ground_truth": gt_data,
-                                    "predicted": result,
-                                    "metrics": individual_metrics["metrics"]  # 包含匹配率等指标
-                                }
+                    if not gt_file:
+                        continue
+                        
+                    # Load ground truth data
+                    gt_path = data_manager.ground_truth_dir / gt_file
+                    if not gt_path.exists():
+                        print(f"Warning: Ground truth file not found: {gt_file}")
+                        continue
+                        
+                    with open(gt_path) as f:
+                        gt_data = json.load(f)
+                        
+                    # Only calculate metrics specified in protocol
+                    if metric_type == "group_distribution":
+                        # Get group_by field from metadata
+                        if "metadata" not in gt_data or "type" not in gt_data["metadata"]:
+                            print(f"Warning: Invalid ground truth file format: {gt_file}")
+                            continue
+                            
+                        if gt_data["metadata"]["type"] != "distribution_by_group":
+                            print(f"Warning: Mismatched metric type in {gt_file}")
+                            continue
+                            
+                        group_field = gt_data["metadata"].get("group_by")
+                        if not group_field:
+                            print(f"Warning: Missing group_by in metadata: {gt_file}")
+                            continue
+                        
+                        # Initialize distribution_by_group if not exists
+                        if "distribution_by_group" not in metrics:
+                            metrics["distribution_by_group"] = {}
+                        
+                        # Use ground truth file name as key
+                        gt_key = gt_file.replace(".json", "")
+                        
+                        # 计算分布指标
+                        distribution_metrics = calculate_metrics(
+                            result=result,
+                            ground_truth=gt_data["distributions"],
+                            metric_type="group_distribution",
+                            group_field=group_field,
+                            group_metadata=gt_data["metadata"]["groups"]  # 传入分组规则
+                        )
+                        
+                        metrics["distribution_by_group"][gt_key] = {
+                            "ground_truth": gt_data["distributions"],
+                            "predicted": distribution_metrics["predicted_distribution"],
+                            "group_metrics": distribution_metrics["group_metrics"],
+                            "average_metrics": distribution_metrics["average_metrics"],
+                            "metadata": gt_data["metadata"]
+                        }
+                        
+                    elif metric_type == "individual_match" and metric_type in [m["type"] for m in protocol["evaluation"]["metrics"]]:
+                        if ("metadata" not in gt_data or 
+                            "type" not in gt_data["metadata"] or
+                            gt_data["metadata"]["type"] != "individual_match"):
+                            print(f"Warning: Invalid ground truth file format: {gt_file}")
+                            continue
+                            
+                        # Initialize individual_match if not exists
+                        if "individual_match" not in metrics:
+                            metrics["individual_match"] = {}
+                            
+                        # Use ground truth file name as key
+                        gt_key = gt_file.replace(".json", "")
+                        
+                        # 计算个体匹配指标
+                        individual_metrics = calculate_metrics(
+                            result=result,
+                            ground_truth=gt_data["responses"],
+                            metric_type="individual_match"
+                        )
+                        
+                        metrics["individual_match"][gt_key] = {
+                            "ground_truth": gt_data,
+                            "predicted": result,
+                            "metrics": individual_metrics["metrics"]  # 包含匹配率等指标
+                        }
             
             # Save results and metrics
             data_manager.save_experiment_result(
