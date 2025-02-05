@@ -59,6 +59,8 @@ class SimulationEngine:
             x, y = sample_location(geo_info["cells"][cell]['bbox'])
             for attr in attributes:
                 agent[attr] = sample_attribute(attr, demographics)
+                agent['location'] = {"x": x, "y": y}
+                agent['cell'] = cell
             cell_height = geo_info["cells"][cell]['heightLimit']
             oppose_weight = 0.2 + (cell_height - min_height) / (max_height - min_height) * (0.7 - 0.2)
             neutral_weight = 0.1
