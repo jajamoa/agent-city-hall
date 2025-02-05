@@ -1,0 +1,597 @@
+{
+    "comments": {
+        "0": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.49355758089408,
+                    "y": 37.73105723066857
+                },
+                "occupation": "blue_collar",
+                "race": "white",
+                "religion": "islam"
+            },
+            "comment": "I strongly support the Kendall Square Mixed-Use Development as it promotes much-needed residential options while enhancing commercial vitality. The inclusion of green spaces is vital for community well-being, and the commitment to sustainable practices like LEED Gold standards demonstrates a forward-thinking approach. Balancing height concerns with increased housing demand is essential, and this project appears to effectively meet that challenge.",
+            "id": 0,
+            "opinion": "support"
+        },
+        "1": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_16",
+                "education": "high_school_or_below",
+                "gender": "female",
+                "income": "high_income",
+                "location": {
+                    "x": -122.48116313139931,
+                    "y": 37.728944619541664
+                },
+                "occupation": "white_collar",
+                "race": "asian",
+                "religion": "other"
+            },
+            "comment": "The Kendall Square Mixed-Use Development presents an exciting opportunity to enhance our community by integrating living spaces with vibrant commercial areas and green spaces. This project not only addresses housing needs but also promotes sustainable practices. It's essential to prioritize public green spaces and ensure adequate parking, but overall, it aligns well with the economic growth of the area.",
+            "id": 1,
+            "opinion": "support"
+        },
+        "2": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_16",
+                "education": "postgraduate",
+                "gender": "female",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.48601651002058,
+                    "y": 37.72828232994
+                },
+                "occupation": "white_collar",
+                "race": "asian",
+                "religion": "islam"
+            },
+            "comment": "The Kendall Square Mixed-Use Development presents a balanced approach by integrating residential, commercial, and green spaces. However, careful attention must be given to the height variance and its potential impact on local aesthetics and traffic. Ensuring that the increase in parking demand is managed effectively will be crucial for maintaining community satisfaction.",
+            "id": 2,
+            "opinion": "neutral"
+        },
+        "3": {
+            "agent": {
+                "age": "60+",
+                "cell": "10_15",
+                "education": "postgraduate",
+                "gender": "male",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.498078548326,
+                    "y": 37.73465488572573
+                },
+                "occupation": "white_collar",
+                "race": "asian",
+                "religion": "christianity"
+            },
+            "comment": "This mixed-use development is a positive step for Kendall Square, enhancing community vibrancy while addressing housing needs. The balance of residential units, retail, and green spaces promotes a sustainable urban environment. The commitment to LEED Gold standards also reflects a forward-thinking approach to energy efficiency and environmental responsibility, which is crucial for our future.",
+            "id": 3,
+            "opinion": "support"
+        },
+        "4": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_16",
+                "education": "high_school_or_below",
+                "gender": "male",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.4797776390758,
+                    "y": 37.73272351210975
+                },
+                "occupation": "white_collar",
+                "race": "other",
+                "religion": "christianity"
+            },
+            "comment": "The Kendall Square Mixed-Use Development presents a balanced approach by incorporating residential spaces alongside commercial and green areas. This project can enhance community vibrancy and accessibility. The commitment to sustainability, such as LEED Gold standards and green spaces, is commendable. However, it\u2019s essential to ensure that parking concerns are adequately addressed to prevent congestion in the area.",
+            "id": 4,
+            "opinion": "support"
+        },
+        "5": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_16",
+                "education": "high_school_or_below",
+                "gender": "female",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.4830606702467,
+                    "y": 37.73393348856133
+                },
+                "occupation": "white_collar",
+                "race": "black",
+                "religion": "christianity"
+            },
+            "comment": "The Kendall Square Mixed-Use Development represents a positive step towards addressing housing needs while incorporating green spaces, which are essential for community well-being. By providing diverse residential options and retail spaces, it fosters a vibrant neighborhood. However, ensuring adequate parking and minimizing the height impact should be prioritized to maintain the area's character and avoid congestion.",
+            "id": 5,
+            "opinion": "support"
+        },
+        "6": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.49184878189338,
+                    "y": 37.72613773558006
+                },
+                "occupation": "retired",
+                "race": "white",
+                "religion": "christianity"
+            },
+            "comment": "The Kendall Square Mixed-Use Development is a promising initiative that addresses the pressing need for housing while enhancing the community. The mix of residential, retail, and green spaces will foster a vibrant atmosphere, promote walkability, and provide valuable amenities. Ensuring LEED Gold standards demonstrates a commitment to sustainability, which is crucial for our future.",
+            "id": 6,
+            "opinion": "support"
+        },
+        "7": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_16",
+                "education": "postgraduate",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.47928663608559,
+                    "y": 37.7277436964735
+                },
+                "occupation": "white_collar",
+                "race": "white",
+                "religion": "christianity"
+            },
+            "comment": "While the mixed-use development offers essential housing and green spaces, I am concerned about the height increase and the resultant traffic and parking issues. With a growing population, we should prioritize affordable housing solutions without compromising the community's character or accessibility, particularly for low-income residents like myself who rely on public transport and accessible spaces.",
+            "id": 7,
+            "opinion": "oppose"
+        },
+        "8": {
+            "agent": {
+                "age": "60+",
+                "cell": "10_15",
+                "education": "high_school_or_below",
+                "gender": "male",
+                "income": "high_income",
+                "location": {
+                    "x": -122.4976430716368,
+                    "y": 37.7292536025803
+                },
+                "occupation": "retired",
+                "race": "black",
+                "religion": "christianity"
+            },
+            "comment": "The Kendall Square Mixed-Use Development is a vital step in addressing housing shortages while enhancing community space. Balancing residential needs with commercial growth and green areas will foster a vibrant environment. The focus on sustainability, such as LEED Gold certification and solar panels, shows a commitment to eco-friendly practices, which is essential for future developments.",
+            "id": 8,
+            "opinion": "support"
+        },
+        "9": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_16",
+                "education": "high_school_or_below",
+                "gender": "male",
+                "income": "low_income",
+                "location": {
+                    "x": -122.48722491510094,
+                    "y": 37.729049184773835
+                },
+                "occupation": "self_employed",
+                "race": "white",
+                "religion": "islam"
+            },
+            "comment": "The mixed-use development in Kendall Square is a great opportunity to address housing shortages while also promoting a vibrant community atmosphere. Combining residential space with retail and green areas fosters social interaction and convenience for residents. However, it's crucial to ensure that the increased parking demand is managed effectively, and green spaces are preserved for community well-being.",
+            "id": 9,
+            "opinion": "support"
+        },
+        "10": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_16",
+                "education": "bachelor",
+                "gender": "male",
+                "income": "low_income",
+                "location": {
+                    "x": -122.48861066343783,
+                    "y": 37.72791301477155
+                },
+                "occupation": "self_employed",
+                "race": "black",
+                "religion": "christianity"
+            },
+            "comment": "The proposed Kendall Square development represents a crucial step towards addressing housing shortages and enhancing community resources. Allocating half the space for residential units, particularly with varied sizes, is commendable. Additionally, integrating public green spaces will foster community engagement and improve quality of life. It's essential, however, to ensure adequate infrastructure supports increased parking demand and pedestrian traffic.",
+            "id": 10,
+            "opinion": "support"
+        },
+        "11": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "high_income",
+                "location": {
+                    "x": -122.49661391044927,
+                    "y": 37.733083958106185
+                },
+                "occupation": "retired",
+                "race": "white",
+                "religion": "non_religious"
+            },
+            "comment": "While the mixed-use development promises more residential units, I am concerned that the height increase and parking demand may negatively impact the neighborhood's character. Preserving green spaces is crucial, as they contribute to community well-being. A focus on more affordable housing options would better serve the diverse needs of Kendall Square residents, particularly younger individuals like myself.",
+            "id": 11,
+            "opinion": "oppose"
+        },
+        "12": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "high_income",
+                "location": {
+                    "x": -122.49367342723993,
+                    "y": 37.72643015820786
+                },
+                "occupation": "blue_collar",
+                "race": "other",
+                "religion": "christianity"
+            },
+            "comment": "While the mixed-use development offers some benefits, its height variance and limited parking exacerbate congestion in Kendall Square. Additionally, the allocation of only 35 residential units does not sufficiently address the urgent housing crisis. Better integration of public green spaces and increased affordable housing options should be prioritized to enhance community well-being and sustainability.",
+            "id": 12,
+            "opinion": "oppose"
+        },
+        "13": {
+            "agent": {
+                "age": "60+",
+                "cell": "10_16",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.47829493799287,
+                    "y": 37.730110733599076
+                },
+                "occupation": "blue_collar",
+                "race": "white",
+                "religion": "christianity"
+            },
+            "comment": "The Kendall Square Mixed-Use Development offers a balanced approach to housing and community needs. With 35 residential units designated for a variety of families, it addresses the critical shortage of affordable housing. Moreover, the commitment to green spaces enhances the quality of life for residents and encourages community interaction, making Kendall Square a more vibrant and sustainable neighborhood.",
+            "id": 13,
+            "opinion": "support"
+        },
+        "14": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_16",
+                "education": "postgraduate",
+                "gender": "female",
+                "income": "high_income",
+                "location": {
+                    "x": -122.4811173932388,
+                    "y": 37.73658190280331
+                },
+                "occupation": "blue_collar",
+                "race": "asian",
+                "religion": "non_religious"
+            },
+            "comment": "The mixed-use development in Kendall Square presents a balanced approach to community needs, offering much-needed residential units while enhancing commercial opportunities. However, careful consideration of the height variance and parking demand is crucial to preserve neighborhood character and avoid congestion. The commitment to green spaces is commendable and can positively impact local biodiversity and community well-being.",
+            "id": 14,
+            "opinion": "neutral"
+        },
+        "15": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_15",
+                "education": "high_school_or_below",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.49306589061062,
+                    "y": 37.72755117882016
+                },
+                "occupation": "self_employed",
+                "race": "black",
+                "religion": "islam"
+            },
+            "comment": "The Kendall Square Mixed-Use Development strikes a commendable balance between residential needs and green spaces. As a low-income resident, I appreciate the allocation of units and the focus on sustainability. However, addressing parking demand and ensuring the accessibility of the green spaces for all community members will be crucial for enhancing our neighborhood's quality of life.",
+            "id": 15,
+            "opinion": "support"
+        },
+        "16": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "male",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.49610717145129,
+                    "y": 37.7310083538261
+                },
+                "occupation": "white_collar",
+                "race": "hispanic",
+                "religion": "christianity"
+            },
+            "comment": "The Kendall Square Mixed-Use Development presents a smart, balanced approach to urban growth. By prioritizing residential units while also integrating retail and green spaces, it enhances community living while addressing housing needs. The addition of green spaces is particularly important for environmental wellbeing and community engagement, ensuring that development meets modern sustainability standards.",
+            "id": 16,
+            "opinion": "support"
+        },
+        "17": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_16",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "high_income",
+                "location": {
+                    "x": -122.48223849777803,
+                    "y": 37.73461119477454
+                },
+                "occupation": "self_employed",
+                "race": "white",
+                "religion": "other"
+            },
+            "comment": "This mixed-use development is a step forward for Kendall Square, addressing the urgent need for housing while enhancing community spaces. The integration of green areas and emphasis on sustainability align with modern living standards, promoting a balanced lifestyle. However, it will be crucial to manage the increased parking demand effectively to maintain accessibility and reduce congestion in our vibrant neighborhood.",
+            "id": 17,
+            "opinion": "support"
+        },
+        "18": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "male",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.4989122670439,
+                    "y": 37.72620707793857
+                },
+                "occupation": "white_collar",
+                "race": "white",
+                "religion": "non_religious"
+            },
+            "comment": "While the mixed-use development aims to provide housing and commercial opportunities, I am concerned about the proposed height increase and the potential strain on parking and local infrastructure. The preservation of green space is also crucial for maintaining the quality of life in Kendall Square. A more balanced approach is needed to ensure community needs are prioritized.",
+            "id": 18,
+            "opinion": "oppose"
+        },
+        "19": {
+            "agent": {
+                "age": "60+",
+                "cell": "10_16",
+                "education": "bachelor",
+                "gender": "male",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.48071691895987,
+                    "y": 37.73409969858048
+                },
+                "occupation": "blue_collar",
+                "race": "white",
+                "religion": "non_religious"
+            },
+            "comment": "While I appreciate the need for more housing and commercial space, the height variance and increased parking demand raise significant concerns. This development risks overpowering the surrounding neighborhood and diminishing the existing community character. Furthermore, the limited green space allocation is not sufficient to offset the increased population density and its impact on local resources.",
+            "id": 19,
+            "opinion": "oppose"
+        },
+        "20": {
+            "agent": {
+                "age": "41-60",
+                "cell": "10_16",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.48706704098923,
+                    "y": 37.730600189228
+                },
+                "occupation": "self_employed",
+                "race": "asian",
+                "religion": "christianity"
+            },
+            "comment": "While the development aims to provide much-needed housing and green space, the height variance raises concerns about the neighborhood's character and increased congestion. Additionally, the allocation of only 35 residential units in a growing area may not adequately address the housing shortage for low-income families like mine. Prioritizing affordable housing and ensuring adequate public transportation should be paramount.",
+            "id": 20,
+            "opinion": "oppose"
+        },
+        "21": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_16",
+                "education": "postgraduate",
+                "gender": "male",
+                "income": "low_income",
+                "location": {
+                    "x": -122.48049886347265,
+                    "y": 37.73376720406885
+                },
+                "occupation": "white_collar",
+                "race": "white",
+                "religion": "non_religious"
+            },
+            "comment": "While the mixed-use development aims to enhance housing and commercial opportunities, the height increase and limited green space could negatively impact our community's character and livability. We need more affordable housing solutions without compromising the existing neighborhood's integrity and the essential nature of public spaces.",
+            "id": 21,
+            "opinion": "oppose"
+        },
+        "22": {
+            "agent": {
+                "age": "60+",
+                "cell": "10_15",
+                "education": "postgraduate",
+                "gender": "female",
+                "income": "high_income",
+                "location": {
+                    "x": -122.4909259111671,
+                    "y": 37.72751640563713
+                },
+                "occupation": "white_collar",
+                "race": "asian",
+                "religion": "christianity"
+            },
+            "comment": "The Kendall Square Mixed-Use Development presents an opportunity to enhance community vibrancy while addressing housing needs. The commitment to green space is commendable, as it promotes environmental sustainability and connectivity. Additionally, the mix of residential and commercial spaces can foster a diverse community, ensuring that it remains liveable and engaging for all residents, including seniors and families.",
+            "id": 22,
+            "opinion": "support"
+        },
+        "23": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_16",
+                "education": "postgraduate",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.48684613440099,
+                    "y": 37.7342420258532
+                },
+                "occupation": "white_collar",
+                "race": "asian",
+                "religion": "islam"
+            },
+            "comment": "The Kendall Square Mixed-Use Development is a positive step towards addressing housing needs in our community while promoting sustainable living. The integration of green spaces is crucial, and the project aligns with environmentally friendly practices. I appreciate that it provides a variety of residential units, catering to diverse family sizes, which is essential for fostering a vibrant community.",
+            "id": 23,
+            "opinion": "support"
+        },
+        "24": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "male",
+                "income": "high_income",
+                "location": {
+                    "x": -122.49676311122867,
+                    "y": 37.72667715910028
+                },
+                "occupation": "white_collar",
+                "race": "white",
+                "religion": "non_religious"
+            },
+            "comment": "The Kendall Square Mixed-Use Development is a promising initiative that blends residential, commercial, and green spaces. The focus on LEED Gold standards and sustainable practices demonstrates a commitment to environmental responsibility. I appreciate the inclusion of diverse residential options and the emphasis on public spaces, which can enrich the community\u2019s social fabric and enhance quality of life for residents and visitors alike.",
+            "id": 24,
+            "opinion": "support"
+        },
+        "25": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_15",
+                "education": "high_school_or_below",
+                "gender": "female",
+                "income": "middle_income",
+                "location": {
+                    "x": -122.49394825379395,
+                    "y": 37.73328517172821
+                },
+                "occupation": "white_collar",
+                "race": "black",
+                "religion": "christianity"
+            },
+            "comment": "This mixed-use development is a promising step toward addressing housing shortages in Kendall Square while enhancing local commerce. The inclusion of green spaces is vital for community well-being. However, careful consideration of the increased parking demand and the concerns around building height is crucial to maintain the neighborhood's character and sustainability.",
+            "id": 25,
+            "opinion": "support"
+        },
+        "26": {
+            "agent": {
+                "age": "41-60",
+                "cell": "10_15",
+                "education": "bachelor",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.49742061874586,
+                    "y": 37.73038782795291
+                },
+                "occupation": "blue_collar",
+                "race": "asian",
+                "religion": "islam"
+            },
+            "comment": "I believe the Kendall Square Mixed-Use Development is a positive step toward addressing our housing shortage, particularly for low-income families. The inclusion of public green spaces is essential for community well-being, and the emphasis on sustainable design aligns with modern environmental needs. However, it\u2019s crucial to consider parking and traffic impacts to ensure accessibility for current residents.",
+            "id": 26,
+            "opinion": "support"
+        },
+        "27": {
+            "agent": {
+                "age": "26-40",
+                "cell": "10_16",
+                "education": "high_school_or_below",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.47989292914916,
+                    "y": 37.72913606048337
+                },
+                "occupation": "self_employed",
+                "race": "asian",
+                "religion": "non_religious"
+            },
+            "comment": "I support the Kendall Square Mixed-Use Development as it addresses the urgent need for affordable housing in our community while promoting local business growth. The project\u2019s green space and LEED Gold standards will enhance our environment, providing a balance between urban development and sustainability. It\u2019s crucial we embrace smart growth solutions that benefit all residents, especially those of us with lower incomes.",
+            "id": 27,
+            "opinion": "support"
+        },
+        "28": {
+            "agent": {
+                "age": "18-25",
+                "cell": "10_15",
+                "education": "high_school_or_below",
+                "gender": "female",
+                "income": "low_income",
+                "location": {
+                    "x": -122.49875098645003,
+                    "y": 37.734415737014686
+                },
+                "occupation": "blue_collar",
+                "race": "white",
+                "religion": "islam"
+            },
+            "comment": "While the mixed-use development aims to enhance housing and commercial space, the proposed height increase raises concerns about community character and access to light. Additionally, with limited parking, it may further strain our already congested streets. It's crucial that any development prioritizes affordable housing options and ensures public green spaces are fully preserved for community use.",
+            "id": 28,
+            "opinion": "oppose"
+        },
+        "29": {
+            "agent": {
+                "age": "60+",
+                "cell": "10_16",
+                "education": "postgraduate",
+                "gender": "female",
+                "income": "high_income",
+                "location": {
+                    "x": -122.47792495370335,
+                    "y": 37.72835495154785
+                },
+                "occupation": "retired",
+                "race": "black",
+                "religion": "other"
+            },
+            "comment": "The Kendall Square Mixed-Use Development presents an excellent opportunity to enhance our community by providing much-needed housing and vibrant retail spaces. By prioritizing sustainability and green spaces, it balances development with environmental concerns. Additionally, the increase in pedestrian traffic can foster a more connected neighborhood, contributing to a more dynamic and welcoming atmosphere.",
+            "id": 29,
+            "opinion": "support"
+        }
+    },
+    "summary": {
+        "opponent_reasons": {
+            "community_dissatisfaction": 0.16222542524337769,
+            "cultural_displacement": 0.09536740928888321,
+            "environmental_destruction": 0.029543442651629448,
+            "gentrification": 0.4996894598007202,
+            "health_risks": 0.12634128332138062,
+            "legal_uncertainty": 0.08683300018310547
+        },
+        "summary_statistics": {
+            "neutral": 3447,
+            "oppose": 42645,
+            "support": 53908
+        },
+        "supporter_reasons": {
+            "economic_stimulus": 0.4152240455150604,
+            "educational_opportunities": 0.04376429319381714,
+            "infrastructure_improvement": 0.08979850262403488,
+            "job_creation": 0.17858564853668213,
+            "renewable_energy_initiatives": 0.16260407865047455,
+            "technological_innovation": 0.11002343147993088
+        }
+    }
+}

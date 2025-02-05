@@ -1,6 +1,7 @@
-import requests
-
 def test_main():
+    import requests
+    import json
+
     geo_info = {
     "gridConfig": {
         "cellSize": 100,
@@ -77,7 +78,9 @@ def test_main():
         result = response.json()
         print("Simulation result:")
         print(result)
-
+    
+    with open('example_results.json', 'w') as f:
+        json.dump(result, f, indent=4)
 
 def test_openai():
     from src.utils import OpenAIClient
