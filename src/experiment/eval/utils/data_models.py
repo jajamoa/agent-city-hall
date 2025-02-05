@@ -30,7 +30,7 @@ class Location(BaseModel):
 
 class Agent(BaseModel):
     """Agent demographic information"""
-    age: str
+    age: int
     income_level: str
     education_level: str
     occupation: str

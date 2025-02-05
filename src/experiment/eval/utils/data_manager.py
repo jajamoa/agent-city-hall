@@ -82,9 +82,10 @@ class DataManager:
     def save_experiment_result(self, 
                              exp_dir: Path,
                              proposal: ZoningProposal,
-                             result: EvaluationResult,
+                             result: Dict[str, Any],
                              proposal_id: str,
-                             model_name: str):
+                             model_name: str,
+                             metrics: Optional[Dict[str, Any]] = None):
         """Save experiment input, output and metrics."""
         # Extract number from proposal_id (e.g., "proposal_000" -> "000")
         file_id = proposal_id.split("_")[-1]
@@ -97,46 +98,10 @@ class DataManager:
         # Save output result
         output_path = exp_dir / f"{file_id}_output.json"
         with open(output_path, "w") as f:
-            json.dump(result.model_dump(), f, indent=2)
+            json.dump(result, f, indent=2)
         
-        # Load ground truth and calculate metrics
-        ground_truth = self.load_ground_truth(file_id)
-        
-        # 配置要计算的分布指标
-        distribution_configs = [
-            {
-                "group_by_field": "agent.age",
-                "target_field": "opinion"
-            },
-            {
-                "group_by_field": "agent.income_level",
-                "target_field": "opinion"
-            },
-            {
-                "group_by_field": "agent.education_level",
-                "target_field": "opinion"
-            }
-        ]
-        
-        # 配置要比较的相似度字段
-        similarity_fields = [
-            "agent.age",
-            "agent.income_level",
-            "agent.education_level",
-            "agent.occupation",
-            "agent.gender"
-        ]
-        
-        # Calculate metrics if ground truth exists
-        if ground_truth:
-            metrics = calculate_metrics(
-                result,
-                ground_truth=ground_truth,
-                distribution_configs=distribution_configs,
-                similarity_fields=similarity_fields
-            )
-            
-            # Save metrics
+        # Save metrics if provided
+        if metrics:
             metrics_path = exp_dir / f"{file_id}_metrics.json"
             with open(metrics_path, "w") as f:
                 json.dump(metrics, f, indent=2) 
