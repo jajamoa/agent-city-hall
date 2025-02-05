@@ -39,7 +39,14 @@ class TemplateModel(BaseModel):
         
         # Example demographic options
         demographics = {
-            "age": ["18-25", "26-40", "41-60", "60+"],
+            "age_ranges": [
+                (18, 24, 0.15),  # 15% probability
+                (25, 34, 0.25),  # 25% probability
+                (35, 44, 0.20),  # 20% probability
+                (45, 54, 0.15),  # 15% probability
+                (55, 64, 0.15),  # 15% probability
+                (65, 85, 0.10)   # 10% probability
+            ],
             "income_level": ["low_income", "middle_income", "high_income"],
             "education_level": ["high_school", "some_college", "bachelor", "postgraduate"],
             "occupation": ["student", "white_collar", "service", "retired", "other"],
@@ -66,11 +73,16 @@ class TemplateModel(BaseModel):
                     min_distance = distance
                     nearest_cell_id = cell_id
             
+            # Generate random age based on weights
+            ranges, weights = zip(*[(r[:2], r[2]) for r in demographics["age_ranges"]])
+            selected_range = random.choices(ranges, weights=weights)[0]
+            age = random.randint(selected_range[0], selected_range[1])
+            
             # Random demographics and opinion
             agent = {
                 "id": i + 1,
                 "agent": {
-                    "age": random.choice(demographics["age"]),
+                    "age": age,
                     "income_level": random.choice(demographics["income_level"]),
                     "education_level": random.choice(demographics["education_level"]),
                     "occupation": random.choice(demographics["occupation"]),
