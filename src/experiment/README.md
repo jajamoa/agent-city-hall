@@ -91,6 +91,16 @@ evaluation:
       ground_truth: "sample_individual_gt.json"
 ```
 
+## Statistical Metrics
+
+The evaluation uses three distance metrics to compare opinion distributions:
+
+- **Jensen-Shannon Divergence**: A symmetric and bounded measure of similarity between probability distributions, defined as $\sqrt{\frac{D_{KL}(P\|M) + D_{KL}(Q\|M)}{2}}$ where $M=\frac{P+Q}{2}$ ([wiki](https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence))
+
+- **Chi-square Distance**: A weighted sum of squared differences between observed and expected frequencies, defined as $\sum \frac{(O_i - E_i)^2}{E_i}$ ([wiki](https://en.wikipedia.org/wiki/Chi-squared_test))
+
+- **Total Variation Distance**: Half the L1 distance between two probability distributions, defined as $\frac{1}{2}\sum|P(x) - Q(x)|$ ([wiki](https://en.wikipedia.org/wiki/Total_variation_distance_of_probability_measures))
+
 ## Output Structure
 
 Each experiment run creates a directory under `log/` with:
@@ -100,4 +110,4 @@ Each experiment run creates a directory under `log/` with:
 - For each proposal:
   - `{id}_input.json`: Input proposal
   - `{id}_output.json`: Simulation results
-  - `{id}_metrics.json`: Evaluation metrics (if ground truth exists) 
+  - `{id}_metrics.json`: Evaluation metrics (if ground truth exists)
