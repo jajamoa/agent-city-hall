@@ -35,11 +35,11 @@ You are a resident of {region} and you have been asked to comment on the followi
 Your demographic profile is {attributes}.
 The policy is as follows: {policy}
 
-First of all, what is your opinion on the policy? Choose one from Support, Oppose, and Neutral. It's open-ended, so feel free to express your opinion.
+First, your opinion on the policy is {opinion}.
 Then, try to provide a comment that is insightful. Try to keep your comment between 30-80 words.
 Please provide your response below in JSON format:
 {{
-    "opinion": "Support or Oppose or Neutral",
+    "opinion": "{opinion}",
     "comment": "Your comment here."
 }}
 Now enter the response, make sure it's in JSON format:

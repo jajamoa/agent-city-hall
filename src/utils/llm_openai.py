@@ -4,11 +4,12 @@ from dotenv import load_dotenv
 
 class OpenAIClient:
     def __init__(self):
-        load_dotenv()
+        load_dotenv(override=True)
         openai_key = os.getenv('OPENAI_API_KEY')
+        print(openai_key)
         if not openai_key:
             raise ValueError("OpenAI API key not found. Please set OPENAI_API_KEY in your .env file.")
-
+        
         self.client = OpenAI(api_key=openai_key)
 
 
@@ -31,3 +32,4 @@ class OpenAIClient:
 
         except Exception as e:
             return f"Error: {str(e)}"
+        

@@ -30,6 +30,7 @@ def discuss():
     population = data.get('population', 0)
     proposal = data.get('proposal', {})
     demographics = data.get('demographics', {})
+    geo_info = data.get('geo_info', {})
     
     # Validate inputs and check for missing values
     if not region or not isinstance(population, int) or not proposal or not demographics:
@@ -38,7 +39,7 @@ def discuss():
         return jsonify({"error": "Invalid proposal. Ensure title and description are provided."}), 400
 
     # Run the simulation
-    opinion_distribution, sample_agents = simulation_engine.simulate(region, population, proposal, demographics)
+    opinion_distribution, sample_agents = simulation_engine.simulate(region, population, proposal, demographics, geo_info)
     
     # Response structure
     response = {

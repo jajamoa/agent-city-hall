@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
 import json
+import random
 import concurrent.futures
 import numpy as np
 from src.utils import LLaMAClient, OpenAIClient
@@ -15,21 +16,21 @@ class SimulationEngine:
         self.openai_client = OpenAIClient()
         self.reason_dictionary = json.load(open("data/reasons.json"))
         
-    def simulate(self, region, population, proposal, demographics):
+    def simulate(self, region, population, proposal, demographics, geo_info):
         # generate distribution of opinions
         opinion_distribution = self._simulate_opinion_distribution(region, population, proposal, demographics)
         
         # generate sample agents (deterministic based on demographics)
-        sample_agents = self._generate_sample_agents(demographics)
+        sample_agents = self._generate_sample_agents(demographics, opinion_distribution, geo_info, N=30)
         
         # generate sample comments for each agent
         sample_agents = self._generate_sample_comments(region, sample_agents, proposal)
         
         return opinion_distribution, sample_agents
         
-    def _generate_sample_agents(self, demographics, N=30):
+    def _generate_sample_agents(self, demographics, opinion_distribution, geo_info, N=30):
         # generate sample agents based on demographics
-        # attributes include age, income, education, occupation, gender, religion, and race.
+        # attributes include location, age, income, education, occupation, gender, religion, and race.
         def sample_attribute(attr_name, demographics):
             # sample an attribute based on demographics
             dist_data = demographics[attr_name + "_distribution"]
@@ -39,23 +40,40 @@ class SimulationEngine:
             sampled_value = np.random.choice(options, p=p)
             return sampled_value
         
+        def sample_location(bounds):
+            # sample a location based on bounds
+            north, south, east, west = bounds["north"], bounds["south"], bounds["east"], bounds["west"]
+            y = np.random.uniform(south, north)
+            x = np.random.uniform(west, east)
+            return x, y
+        
         attributes = ["age", "income", "education", "occupation", "gender", "religion", "race"]
+        opinion_weights = opinion_distribution["summary_statistics"]
         sample_agents = {}
+        heights = geo_info['heightLimits']['options']
+        max_height, min_height = max(heights), min(heights)
+        cells = list(geo_info["cells"].keys())
         for i in range(N):
             agent = {}
+            cell = random.choice(cells)
+            x, y = sample_location(geo_info["cells"][cell]['bbox'])
             for attr in attributes:
                 agent[attr] = sample_attribute(attr, demographics)
-            sample_agents[i] = {"id": i, "agent": agent}
+            cell_height = geo_info["cells"][cell]['heightLimit']
+            oppose_weight = 0.2 + (cell_height - min_height) / (max_height - min_height) * (0.7 - 0.2)
+            neutral_weight = 0.1
+            support_weight = 1 - oppose_weight - neutral_weight
+            sample_agents[i] = {"id": i, "agent": agent, "opinion": random.choices(["support", "oppose", "neutral"], weights=[support_weight, oppose_weight, neutral_weight])[0]}
         return sample_agents
     
     
     def _generate_sample_comments(self, region, sample_agents, proposal):
-        def generate_opinion_and_comment(agent_id, attributes):
+        def generate_opinion_and_comment(agent_id, attributes, opinion):
             num_attempts = 0
             while num_attempts < 3:
                 try:
                     # generate a comment based on attributes and proposal
-                    prompt = SIMULATED_AGENT_COMMENT_PROMPT.format(region=region, attributes=attributes, policy=str(proposal))
+                    prompt = SIMULATED_AGENT_COMMENT_PROMPT.format(region=region, attributes=attributes, policy=str(proposal), opinion=opinion)
                     messages = [{"role": "user", "content": prompt}]
                     response = self.openai_client.chat(messages, temperature=1, force_json=True)
                     response = json.loads(response)
@@ -73,7 +91,7 @@ class SimulationEngine:
         with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             # Create a list of futures
             futures = {
-                executor.submit(generate_opinion_and_comment, agent_id, agent["agent"]): agent_id
+                executor.submit(generate_opinion_and_comment, agent_id, agent["agent"], agent["opinion"]): agent_id
                 for agent_id, agent in sample_agents.items()
             }
 
