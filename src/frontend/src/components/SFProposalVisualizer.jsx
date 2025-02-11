@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, forwardRef, useImperativeHandle } from "react";
 import Map, { Source, Layer, Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MAPBOX_TOKEN } from '../constants/config';
 import { api } from '../services/api';
 import gridData from '../data/sfZoningGrid.json';
+// import gridData from '../data/sfZoningGrid2024.json';
 import { generateGridGeoJSON, latLngToGridCoords, updateCell } from '../utils/gridUtils';
 import _ from 'lodash';
 
@@ -20,7 +21,7 @@ const SF_COORDINATES = {
   "castro": { longitude: -122.4350, latitude: 37.7609, zoom: 14 }
 };
 
-// 高度限制对应的颜色
+// Height limit colors
 const heightColors = {
   40: '#FDB462',  // 65 feet
   65: '#FFB6C1',  // 80 feet
@@ -34,13 +35,13 @@ const heightColors = {
 };
 
 const TOOLS = {
-  // 主要工具
+  // Main tools
   MAIN: {
     PAN: { id: 'pan', icon: '🖐', label: 'Pan' },
     INSPECT: { id: 'inspect', icon: 'ℹ️', label: 'Inspect' },
     EDIT: { id: 'edit', icon: '✏️', label: 'Edit' }
   },
-  // 编辑子工具
+  // Edit sub-tools
   EDIT_SUB: {
     SELECT: { id: 'select', icon: '☝️', label: 'Select' },
     BRUSH: { id: 'brush', icon: '🖌️', label: 'Brush' },
@@ -48,7 +49,7 @@ const TOOLS = {
   }
 };
 
-// 使用React.memo优化渲染性能
+// Optimize rendering performance using React.memo
 const GridCell = React.memo(({ cell, isHovered, isSelected }) => {
   if (!cell?.heightLimit) return null;
   
@@ -63,7 +64,11 @@ const GridCell = React.memo(({ cell, isHovered, isSelected }) => {
   );
 });
 
-const SFProposalVisualizer = () => {
+const MAX_HISTORY = 20; // Maximum number of history records
+
+const STORAGE_KEY = 'sf_zoning_grid_data';
+
+const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
   const [viewState, setViewState] = useState({
     ...SF_COORDINATES['san_francisco'],
     padding: { top: 0, bottom: 0, left: 0, right: 0 },
@@ -82,34 +87,80 @@ const SFProposalVisualizer = () => {
     bounds: gridData.gridConfig.bounds,
     cellSize: 200
   });
-  const [editHistory, setEditHistory] = useState([gridData.cells]); // 历史记录
-  const [historyIndex, setHistoryIndex] = useState(0); // 当前历史位置
-  const [editMode, setEditMode] = useState(null); // 编辑子模式
-  const MAX_HISTORY = 20; // 最大历史记录数量
-  const [pendingChanges, setPendingChanges] = useState({}); // 存储未确认的更改
+  const [editHistory, setEditHistory] = useState([gridData.cells]);
+  const [historyIndex, setHistoryIndex] = useState(0);
+  const [editMode, setEditMode] = useState(null);
+  const [pendingChanges, setPendingChanges] = useState({});
   const [hasUnappliedChanges, setHasUnappliedChanges] = useState(false);
-  const mapRef = React.useRef(null);
   const [sourceKey, setSourceKey] = useState(0);
 
-  // 初始化时处理 JSON 中的单元格
+  // Initialize pattern
   useEffect(() => {
-    // 为已有的单元格添加 isEdited 标记
-    const initialCells = { ...gridData.cells };
-    Object.entries(initialCells).forEach(([key, cell]) => {
-      if (cell.heightLimit && cell.heightLimit !== gridData.heightLimits.default) {
-        initialCells[key] = {
-          ...cell,
-          isEdited: true
-        };
+    if (!map) return;
+
+    const loadPattern = () => {
+      if (map.hasImage('editing-pattern')) return;
+
+      const img = new Image();
+      img.onload = () => {
+        if (map.hasImage('editing-pattern')) return;
+        map.addImage('editing-pattern', img);
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(`
+        <svg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'>
+          <path d='M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2' stroke='rgba(255,255,255,0.5)' stroke-width='1'/>
+        </svg>
+      `);
+    };
+
+    if (map.loaded()) {
+      loadPattern();
+    } else {
+      map.once('load', loadPattern);
+    }
+
+    return () => {
+      if (map && map.hasImage('editing-pattern')) {
+        map.removeImage('editing-pattern');
       }
-    });
+    };
+  }, [map]);
+
+  // Initialize data
+  useEffect(() => {
+    // First try to load data from localStorage
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    // Use deep copy to avoid reference issues
+    let initialCells = JSON.parse(JSON.stringify(gridData.cells));
+
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        // Merge saved data with default data
+        initialCells = {
+          ...initialCells,
+          ...parsedData
+        };
+      } catch (error) {
+        console.error('Error loading saved grid data:', error);
+      }
+    } else {
+      // If no saved data, mark edited cells in initial JSON
+      Object.entries(initialCells).forEach(([key, cell]) => {
+        if (cell.heightLimit && cell.heightLimit !== gridData.heightLimits.default) {
+          initialCells[key] = {
+            ...cell,
+            isEdited: true
+          };
+        }
+      });
+    }
+
     setGridCells(initialCells);
     setEditHistory([initialCells]);
-    // 强制更新一次
-    setSourceKey(prev => prev + 1);
-  }, []); // 只在组件挂载时运行一次
+  }, []); // Only run once when component mounts
 
-  // 生成网格的GeoJSON数据
+  // Generate GeoJSON data
   const gridGeoJSON = React.useMemo(() => {
     if (!gridConfig.bounds || !showGrid) return null;
     
@@ -121,23 +172,13 @@ const SFProposalVisualizer = () => {
       gridCells
     );
 
-    // 为每个 feature 添加 key 属性和时间戳
-    geojson.features = geojson.features.map(feature => ({
-      ...feature,
-      properties: {
-        ...feature.properties,
-        key: `${feature.properties.row}_${feature.properties.col}`,
-        timestamp: Date.now()  // 添加时间戳强制更新
-      }
-    }));
-
     return geojson;
   }, [gridConfig, gridCells, showGrid]);
 
-  // 应用笔刷编辑
+  // Apply brush edits
   const applyBrush = useCallback((centerCell) => {
     const { row, col } = centerCell;
-    let updatedCells = { ...gridCells };  // 直接修改 gridCells
+    let updatedCells = { ...gridCells };  // Directly modify gridCells
     let updatedChanges = { ...pendingChanges };
     
     const radius = Math.floor(brushSize / 2);
@@ -152,14 +193,14 @@ const SFProposalVisualizer = () => {
             gridData.heightLimits.default : 
             selectedHeight;
             
-          // 更新 gridCells 以立即显示效果
+          // Update gridCells for immediate display
           updatedCells[key] = {
             ...updatedCells[key],
             heightLimit: newHeight,
             isEdited: true
           };
 
-          // 记录到 pendingChanges 以便后续存入 history
+          // Record to pendingChanges for later history
           updatedChanges[key] = {
             heightLimit: newHeight,
             isPending: true
@@ -168,19 +209,19 @@ const SFProposalVisualizer = () => {
       }
     }
     
-    setGridCells(updatedCells);  // 立即更新显示
-    setPendingChanges(updatedChanges);  // 记录待确认的更改
+    setGridCells(updatedCells);  // Update display immediately
+    setPendingChanges(updatedChanges);  // Record pending changes
     setHasUnappliedChanges(true);
   }, [gridCells, pendingChanges, brushSize, selectedHeight, editMode]);
 
-  // 处理鼠标移动事件
+  // Handle mouse move events
   const handleMouseMove = useCallback((event) => {
     if (currentTool === TOOLS.MAIN.PAN.id || !gridConfig.bounds) return;
 
     const [lng, lat] = event.lngLat.toArray();
     const coords = latLngToGridCoords({ lng, lat }, gridConfig);
     
-    // 如果坐标没有变化，不更新
+    // Don't update if coordinates haven't changed
     if (hoveredCell?.row === coords.row && hoveredCell?.col === coords.col) {
       return;
     }
@@ -193,24 +234,24 @@ const SFProposalVisualizer = () => {
     }
   }, [currentTool, editMode, isDragging, gridConfig, hoveredCell, applyBrush]);
 
-  // 处理鼠标按下事件
+  // Handle mouse down events
   const handleMouseDown = useCallback((event) => {
     if (currentTool === TOOLS.MAIN.EDIT.id && 
         (editMode === TOOLS.EDIT_SUB.BRUSH.id || editMode === TOOLS.EDIT_SUB.ERASE.id)) {
       setIsDragging(true);
-      // 立即应用第一个笔刷点
+      // Immediately apply first brush point
       const [lng, lat] = event.lngLat.toArray();
       const coords = latLngToGridCoords({ lng, lat }, gridConfig);
       applyBrush(coords);
     }
   }, [currentTool, editMode, gridConfig, applyBrush]);
 
-  // 处理鼠标抬起事件
+  // Handle mouse up events
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
   }, []);
 
-  // 处理地图事件
+  // Handle map click events
   const handleMapClick = useCallback((event) => {
     if (currentTool === TOOLS.MAIN.PAN.id || !gridConfig.bounds) return;
 
@@ -235,12 +276,12 @@ const SFProposalVisualizer = () => {
     }
   }, [currentTool, editMode, gridCells, gridConfig, applyBrush]);
 
-  // 处理单个格子的高度更改
+  // Handle single cell height change
   const handleHeightChange = (height) => {
     setSelectedHeight(height);
     if (height && selectedCell && currentTool === TOOLS.MAIN.EDIT.id && editMode === TOOLS.EDIT_SUB.SELECT.id) {
       const key = `${selectedCell.row}_${selectedCell.col}`;
-      // 直接更新 gridCells 显示
+      // Directly update gridCells display
       setGridCells(prev => ({
         ...prev,
         [key]: {
@@ -250,7 +291,7 @@ const SFProposalVisualizer = () => {
           isPending: true
         }
       }));
-      // 记录到 pendingChanges
+      // Record to pendingChanges
       setPendingChanges(prev => ({
         ...prev,
         [key]: {
@@ -262,26 +303,28 @@ const SFProposalVisualizer = () => {
     }
   };
 
-  // 丢弃更改
+  // Discard changes
   const discardChanges = useCallback(() => {
-    // 强制刷新到当前历史状态
+    // Force refresh to current history state
     const currentState = editHistory[historyIndex];
-    setGridCells({...currentState});  // 使用展开运算符确保引用更新
+    setGridCells({...currentState});  // Use spread operator to ensure reference update
     setPendingChanges({});
     setHasUnappliedChanges(false);
   }, [editHistory, historyIndex]);
 
-  // 更新工具切换逻辑
+  // Update tool switching logic
   const handleToolChange = (toolId) => {
     if (Object.values(TOOLS.MAIN).some(tool => tool.id === toolId)) {
-      // 如果切换到非编辑工具，自动丢弃更改
+      // If switching to non-edit tool, automatically discard changes
       if (toolId !== TOOLS.MAIN.EDIT.id && hasUnappliedChanges) {
         discardChanges();
       }
       setCurrentTool(toolId);
       setEditMode(null);
+      // Notify parent component map interaction status
+      onMapInteraction(toolId === TOOLS.MAIN.PAN.id);
     } else if (Object.values(TOOLS.EDIT_SUB).some(tool => tool.id === toolId)) {
-      // 切换编辑子工具时，确保显示状态与缓存一致
+      // Ensure display state consistent with cache when switching edit sub-tools
       if (hasUnappliedChanges) {
         const currentState = editHistory[historyIndex];
         setGridCells({...currentState});
@@ -292,7 +335,7 @@ const SFProposalVisualizer = () => {
     }
   };
 
-  // 应用所有待定更改
+  // Modify applyChanges function, add persistence logic
   const applyChanges = useCallback(() => {
     if (!hasUnappliedChanges) return;
 
@@ -309,12 +352,12 @@ const SFProposalVisualizer = () => {
       }
     });
 
-    // 保存到历史记录
+    // Save to history
     const newHistory = editHistory.slice(0, historyIndex + 1);
     newHistory.push(updatedCells);
     if (newHistory.length > MAX_HISTORY) {
       newHistory.shift();
-      // 调整 historyIndex 以适应移除的记录
+      // Adjust historyIndex to adapt to removed record
       setHistoryIndex(prev => prev - 1);
     }
     setEditHistory(newHistory);
@@ -323,73 +366,87 @@ const SFProposalVisualizer = () => {
     setGridCells(updatedCells);
     setPendingChanges({});
     setHasUnappliedChanges(false);
+
+    // Persist to localStorage
+    try {
+      // Only save modified cells
+      const modifiedCells = {};
+      Object.entries(updatedCells).forEach(([key, cell]) => {
+        if (cell.isEdited) {
+          modifiedCells[key] = cell;
+        }
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(modifiedCells));
+    } catch (error) {
+      console.error('Error saving grid data:', error);
+    }
   }, [gridCells, pendingChanges, hasUnappliedChanges, editHistory, historyIndex]);
 
-  // 撤销
+  // Add reset functionality
+  const resetToDefault = useCallback(() => {
+    localStorage.removeItem(STORAGE_KEY);
+    setGridCells(gridData.cells);
+    setEditHistory([gridData.cells]);
+    setHistoryIndex(0);
+    setPendingChanges({});
+    setHasUnappliedChanges(false);
+    setSelectedCell(null);
+  }, []);
+
+  // Undo
   const undo = useCallback(() => {
     if (historyIndex > 0) {
       const newState = editHistory[historyIndex - 1];
-      setGridCells({...newState});  // 强制刷新显示
+      setGridCells({...newState});  // Force refresh display
       setPendingChanges({});
       setHasUnappliedChanges(false);
       setHistoryIndex(historyIndex - 1);
     }
   }, [historyIndex, editHistory]);
 
-  // 重做
+  // Redo
   const redo = useCallback(() => {
     if (historyIndex < editHistory.length - 1) {
       const newState = editHistory[historyIndex + 1];
-      setGridCells({...newState});  // 强制刷新显示
+      setGridCells({...newState});  // Force refresh display
       setPendingChanges({});
       setHasUnappliedChanges(false);
       setHistoryIndex(historyIndex + 1);
     }
   }, [historyIndex, editHistory]);
 
-  // 更新网格样式以显示编辑状态
+  // Use debounce for mouse move events, but reduce delay for responsiveness
+  const debouncedMouseMove = useCallback(
+    _.debounce((event) => {
+      handleMouseMove(event);
+    }, 8), // Reduce delay to 8ms
+    [handleMouseMove]
+  );
+
+  // Update grid style to display edit status
   const gridLayerStyle = {
     id: 'grid-fill',
     type: 'fill',
     paint: {
       'fill-color': [
-        'case',
-        // 检查是否是编辑中的格子
-        ['in', ['get', 'key'], ...Object.keys(pendingChanges)],
-        [
-          'match',
-          ['get', 'key'],
-          ...Object.entries(pendingChanges).flatMap(([key, change]) => [key, heightColors[change.heightLimit]]),
-          'transparent'
-        ],
-        // 如果不是编辑中的格子，使用当前状态的颜色
-        ['has', 'heightLimit'],
-        [
-          'match',
-          ['get', 'heightLimit'],
-          ...Object.entries(heightColors).flatMap(([height, color]) => [parseInt(height), color]),
-          'transparent'
-        ],
+        'match',
+        ['get', 'heightLimit'],
+        40, heightColors[40],
+        65, heightColors[65],
+        80, heightColors[80],
+        85, heightColors[85],
+        105, heightColors[105],
+        130, heightColors[130],
+        140, heightColors[140],
+        240, heightColors[240],
+        300, heightColors[300],
         'transparent'
       ],
-      'fill-opacity': [
-        'case',
-        // 编辑中的格子使用更高的透明度
-        ['in', ['get', 'key'], ...Object.keys(pendingChanges)],
-        0.8,
-        // hover 的格子
-        ['all',
-          ['==', ['get', 'row'], hoveredCell?.row],
-          ['==', ['get', 'col'], hoveredCell?.col]
-        ],
-        0.8,
-        // 其他格子
-        0.6
-      ]
+      'fill-opacity': 0.6
     }
   };
 
-  // 暂时注释掉 pattern 图层，等颜色显示正常后再处理
+  // Temporarily comment out pattern layer until color display is normal
   const editingLayerStyle = {
     id: 'editing-pattern',
     type: 'fill',
@@ -400,21 +457,13 @@ const SFProposalVisualizer = () => {
     filter: ['in', ['get', 'key'], ...Object.keys(pendingChanges)]
   };
 
-  // 添加一个基础网格图层，显示所有网格
+  // Add a base grid layer to display all grids
   const baseGridLayerStyle = {
     id: 'base-grid',
     type: 'fill',
     paint: {
       'fill-color': '#000',
-      'fill-opacity': [
-        'case',
-        ['all',
-          ['==', ['get', 'row'], hoveredCell?.row],
-          ['==', ['get', 'col'], hoveredCell?.col]
-        ],
-        0.2,
-        0
-      ]
+      'fill-opacity': 0.05
     }
   };
 
@@ -424,60 +473,46 @@ const SFProposalVisualizer = () => {
     paint: {
       'line-color': '#000',
       'line-width': 0.5,
-      'line-opacity': 0.2,
-      'line-gap-width': 0
+      'line-opacity': 0.1
     }
   };
 
-  // 使用防抖优化鼠标移动事件，但降低延迟以提高响应性
-  const debouncedMouseMove = useCallback(
-    _.debounce((event) => {
-      handleMouseMove(event);
-    }, 8), // 降低延迟到8ms
-    [handleMouseMove]
-  );
-
-  // 修改 pattern 加载逻辑
-  useEffect(() => {
-    const map = mapRef.current?.getMap();
-    if (!map) return;
-
-    const loadPattern = () => {
-      // 检查 pattern 是否已存在
-      if (map.hasImage('editing-pattern')) return;
-
-      const img = new Image();
-      img.onload = () => {
-        // 确保地图仍然存在
-        if (map.hasImage('editing-pattern')) return;
-        map.addImage('editing-pattern', img);
-      };
-      img.src = 'data:image/svg+xml;base64,' + btoa(`
-        <svg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'>
-          <path d='M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2' stroke='rgba(255,255,255,0.5)' stroke-width='1'/>
-        </svg>
-      `);
-    };
-
-    // 如果地图已加载，直接添加 pattern
-    if (map.loaded()) {
-      loadPattern();
-    } else {
-      // 否则等待地图加载完成
-      map.once('load', loadPattern);
-    }
-
-    // 清理函数
-    return () => {
-      const map = mapRef.current?.getMap();
-      if (map && map.hasImage('editing-pattern')) {
-        map.removeImage('editing-pattern');
-      }
-    };
+  // Modify Grid Visibility button processing function
+  const toggleGridVisibility = useCallback(() => {
+    setShowGrid(prev => !prev);
   }, []);
 
+  // Expose methods to parent component
+  useImperativeHandle(ref, () => ({
+    handleMapClick: handleMapClick,
+    handleMouseDown: handleMouseDown,
+    handleMouseUp: handleMouseUp,
+    handleMouseMove: debouncedMouseMove,
+    getCursor: () => {
+      return currentTool === TOOLS.MAIN.PAN.id ? (isDragging ? 'grabbing' : 'grab') :
+        currentTool === TOOLS.MAIN.INSPECT.id ? 'pointer' :
+        currentTool === TOOLS.MAIN.EDIT.id ? (
+          editMode === TOOLS.EDIT_SUB.SELECT.id ? 'pointer' :
+          editMode === TOOLS.EDIT_SUB.BRUSH.id || editMode === TOOLS.EDIT_SUB.ERASE.id ? 'crosshair' :
+          'default'
+        ) : 'default';
+    }
+  }));
+
   return (
-    <div className="sf-visualizer-container">
+    <>
+      {showGrid && gridGeoJSON && (
+        <Source 
+          key={sourceKey}
+          type="geojson" 
+          data={gridGeoJSON}
+        >
+          <Layer {...baseGridLayerStyle} />
+          <Layer {...gridLayerStyle} />
+          <Layer {...gridOutlineStyle} />
+        </Source>
+      )}
+      
       <div className={`toolbar ${toolbarCollapsed ? 'collapsed' : ''}`}>
         <div className="toolbar-header">
           <h3>Tools</h3>
@@ -493,16 +528,24 @@ const SFProposalVisualizer = () => {
           <div className="toolbar-content">
             <div className="tool-section">
               <label className="tool-label">Grid Visibility</label>
-              <button
-                className={`dark-button ${showGrid ? 'active' : ''}`}
-                onClick={() => {
-                  setShowGrid(!showGrid);
-                  // 强制触发一次 Source 更新
-                  setSourceKey(prev => prev + 1);
-                }}
-              >
-                {showGrid ? 'Hide Grid' : 'Show Grid'}
-              </button>
+              <div className="tool-buttons">
+                <button
+                  className={`dark-button ${showGrid ? 'active' : ''}`}
+                  onClick={toggleGridVisibility}
+                >
+                  {showGrid ? 'Hide Grid' : 'Show Grid'}
+                </button>
+                <button
+                  className="dark-button warning"
+                  onClick={() => {
+                    if (window.confirm('Are you sure you want to reset all changes? This action cannot be undone.')) {
+                      resetToDefault();
+                    }
+                  }}
+                >
+                  Reset All
+                </button>
+              </div>
             </div>
 
             <div className="tool-section">
@@ -615,46 +658,6 @@ const SFProposalVisualizer = () => {
         )}
       </div>
 
-      <div className="main-content">
-        <Map
-          ref={mapRef}
-          {...viewState}
-          onMove={(evt) => currentTool === TOOLS.MAIN.PAN.id && setViewState(evt.viewState)}
-          onClick={handleMapClick}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseMove={debouncedMouseMove}
-          dragPan={currentTool === TOOLS.MAIN.PAN.id}
-          dragRotate={currentTool === TOOLS.MAIN.PAN.id}
-          scrollZoom={currentTool === TOOLS.MAIN.PAN.id}
-          style={{ width: "100%", height: "100%" }}
-          mapStyle="mapbox://styles/mapbox/dark-v10"
-          mapboxAccessToken={MAPBOX_TOKEN}
-          cursor={
-            currentTool === TOOLS.MAIN.PAN.id ? (isDragging ? 'grabbing' : 'grab') :
-            currentTool === TOOLS.MAIN.INSPECT.id ? 'pointer' :
-            currentTool === TOOLS.MAIN.EDIT.id ? (
-              editMode === TOOLS.EDIT_SUB.SELECT.id ? 'pointer' :
-              editMode === TOOLS.EDIT_SUB.BRUSH.id || editMode === TOOLS.EDIT_SUB.ERASE.id ? 'crosshair' :
-              'default'
-            ) : 'default'
-          }
-        >
-          {showGrid && gridGeoJSON && (
-            <Source 
-              key={sourceKey}
-              type="geojson" 
-              data={gridGeoJSON}
-            >
-              <Layer {...baseGridLayerStyle} />
-              <Layer {...gridLayerStyle} />
-              {/* <Layer {...editingLayerStyle} /> */}
-              <Layer {...gridOutlineStyle} />
-            </Source>
-          )}
-        </Map>
-      </div>
-
       {selectedCell && (currentTool === TOOLS.MAIN.INSPECT.id || currentTool === TOOLS.MAIN.EDIT.id) && (
         <div className="detail-panel">
           <div className="detail-panel-header">
@@ -698,8 +701,8 @@ const SFProposalVisualizer = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
-};
+});
 
-export default React.memo(SFProposalVisualizer); 
+export default SFProposalVisualizer; 
