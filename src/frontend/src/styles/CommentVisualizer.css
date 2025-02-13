@@ -184,6 +184,11 @@ circle:hover {
     grid-template-rows: auto 1fr auto;
     height: auto;
   }
+
+  /* Hide agent popup on mobile */
+  .agent-info-popup {
+    display: none !important;
+  }
 }
 
 /* Statistics Display */
