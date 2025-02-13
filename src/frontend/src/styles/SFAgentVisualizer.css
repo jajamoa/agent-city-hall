@@ -12,7 +12,7 @@
 }
 
 .filter-panel.minimized {
-  transform: translateX(-280px);  /* 320px - 40px */
+  transform: translateX(-290px); 
 }
 
 .filter-panel.minimized .toolbar-content {
@@ -37,7 +37,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 12px;  /* 改为左边距 */
 }
 
 .minimize-button:hover {
