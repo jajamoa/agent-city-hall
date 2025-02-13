@@ -472,7 +472,7 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
     type: 'line',
     paint: {
       'line-color': '#000',
-      'line-width': 0.5,
+      'line-width': 0.3,
       'line-opacity': 0.1
     }
   };
