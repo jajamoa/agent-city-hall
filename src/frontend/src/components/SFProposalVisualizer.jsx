@@ -22,17 +22,59 @@ const SF_COORDINATES = {
   "castro": { longitude: -122.4350, latitude: 37.7609, zoom: 14 }
 };
 
-// Height limit colors
-const heightColors = {
-  65: '#F4A261',  // 65 feet (6 stories) - Soft Orange
-  80: '#D291FF',  // 80 feet (Unchanged) - Pastel Purple
-  85: '#E76F51',  // 85 feet (8 stories) - Vibrant Orange-Red
-  105: '#C642E3', // 105 feet (Unchanged) - Bright Magenta
-  130: '#32127A', // 130 feet (Unchanged) - Deep Purple
-  140: '#E63946', // 140 feet (14 stories) - Intense Red
-  240: '#A93226', // 240 feet (24 stories) - Dark Crimson
-  300: '#6B4226'  // 300 feet (30 stories) - Rich Brown
+// Height limit colors and descriptions
+const heightLimits = {
+  40: {
+    color: '#87CEEB',
+    label: 'No density limits',
+    description: 'No height change, but remove density limits that reduce the number of housing units'
+  },
+  65: {
+    color: '#F4A261',
+    label: '65 feet (6 stories)',
+    description: '65 feet (6 stories)'
+  },
+  80: {
+    color: '#D291FF',
+    label: '80 feet (Unchanged)',
+    description: '80 feet (Unchanged)'
+  },
+  85: {
+    color: '#E76F51',
+    label: '85 feet (8 stories)',
+    description: '85 feet (8 stories)'
+  },
+  105: {
+    color: '#C642E3',
+    label: '105 feet (Unchanged)',
+    description: '105 feet (Unchanged)'
+  },
+  130: {
+    color: '#32127A',
+    label: '130 feet (Unchanged)',
+    description: '130 feet (Unchanged)'
+  },
+  140: {
+    color: '#E63946',
+    label: '140 feet (14 stories)',
+    description: '140 feet (14 stories)'
+  },
+  240: {
+    color: '#A93226',
+    label: '240 feet (24 stories)',
+    description: '240 feet (24 stories)'
+  },
+  300: {
+    color: '#6B4226',
+    label: '300 feet (30 stories)',
+    description: '300 feet (30 stories)'
+  }
 };
+
+// Convert heightLimits to heightColors for backward compatibility
+const heightColors = Object.fromEntries(
+  Object.entries(heightLimits).map(([height, data]) => [height, data.color])
+);
 
 const TOOLS = {
   // Main tools
@@ -237,7 +279,12 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
 
   // Handle mouse down events
   const handleMouseDown = useCallback((event) => {
-    if (currentTool === TOOLS.MAIN.EDIT.id && 
+    if (currentTool === TOOLS.MAIN.PAN.id) {
+      setIsDragging(true);
+      if (map) {
+        map.getCanvas().style.cursor = 'grabbing';
+      }
+    } else if (currentTool === TOOLS.MAIN.EDIT.id && 
         (editMode === TOOLS.EDIT_SUB.BRUSH.id || editMode === TOOLS.EDIT_SUB.ERASE.id)) {
       setIsDragging(true);
       // Immediately apply first brush point
@@ -245,12 +292,15 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
       const coords = latLngToGridCoords({ lng, lat }, gridConfig);
       applyBrush(coords);
     }
-  }, [currentTool, editMode, gridConfig, applyBrush]);
+  }, [currentTool, editMode, gridConfig, applyBrush, map]);
 
   // Handle mouse up events
   const handleMouseUp = useCallback(() => {
     setIsDragging(false);
-  }, []);
+    if (currentTool === TOOLS.MAIN.PAN.id && map) {
+      map.getCanvas().style.cursor = 'grab';
+    }
+  }, [currentTool, map]);
 
   // Handle map click events
   const handleMapClick = useCallback((event) => {
@@ -324,6 +374,10 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
       setEditMode(null);
       // Notify parent component map interaction status
       onMapInteraction(toolId === TOOLS.MAIN.PAN.id);
+      // Force map cursor update
+      if (map) {
+        map.getCanvas().style.cursor = toolId === TOOLS.MAIN.PAN.id ? 'grab' : 'default';
+      }
     } else if (Object.values(TOOLS.EDIT_SUB).some(tool => tool.id === toolId)) {
       // Ensure display state consistent with cache when switching edit sub-tools
       if (hasUnappliedChanges) {
@@ -333,6 +387,10 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
         setHasUnappliedChanges(false);
       }
       setEditMode(toolId);
+      // Force map cursor update for edit tools
+      if (map) {
+        map.getCanvas().style.cursor = 'default';
+      }
     }
   };
 
@@ -432,6 +490,7 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
       'fill-color': [
         'match',
         ['get', 'heightLimit'],
+        40, heightColors[40],
         65, heightColors[65],
         80, heightColors[80],
         85, heightColors[85],
@@ -489,13 +548,10 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
     handleMouseUp: handleMouseUp,
     handleMouseMove: debouncedMouseMove,
     getCursor: () => {
-      return currentTool === TOOLS.MAIN.PAN.id ? (isDragging ? 'grabbing' : 'grab') :
-        currentTool === TOOLS.MAIN.INSPECT.id ? 'pointer' :
-        currentTool === TOOLS.MAIN.EDIT.id ? (
-          editMode === TOOLS.EDIT_SUB.SELECT.id ? 'pointer' :
-          editMode === TOOLS.EDIT_SUB.BRUSH.id || editMode === TOOLS.EDIT_SUB.ERASE.id ? 'crosshair' :
-          'default'
-        ) : 'default';
+      if (currentTool === TOOLS.MAIN.PAN.id) {
+        return isDragging ? 'grabbing' : 'grab';
+      }
+      return 'default';
     }
   }));
 
@@ -701,10 +757,10 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
       <div className="legend-panel">
         <h4>Height Limits</h4>
         <div className="height-legend">
-          {Object.entries(heightColors).map(([height, color]) => (
-            <div key={height} className="legend-item">
-              <div className="color-box" style={{ backgroundColor: color }} />
-              <span>{height} feet</span>
+          {Object.entries(heightLimits).map(([height, data]) => (
+            <div key={height} className="legend-item" title={data.description}>
+              <div className="color-box" style={{ backgroundColor: data.color }} />
+              <span>{height === '40' ? data.label : data.label}</span>
             </div>
           ))}
         </div>
