@@ -6,6 +6,7 @@ import { api } from '../services/api';
 // import gridData from '../data/sfZoningGrid.json';
 import gridData from '../data/sfZoningGrid2024.json';
 import { generateGridGeoJSON, latLngToGridCoords, updateCell } from '../utils/gridUtils';
+import SimulationHandler from './SimulationHandler';
 import _ from 'lodash';
 
 const SF_COORDINATES = {
@@ -67,7 +68,7 @@ const MAX_HISTORY = 20; // Maximum number of history records
 
 const STORAGE_KEY = 'sf_zoning_grid_data';
 
-const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
+const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationResults }, ref) => {
   const [viewState, setViewState] = useState({
     ...SF_COORDINATES['san_francisco'],
     padding: { top: 0, bottom: 0, left: 0, right: 0 },
@@ -91,6 +92,7 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
   const [pendingChanges, setPendingChanges] = useState({});
   const [hasUnappliedChanges, setHasUnappliedChanges] = useState(false);
   const [sourceKey, setSourceKey] = useState(0);
+  const [isSimulating, setIsSimulating] = useState(false);
 
   // Initialize pattern
   useEffect(() => {
@@ -525,7 +527,7 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
         {!toolbarCollapsed && (
           <div className="toolbar-content">
             <div className="tool-section">
-              <label className="tool-label">Grid Visibility</label>
+              <label className="tool-label">Actions</label>
               <div className="tool-buttons">
                 <button
                   className={`dark-button ${showGrid ? 'active' : ''}`}
@@ -543,6 +545,14 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
                 >
                   Reset All
                 </button>
+                <SimulationHandler
+                  proposal={{
+                    grid_config: gridConfig,
+                    height_limits: gridData.heightLimits,
+                    cells: gridCells
+                  }}
+                  onSimulationResults={onSimulationResults}
+                />
               </div>
             </div>
 

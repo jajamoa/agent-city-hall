@@ -2,15 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Marker, Popup } from 'react-map-gl';
 import agentData from '../data/sfAgents.json';
 
-const sentimentColors = {
-  positive: '#4CAF50',  // Green
-  neutral: '#FFC107',   // Yellow
-  negative: '#F44336'   // Red
-};
-
 const SFAgentVisualizer = ({ map }) => {
   const [agents, setAgents] = useState(agentData.agents);
   const [selectedAgent, setSelectedAgent] = useState(null);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [filters, setFilters] = useState({
     sentiment: 'all',
     neighborhood: 'all',
@@ -66,11 +61,10 @@ const SFAgentVisualizer = ({ map }) => {
           }}
         >
           <div
-            className={`agent-marker ${selectedAgent?.id === agent.id ? 'selected' : ''}`}
-            style={{
-              backgroundColor: sentimentColors[agent.sentiment],
-              boxShadow: `0 0 8px ${sentimentColors[agent.sentiment]}80`
-            }}
+            className={`agent-marker ${
+              selectedAgent?.id === agent.id ? 'selected' : ''
+            } ${agent.sentiment === 'positive' ? 'support' : 
+               agent.sentiment === 'neutral' ? 'neutral' : 'oppose'}`}
           />
         </Marker>
       ))}
@@ -78,24 +72,34 @@ const SFAgentVisualizer = ({ map }) => {
       {/* Agent Popup */}
       {selectedAgent && (
         <Popup
-          longitude={selectedAgent.location.longitude}
-          latitude={selectedAgent.location.latitude}
-          anchor="top"
-          onClose={() => setSelectedAgent(null)}
+          longitude={map.getCenter().lng}
+          latitude={map.getCenter().lat}
+          closeButton={false}
           closeOnClick={false}
+          onClose={() => setSelectedAgent(null)}
+          className="agent-info-popup"
         >
           <div className="agent-popup">
-            <h3>{selectedAgent.name}</h3>
-            <p>{selectedAgent.occupation}</p>
-            <p>{selectedAgent.comment}</p>
+            <div className="popup-header">
+              <h3>{selectedAgent.name}</h3>
+              <button className="close-button" onClick={() => setSelectedAgent(null)}>×</button>
+            </div>
+            <p className="occupation">{selectedAgent.occupation}</p>
+            <p className="comment">{selectedAgent.comment}</p>
           </div>
         </Popup>
       )}
 
       {/* Filter Panel */}
-      <div className="filter-panel dark-theme">
+      <div className={`filter-panel dark-theme ${isMinimized ? 'minimized' : ''}`}>
         <div className="toolbar-header">
-          <h3>Resident Filters</h3>
+          <h3>{isMinimized ? 'Filters' : 'Resident Filters'}</h3>
+          <button 
+            className="minimize-button" 
+            onClick={() => setIsMinimized(!isMinimized)}
+          >
+            {isMinimized ? '>' : '<'}
+          </button>
         </div>
         
         <div className="toolbar-content">
@@ -153,22 +157,19 @@ const SFAgentVisualizer = ({ map }) => {
                 <div
                   className="sentiment-positive"
                   style={{
-                    width: `${(filteredAgents.filter(a => a.sentiment === 'positive').length / filteredAgents.length) * 100}%`,
-                    backgroundColor: sentimentColors.positive
+                    width: `${(filteredAgents.filter(a => a.sentiment === 'positive').length / filteredAgents.length) * 100}%`
                   }}
                 />
                 <div
                   className="sentiment-neutral"
                   style={{
-                    width: `${(filteredAgents.filter(a => a.sentiment === 'neutral').length / filteredAgents.length) * 100}%`,
-                    backgroundColor: sentimentColors.neutral
+                    width: `${(filteredAgents.filter(a => a.sentiment === 'neutral').length / filteredAgents.length) * 100}%`
                   }}
                 />
                 <div
                   className="sentiment-negative"
                   style={{
-                    width: `${(filteredAgents.filter(a => a.sentiment === 'negative').length / filteredAgents.length) * 100}%`,
-                    backgroundColor: sentimentColors.negative
+                    width: `${(filteredAgents.filter(a => a.sentiment === 'negative').length / filteredAgents.length) * 100}%`
                   }}
                 />
               </div>
@@ -200,7 +201,8 @@ const SFAgentVisualizer = ({ map }) => {
             </div>
             <div className="detail-row">
               <span className="detail-label">Sentiment:</span>
-              <span style={{ color: sentimentColors[selectedAgent.sentiment] }}>
+              <span className={`opinion-tag ${selectedAgent.sentiment === 'positive' ? 'support' : 
+                selectedAgent.sentiment === 'neutral' ? 'neutral' : 'oppose'}`}>
                 {selectedAgent.sentiment === 'positive' ? 'Support' :
                  selectedAgent.sentiment === 'neutral' ? 'Neutral' : 'Oppose'}
               </span>

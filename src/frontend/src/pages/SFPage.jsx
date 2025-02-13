@@ -19,6 +19,7 @@ const SFPage = () => {
   const [map, setMap] = useState(null);
   const [isMapInteractive, setIsMapInteractive] = useState(true);
   const proposalVisualizerRef = useRef(null);
+  const [simulationData, setSimulationData] = useState(null);
 
   const onMapLoad = useCallback((event) => {
     setMap(event.target);
@@ -27,6 +28,12 @@ const SFPage = () => {
   // 处理地图交互状态的回调
   const handleMapInteraction = useCallback((canInteract) => {
     setIsMapInteractive(canInteract);
+  }, []);
+
+  // 处理模拟结果的回调
+  const handleSimulationResults = useCallback((results) => {
+    setSimulationData(results);
+    setActiveLayer('agents'); // 自动切换到居民反馈视图
   }, []);
 
   // 转发地图事件到 ProposalVisualizer
@@ -92,9 +99,13 @@ const SFPage = () => {
             ref={proposalVisualizerRef}
             map={map} 
             onMapInteraction={handleMapInteraction}
+            onSimulationResults={handleSimulationResults}
           />
         ) : map && activeLayer === 'agents' ? (
-          <SFAgentVisualizer map={map} />
+          <SFAgentVisualizer 
+            map={map} 
+            simulationData={simulationData}
+          />
         ) : null}
       </Map>
     </div>
