@@ -8,6 +8,7 @@ import gridData from '../data/sfZoningGrid2024.json';
 import { generateGridGeoJSON, latLngToGridCoords, updateCell } from '../utils/gridUtils';
 import SimulationHandler from './SimulationHandler';
 import _ from 'lodash';
+import { isMobileDevice } from '../utils/deviceUtils';
 
 const SF_COORDINATES = {
   "san_francisco": { longitude: -122.4194, latitude: 37.7749, zoom: 12 },
@@ -120,7 +121,7 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
   const [currentTool, setCurrentTool] = useState(TOOLS.MAIN.PAN.id);
   const [hoveredCell, setHoveredCell] = useState(null);
   const [showGrid, setShowGrid] = useState(true);
-  const [toolbarCollapsed, setToolbarCollapsed] = useState(false);
+  const [toolbarCollapsed, setToolbarCollapsed] = useState(isMobileDevice());
   const [brushSize, setBrushSize] = useState(1);
   const [selectedHeight, setSelectedHeight] = useState(gridData.heightLimits.default);
   const [isDragging, setIsDragging] = useState(false);
@@ -135,6 +136,16 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction, onSimulationRe
   const [hasUnappliedChanges, setHasUnappliedChanges] = useState(false);
   const [sourceKey, setSourceKey] = useState(0);
   const [isSimulating, setIsSimulating] = useState(false);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = _.debounce(() => {
+      setToolbarCollapsed(isMobileDevice());
+    }, 250);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Initialize pattern
   useEffect(() => {

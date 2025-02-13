@@ -184,11 +184,6 @@ circle:hover {
     grid-template-rows: auto 1fr auto;
     height: auto;
   }
-
-  .filter-panel,
-  .detail-panel {
-    padding: 1rem;
-  }
 }
 
 /* Statistics Display */

@@ -1,16 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Marker, Popup } from 'react-map-gl';
 import agentData from '../data/sfAgents.json';
+import { isMobileDevice } from '../utils/deviceUtils';
+import _ from 'lodash';
 
 const SFAgentVisualizer = ({ map }) => {
   const [agents, setAgents] = useState(agentData.agents);
   const [selectedAgent, setSelectedAgent] = useState(null);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(isMobileDevice());
   const [filters, setFilters] = useState({
     sentiment: 'all',
     neighborhood: 'all',
     reasons: []
   });
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = _.debounce(() => {
+      setIsMinimized(isMobileDevice());
+    }, 250);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Get all possible reasons
   const allReasons = [...new Set(agents.flatMap(agent => agent.reasons))];
