@@ -1,0 +1,26 @@
+{
+    "gridConfig": {
+        "cellSize": 200,
+        "bounds": {
+            "north": 37.812,
+            "south": 37.708,
+            "east": -122.3549,
+            "west": -122.5157
+        }
+    },
+    "heightLimits": {
+        "default": 0,
+        "options": [
+            40,
+            65,
+            80,
+            85,
+            105,
+            130,
+            140,
+            240,
+            300
+        ]
+    },
+    "cells": {}
+}

@@ -3,8 +3,8 @@ import Map, { Source, Layer, Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { MAPBOX_TOKEN } from '../constants/config';
 import { api } from '../services/api';
-import gridData from '../data/sfZoningGrid.json';
-// import gridData from '../data/sfZoningGrid2024.json';
+// import gridData from '../data/sfZoningGrid.json';
+import gridData from '../data/sfZoningGrid2024.json';
 import { generateGridGeoJSON, latLngToGridCoords, updateCell } from '../utils/gridUtils';
 import _ from 'lodash';
 
@@ -23,15 +23,14 @@ const SF_COORDINATES = {
 
 // Height limit colors
 const heightColors = {
-  40: '#FDB462',  // 65 feet
-  65: '#FFB6C1',  // 80 feet
-  80: '#B3CDE3',  // 85 feet
-  85: '#CCEBC5',  // 105 feet
-  105: '#DECBE4', // 130 feet
-  130: '#FED9A6', // 140 feet
-  140: '#FFFFCC', // 240 feet
-  240: '#E5D8BD', // 300 feet
-  300: '#FDDAEC'  // 300+ feet
+  65: '#F4A261',  // 65 feet (6 stories) - Soft Orange
+  80: '#D291FF',  // 80 feet (Unchanged) - Pastel Purple
+  85: '#E76F51',  // 85 feet (8 stories) - Vibrant Orange-Red
+  105: '#C642E3', // 105 feet (Unchanged) - Bright Magenta
+  130: '#32127A', // 130 feet (Unchanged) - Deep Purple
+  140: '#E63946', // 140 feet (14 stories) - Intense Red
+  240: '#A93226', // 240 feet (24 stories) - Dark Crimson
+  300: '#6B4226'  // 300 feet (30 stories) - Rich Brown
 };
 
 const TOOLS = {
@@ -83,9 +82,8 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
   const [selectedHeight, setSelectedHeight] = useState(gridData.heightLimits.default);
   const [isDragging, setIsDragging] = useState(false);
   const [gridConfig] = useState({
-    ...gridData.gridConfig,
-    bounds: gridData.gridConfig.bounds,
-    cellSize: 200
+    cellSize: gridData.gridConfig.cellSize || 100,
+    bounds: gridData.gridConfig.bounds
   });
   const [editHistory, setEditHistory] = useState([gridData.cells]);
   const [historyIndex, setHistoryIndex] = useState(0);
@@ -166,7 +164,8 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
     
     const geojson = generateGridGeoJSON(
       {
-        ...gridConfig,
+        cellSize: gridConfig.cellSize,
+        bounds: gridConfig.bounds,
         heightLimits: gridData.heightLimits
       },
       gridCells
@@ -431,7 +430,6 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
       'fill-color': [
         'match',
         ['get', 'heightLimit'],
-        40, heightColors[40],
         65, heightColors[65],
         80, heightColors[80],
         85, heightColors[85],
@@ -440,7 +438,7 @@ const SFProposalVisualizer = forwardRef(({ map, onMapInteraction }, ref) => {
         140, heightColors[140],
         240, heightColors[240],
         300, heightColors[300],
-        'transparent'
+        'transparent'  // default color
       ],
       'fill-opacity': 0.6
     }
