@@ -12,3 +12,7 @@ plotly>=5.13.0
 pytest>=7.0.0  # for testing
 black>=22.0.0  # for code formatting
 mypy>=1.0.0   # for type checking
+geopandas>=0.14.0 # for geojson handling
+
+# Progress bar
+tqdm>=4.66.0 
