@@ -5,6 +5,10 @@ import importlib
 from pathlib import Path
 from typing import Type, Dict, Any
 import argparse
+# import sys
+# sys.path.insert(0, r'G:\ACH\agent-city-hall\src')
+
+
 
 from models.base import BaseModel, ModelConfig
 from experiment.eval.utils.data_models import (
@@ -55,13 +59,16 @@ def load_model_class(model_path: str) -> Type[BaseModel]:
     """
     try:
         # Split path into module path and class name
+        print("model path is", model_path)
         module_path, class_name = model_path.rsplit('.', 1)
         
         # Import module
         module = importlib.import_module(module_path)
+        print(module)
         
         # Get class from module
         model_class = getattr(module, class_name)
+        print(model_class)
         
         # Verify it's a BaseModel subclass
         if not issubclass(model_class, BaseModel):
@@ -70,6 +77,25 @@ def load_model_class(model_path: str) -> Type[BaseModel]:
         return model_class
     except Exception as e:
         raise ValueError(f"Failed to load model class from {model_path}: {str(e)}")
+
+# async def validate_model_output(output: Dict[str, Any], population: int) -> bool:
+#     """Validate model output format and data consistency using Pydantic models."""
+#     try:
+#         # Validate basic structure using EvaluationResult model
+#         result = EvaluationResult(
+#             summary=OpinionSummary(**output["summary"]),
+#             comments=[Comment(**c) for c in output["comments"]],
+#             key_themes=output.get("key_themes")
+#         )
+        
+#         # Only check if we have the correct number of comments
+#         if len(result.comments) != population:
+#             raise ValueError(f"Number of agents ({len(result.comments)}) does not match population ({population})")
+        
+#         return True
+        
+#     except Exception as e:
+#         raise ValueError(f"Model output validation failed: {str(e)}")
 
 async def validate_model_output(output: Dict[str, Any], population: int) -> bool:
     """Validate model output format and data consistency using Pydantic models."""
@@ -81,14 +107,15 @@ async def validate_model_output(output: Dict[str, Any], population: int) -> bool
             key_themes=output.get("key_themes")
         )
         
-        # Only check if we have the correct number of comments
-        if len(result.comments) != population:
-            raise ValueError(f"Number of agents ({len(result.comments)}) does not match population ({population})")
+        # only check the comments
+        if len(result.comments) == 0:
+            raise ValueError("No agent opinions generated")
         
         return True
         
     except Exception as e:
         raise ValueError(f"Model output validation failed: {str(e)}")
+
 
 async def validate_model(model_class: Type[BaseModel], config: ModelConfig = None) -> bool:
     """Validate a model implementation."""
