@@ -185,9 +185,9 @@ circle:hover {
     height: auto;
   }
 
-  .filter-panel,
-  .detail-panel {
-    padding: 1rem;
+  /* Hide agent popup on mobile */
+  .agent-info-popup {
+    display: none !important;
   }
 }
 
@@ -221,7 +221,7 @@ circle:hover {
   position: relative;
 }
 
-/* 选中状态的光晕效果 */
+/* Selected state pulse effect */
 .marker.selected {
   transform: scale(1.2);
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.15);
@@ -265,7 +265,7 @@ circle:hover {
   }
 }
 
-/* 原有的标记样式保持不变 */
+/* Keep original marker styles unchanged */
 .marker:hover {
   transform: scale(1.2);
 }
@@ -409,8 +409,8 @@ select.dark-input option {
 }
 
 .opinion-tag.neutral {
-  background-color: rgba(156, 163, 175, 0.2);
-  color: #9ca3af;
+  background-color: rgba(255, 193, 7, 0.2);  /* 半透明黄色 */
+  color: #FFC107;  /* 纯黄色 */
 }
 
 .opinion-tag.oppose {
@@ -536,6 +536,7 @@ select.dark-input option {
   font-size: 13px;
 }
 
+/* Disable mapbox controls */
 .mapboxgl-ctrl-bottom-right {
   display: none;
 }
@@ -849,7 +850,7 @@ select.dark-input option {
   bottom: 24px;
 }
 
-/* Tool Buttons */
+/* Tool buttons */
 .tool-buttons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -857,7 +858,7 @@ select.dark-input option {
 }
 
 .tool-button {
-  display: none;  /* 移除旧的工具按钮样式，统一使用 dark-button */
+  display: none;  /* Remove old tool button styles, use dark-button instead */
 }
 
 .tool-icon {
@@ -911,20 +912,20 @@ select.dark-input option {
   width: 100%;
 }
 
-/* 编辑状态指示器样式 */
+/* Grid editing styles */
 .editing-pattern {
   background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2' stroke='%23fff' stroke-width='1' opacity='0.5'/%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
-/* 工具栏中的分隔线 */
+/* Divider in toolbar */
 .tool-section:not(:last-child) {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding-bottom: 16px;
   margin-bottom: 16px;
 }
 
-/* 毛玻璃效果的基础样式 */
+/* Glass effect base styles */
 .glass-effect {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
@@ -932,7 +933,7 @@ select.dark-input option {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 应用毛玻璃效果到所有悬浮窗口 */
+/* Apply glass effect to all floating windows */
 .toolbar,
 .detail-panel,
 .legend-panel {
@@ -942,42 +943,14 @@ select.dark-input option {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* 统一工具栏和按钮样式 */
-.tool-section {
-  margin-bottom: 24px;
-}
-
-.tool-section:last-child {
-  margin-bottom: 0;
-}
-
-.tool-section:not(:last-child) {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-}
-
-.tool-label {
-  display: block;
-  color: #d1d5db;
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.tool-buttons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-}
-
-/* 编辑操作按钮容器 */
+/* Edit operation button container */
 .edit-actions {
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
 }
 
-/* 调试状态的颜色 */
+/* Debug state colors */
 .grid-cell.pending {
-  background-color: rgba(255, 0, 0, 0.3) !important;  /* 红色表示pending状态 */
+  background-color: rgba(255, 0, 0, 0.3) !important;  /* Red indicates pending state */
 }
