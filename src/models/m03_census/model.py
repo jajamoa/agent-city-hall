@@ -1,4 +1,5 @@
 import json
+import os
 import random
 from pathlib import Path
 from typing import Dict, Any, Tuple, List
@@ -30,7 +31,7 @@ class Census(BaseModel):
             self.config, 
             "agent_data_file", 
             # r"G:\ACH\agent-city-hall\src\models\m03_census\census_data\agents_37.json"
-            r"/Volumes/T7 Touch/ACH/agent-city-hall/src/models/m03_census/census_data/agents_37.json"
+            os.path.join(os.path.dirname(__file__), "census_data", "agents_37.json")
 
         )
     
