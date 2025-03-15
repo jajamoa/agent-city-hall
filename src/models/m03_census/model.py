@@ -82,7 +82,7 @@ class Census(BaseModel):
         
         agents = []
         opinion_counts = {"support": 0, "oppose": 0, "neutral": 0}
-        key_themes = {"support": set(), "oppose": set()}
+        key_themes = {"support": set(), "oppose": set(), "neutral": set()}
         
         for raw_agent in raw_agents:
             # Generate opinion, comment, and key themes using OpenAI
