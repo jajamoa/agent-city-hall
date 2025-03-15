@@ -22,7 +22,7 @@ def get_prompt_first_layer(agent: Dict[str, Any], proposal: Dict[str, Any]) -> s
     agent_lng = agent['coordinates']['lng']
     nearest_cell = None
     min_distance = float('inf')
-    
+
     for cell_id, cell in proposal['cells'].items():
         bbox = cell['bbox']
         cell_lat = (bbox['north'] + bbox['south']) / 2
@@ -35,7 +35,7 @@ def get_prompt_first_layer(agent: Dict[str, Any], proposal: Dict[str, Any]) -> s
     def get_prompt_for_dependency(dependency: str) -> str:
         return  f"""
     You are a resident with the following attributes:
-    {[f"{key}: {agent[key]}" for key in dependencies[dependency]]}
+    {[f"{key}: {agent.get(key, None)}" for key in dependencies[dependency]]}
 
     You are considering the following rezoning proposal:
     Proposal Details:
@@ -52,23 +52,20 @@ def get_prompt_first_layer(agent: Dict[str, Any], proposal: Dict[str, Any]) -> s
         "Infrastructure Strain": get_prompt_for_dependency("Infrastructure Strain"),
         "Community Benefits": get_prompt_for_dependency("Community Benefits"),
         "Small Business Impact": get_prompt_for_dependency("Small Business Impact")
-    }   
+    }
 
     return prompts
 
 def get_prompt_second_layer(intermediate_thoughts: Dict[str, str]) -> str:
+    joined_thoughts = "\n".join([f"- {dependency}: {intermediate_thoughts[dependency]}" for dependency in intermediate_thoughts])
     return f"""
 You are a resident and you are considering the following rezoning proposal:
-
 You have some thoughts on the impact of this proposal.
-{'\n'.join([f"- {dependency}: {intermediate_thoughts[dependency]}" for dependency in intermediate_thoughts])}
-
+{joined_thoughts}
 Now, you need to generate:
 1. Opinion (support/oppose/neutral)
 2. A brief comment explaining their stance (1-2 sentences)
 3. Key themes in the comment (2-3 keywords)
-
 Format: opinion|comment|theme1,theme2,theme3
 """
-
 

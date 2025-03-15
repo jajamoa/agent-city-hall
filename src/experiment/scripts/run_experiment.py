@@ -13,6 +13,7 @@ sys.path.append(str(Path(__file__).parent.parent.parent))
 from models.base import BaseModel, ModelConfig
 from models.m01_basic.model import BasicSimulationModel
 from models.m02_stupid.model import StupidAgentModel
+from models.m03_census.model import Census
 from models.m04_census_twolayer.model import CensusTwoLayer
 from experiment.eval.utils.data_models import ZoningProposal
 from experiment.eval.utils.data_manager import DataManager
@@ -21,6 +22,7 @@ from experiment.eval.utils.metrics import calculate_metrics
 AVAILABLE_MODELS = {
     "basic": BasicSimulationModel,
     "stupid": StupidAgentModel,
+    "census": Census,
     "twolayer": CensusTwoLayer
 }
 

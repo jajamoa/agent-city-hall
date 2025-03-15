@@ -20,6 +20,7 @@ class CensusTwoLayer(Census):
     def __init__(self, config: ModelConfig = None):
         super().__init__(config)
 
+
     async def _generate_opinion_and_comment(self, agent: Dict[str, Any], proposal: Dict[str, Any]) -> Tuple[str, str, List[str]]:
         """Generate opinion and comment for an agent using OpenAI.
         
@@ -36,10 +37,10 @@ class CensusTwoLayer(Census):
         # generate intermediate thoughts
         intermediate_thoughts = {}
         for dependency, prompt in prompts_first_layer.items():
-            intermediate_thoughts[dependency] = await self.llm.generate_text(prompt)
+            intermediate_thoughts[dependency] = await self.llm.generate(prompt)
 
         prompts_second_layer = get_prompt_second_layer(intermediate_thoughts)
-        response= await self.llm.generate_text(prompts_second_layer)
+        response= await self.llm.generate(prompts_second_layer)
         
         try:
             parts = response.strip().split("|")
