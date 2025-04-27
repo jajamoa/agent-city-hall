@@ -1,0 +1,845 @@
+{
+  "675724ccce05695f1f77ad27": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 6,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 5,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 8,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 5,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 8,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 4,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 8,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 5,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 7
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Walkability and access to amenities",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Personal property values or homeownership concerns",
+        "Integration of new residents into community life"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "School quality or capacity in the area"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Walkability and access to amenities",
+        "Noise",
+        "congestion",
+        "or infrastructure strain"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility"
+      ]
+    }
+  },
+  "667a5ff51c51c00cc8fa401b": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 7,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 5,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 7,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 7,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 6,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 8,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 4,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 9,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 7
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Walkability and access to amenities"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Traffic and parking availability",
+        "Walkability and access to amenities"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Noise",
+        "congestion",
+        "or infrastructure strain"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Personal property values or homeownership concerns"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents"
+      ]
+    }
+  },
+  "67df27dcf59178048927e1e0": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 10,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 10,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 10,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 10,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 10,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 10,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 9,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 6,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 10
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Walkability and access to amenities"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Walkability and access to amenities",
+        "Personal property values or homeownership concerns",
+        "School quality or capacity in the area"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Walkability and access to amenities",
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "School quality or capacity in the area"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "School quality or capacity in the area"
+      ]
+    }
+  },
+  "67a7f0b4cd899684a4540c81": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 5,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 6,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 6,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 6,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 6,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 6,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 6,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 6,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 6
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility",
+        "Walkability and access to amenities"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Walkability and access to amenities",
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings",
+        "Personal property values or homeownership concerns"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Fairness and distribution of development across neighborhoods",
+        "Building height or scale relative to surroundings"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Personal property values or homeownership concerns",
+        "Integration of new residents into community life",
+        "School quality or capacity in the area"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Personal property values or homeownership concerns"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Traffic and parking availability",
+        "Walkability and access to amenities",
+        "Noise",
+        "congestion",
+        "or infrastructure strain"
+      ]
+    }
+  },
+  "67f08f941e4a8bc778f9c01d": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 9,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 9,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 7,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 8,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 8,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 9,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 7,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 9,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 8
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility",
+        "Economic vitality for local businesses"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Neighborhood character and visual compatibility",
+        "Walkability and access to amenities"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Economic vitality for local businesses"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Economic vitality for local businesses"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility"
+      ]
+    }
+  },
+  "6422f34be2b8257efb345837": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 10,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 9,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 9,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 9,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 8,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 6,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 8,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 7,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 6
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Walkability and access to amenities",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses",
+        "Integration of new residents into community life"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Integration of new residents into community life"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Economic vitality for local businesses",
+        "Integration of new residents into community life"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Personal property values or homeownership concerns"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Integration of new residents into community life"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Fairness and distribution of development across neighborhoods"
+      ]
+    }
+  },
+  "67570e64fcbbd6076d56e231": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 8,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 8,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 8,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 8,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 8,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 7,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 8,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 8,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 6
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Traffic and parking availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Economic vitality for local businesses"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Traffic and parking availability",
+        "Walkability and access to amenities"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Economic vitality for local businesses"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Personal property values or homeownership concerns"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Traffic and parking availability",
+        "Walkability and access to amenities"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Economic vitality for local businesses",
+        "Personal property values or homeownership concerns"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Personal property values or homeownership concerns"
+      ]
+    }
+  },
+  "67ed84f0157a46a0dcb9bac6": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 7,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 8,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 9,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 7,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 7,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 7,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 4,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 9,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 7
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Traffic and parking availability"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Noise",
+        "congestion",
+        "or infrastructure strain"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Personal property values or homeownership concerns"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Personal property values or homeownership concerns"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Building height or scale relative to surroundings"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Economic vitality for local businesses"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Personal property values or homeownership concerns"
+      ]
+    }
+  },
+  "67d84f3ae6e2db3ba2b69b5e": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 7,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 6,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 5,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 8,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 7,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 8,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 6,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 6,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 7
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Traffic and parking availability",
+        "Walkability and access to amenities",
+        "School quality or capacity in the area"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Traffic and parking availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Integration of new residents into community life",
+        "School quality or capacity in the area"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Economic vitality for local businesses",
+        "School quality or capacity in the area"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Fairness and distribution of development across neighborhoods",
+        "Personal property values or homeownership concerns"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Neighborhood character and visual compatibility",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Walkability and access to amenities",
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "School quality or capacity in the area"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses",
+        "School quality or capacity in the area"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "School quality or capacity in the area"
+      ]
+    }
+  },
+  "67f30615fe902d6a7d0c449e": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 6,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 4,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 2,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 8,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 5,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 2,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 9,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 6,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 3
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Walkability and access to amenities",
+        "Building height or scale relative to surroundings"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Building height or scale relative to surroundings",
+        "Personal property values or homeownership concerns"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Building height or scale relative to surroundings"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Fairness and distribution of development across neighborhoods",
+        "Building height or scale relative to surroundings"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Neighborhood character and visual compatibility",
+        "Traffic and parking availability",
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Building height or scale relative to surroundings",
+        "Personal property values or homeownership concerns"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Traffic and parking availability",
+        "Noise",
+        "congestion",
+        "or infrastructure strain",
+        "Building height or scale relative to surroundings",
+        "Integration of new residents into community life"
+      ]
+    }
+  },
+  "65e395693e55e0a627707870": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 8,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 10,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 9,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 9,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 10,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 6,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 10,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 9,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 4
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility",
+        "Building height or scale relative to surroundings"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility",
+        "Building height or scale relative to surroundings"
+      ]
+    }
+  },
+  "65d53085794e617217d43942": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 10,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 10,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 10,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 10,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 8,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 7,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 10,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 10,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 10
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Integration of new residents into community life"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities",
+        "Integration of new residents into community life"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Traffic and parking availability",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ]
+    }
+  },
+  "67ddeeb16c3378ebbd4bcb8e": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 8,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 6,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 4,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 9,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 7,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 5,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 8,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 6,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 3
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Walkability and access to amenities"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Neighborhood character and visual compatibility"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Building height or scale relative to surroundings"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Neighborhood character and visual compatibility",
+        "Fairness and distribution of development across neighborhoods"
+      ]
+    }
+  },
+  "6766ecf63a849b0fabf9755c": {
+    "opinions": {
+      "1.1\nPolicy Description:\nAllow 4\u20136 story buildings (65 ft max) at the key intersections or transit hubs shown in orange, and lift unit-count limits there. \n\nEveryday Framing:\nIn each orange-shaded intersection on the map, you\u2019d see new 4\u20136 story apartment buildings\u2014some units set aside as affordable housing, ground-floor shops or services, and high-quality, context-sensitive design helping spread new homes and jobs fairly across the city.": 8,
+      "1.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings at the orange intersections or transit hubs. \n\nEveryday Framing:\nAt each orange intersection, you\u2019d find new 10\u201314 story towers with both market-rate and affordable apartments, shops or community rooms on the ground floor, all built to clear design rules and shared fairly across neighborhoods.": 5,
+      "1.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers at the orange-marked key intersections or transit hubs. \n\nEveryday Framing:\nWhere you see orange dots, imagine 25\u201330 story mixed-use towers\u2014full of apartments (some affordable), shops or civic space below, all designed to clear, fair standards that bring more homes to every neighborhood.": 9,
+      "2.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings along the orange-shaded commercial streets. \nEveryday Framing:\nOn the orange commercial corridors, you\u2019d find new 4\u20136 story mixed-use buildings\u2014some apartments set at below-market rents, shops or services on the street level, and consistent design features that help share growth evenly across San Francisco.": 9,
+      "2.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings along the orange commercial avenues. \nEveryday Framing:\nAlong the orange routes, imagine rows of 10\u201314 story buildings\u2014apartments for multiple incomes, ground-floor shops or community hubs, all built to clear, fair design guidelines that extend benefits across every neighborhood.": 9,
+      "2.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted commercial corridors.\nEveryday Framing:\nWhere the map is orange, picture new 25\u201330 story skyscrapers\u2014packed with homes (some affordable), shops or community rooms below, all built to clear, consistent design standards that share new housing citywide.": 10,
+      "3.1\nPolicy Description:\nAllow 4\u20136 story (65 ft) buildings on the orange-shaded main streets, plus higher density behind.\nEveryday Framing:\nOn the orange main streets, you\u2019d see new 4\u20136 story apartments\u2014some rented at lower rates, shops or services at street level, all meeting clear design rules and helping spread new homes fairly.": 9,
+      "3.2\nPolicy Description:\nAllow 7\u201314 story (85\u2013140 ft) buildings on the orange main streets. \nEveryday Framing:\nWhere the map is orange, picture rows of 10\u201314 story mixed-use buildings\u2014some homes set aside at affordable rents, shops or community spaces below, built to consistent, fair design standards for all neighborhoods.": 10,
+      "3.3\nPolicy Description:\nAllow 20\u201330 story (240\u2013300 ft) towers on the orange-highlighted main streets. \nEveryday Framing:\nOn each orange main street, imagine new 25\u201330 story towers\u2014packed with apartments (including affordable units), shops or community rooms at ground level, all built to clear, citywide design standards that spread benefits across neighborhoods.": 10
+    },
+    "reasons": {
+      "1.1 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Traffic and parking availability",
+        "Building height or scale relative to surroundings"
+      ],
+      "1.2 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "1.3 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Traffic and parking availability"
+      ],
+      "2.1 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Affordability for low- and middle-income residents",
+        "Fairness and distribution of development across neighborhoods"
+      ],
+      "2.2 (you should choose fewer than three reasons)": [
+        "Housing supply and availability",
+        "Fairness and distribution of development across neighborhoods",
+        "Economic vitality for local businesses"
+      ],
+      "2.3 (you should choose fewer than three reasons)": [
+        "Traffic and parking availability",
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings"
+      ],
+      "3.1 (you should choose fewer than three reasons)": [
+        "Traffic and parking availability",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses"
+      ],
+      "3.2 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings"
+      ],
+      "3.3 (you should choose fewer than three reasons)": [
+        "Affordability for low- and middle-income residents",
+        "Neighborhood character and visual compatibility",
+        "Walkability and access to amenities",
+        "Economic vitality for local businesses",
+        "Building height or scale relative to surroundings"
+      ]
+    }
+  }
+}
