@@ -1,36 +1,80 @@
-# Evaluation Data
+# Experiment Data
 
-This directory contains data files used for the evaluation of housing policy opinion models.
+This directory contains data files for simulation and evaluation of agent opinions on housing policies.
 
 ## Directory Structure
 
-The data is organized by data source, with each source having its own directory:
-
 ```
 data/
-├── sf_prolific_survey/   # Survey data from Prolific participants
-│   ├── raw/              # Raw CSV survey files
-│   └── processed/        # Processed demographic and reaction data
-│
-├── sf_rezoning_plan/     # San Francisco rezoning plan data
-│   ├── raw/              # Raw GeoJSON files and processing scripts
-│   └── processed/        # Processed rezoning proposals
-│
-├── samples/              # Sample data files for testing
-│
-└── README.md             # This file
+├── sf_prolific_survey/      # Survey data from participants
+├── sf_rezoning_plan/        # Zoning proposal data
+├── samples/                 # Sample data for testing
+└── ... (other data sets)
 ```
 
-## Data Sources
+## Data Formats
 
-### SF Prolific Survey
+### Proposal Format (JSON)
 
-Contains survey responses from participants on Prolific regarding their opinions on various housing policy scenarios in San Francisco. Each participant provided demographic information and rated different housing policy scenarios.
+Zoning proposals are stored in JSON format with the following structure:
 
-### SF Rezoning Plan
+```json
+{
+  "grid_config": {
+    "cellSize": 100,
+    "bounds": { ... }
+  },
+  "height_limits": {
+    "default": 40,
+    "options": [40, 65, 80, ...]
+  },
+  "cells": {
+    "cell_id": {
+      "height_limit": 65,
+      "category": "residential",
+      "bbox": { ... }
+    },
+    ...
+  }
+}
+```
 
-Contains geospatial data on San Francisco zoning policies, including both current zoning and proposed rezoning plans. This data is used to create policy scenarios that survey participants respond to.
+### Ground Truth Format (JSON)
 
-### Samples
+Survey responses (ground truth) are stored in JSON with this structure:
 
-Contains sample data files used for testing and development purposes. 
+```json
+{
+  "user_id": {
+    "opinions": {
+      "cell_id": 8,  // Scale: 1-10
+      ...
+    },
+    "reasons": {
+      "cell_id": ["transit", "housing_supply"],
+      ...
+    }
+  },
+  ...
+}
+```
+
+## Using the Data
+
+In experiment protocols, reference these files as:
+
+```yaml
+input:
+  proposals:
+    - "sf_rezoning_plan/processed/proposal_abc.json" 
+
+evaluation:
+  ground_truth: "sf_prolific_survey/processed/survey_responses.json"
+```
+
+## Adding New Data
+
+To add new data:
+1. Create appropriately named subdirectories
+2. Document data sources and processing steps
+3. Ensure the output format matches the expected structure 
