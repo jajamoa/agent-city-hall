@@ -54,10 +54,17 @@ for pattern_id, cells in pattern_cells.items():
         # Create a copy of the raw proposal
         mock_proposal = copy.deepcopy(raw_proposal)
         
-        # Modify the height limits for the relevant cells
+        # Create a new cells dictionary that only includes cells in the current pattern
+        new_cells = {}
+        
+        # Only keep cells that are in the current pattern and update their height limits
         for cell_id in cells:
             if cell_id in mock_proposal['cells']:
-                mock_proposal['cells'][cell_id]['heightLimit'] = new_height
+                new_cells[cell_id] = mock_proposal['cells'][cell_id]
+                new_cells[cell_id]['heightLimit'] = new_height
+        
+        # Replace the original cells dictionary with the filtered one
+        mock_proposal['cells'] = new_cells
         
         # Save the mock proposal to a JSON file with the format "pattern.variant.json"
         filename = f"{pattern_id}.{variant_id}.json"
@@ -66,7 +73,7 @@ for pattern_id, cells in pattern_cells.items():
             json.dump(mock_proposal, f, indent=4)
         
         # Print status
-        print(f"Generated mock proposal {filename} with {len(cells)} cells modified to height {new_height}")
+        print(f"Generated mock proposal {filename} with {len(cells)} cells, all set to height {new_height}")
 
 # Clean up any existing subdirectories
 for item in os.listdir(OUTPUT_DIR):
