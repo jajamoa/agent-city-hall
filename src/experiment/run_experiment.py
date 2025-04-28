@@ -9,6 +9,7 @@ from typing import List, Dict, Any
 import argparse
 from datetime import datetime
 import yaml
+import traceback
 
 import sys
 sys.path.append(str(Path(__file__).parent.parent))
@@ -84,9 +85,11 @@ async def run_experiment(protocol: dict, eval_only: bool = False, experiment_dir
         with open(exp_dir / "protocol.yaml", "w") as f:
             yaml.dump(protocol, f, default_flow_style=False)
         
-        # Initialize model
+        # Initialize model with model_config if specified in protocol
         model_class = AVAILABLE_MODELS[protocol["model"]]
-        config = ModelConfig(population=protocol["population"])
+        model_config = protocol.get("model_config", {})
+        config = ModelConfig(population=protocol["population"], **model_config)
+        print(f"Initializing model with config: {config.__dict__}")
         model = model_class(config)
         
         # Run experiment
@@ -104,15 +107,28 @@ async def run_experiment(protocol: dict, eval_only: bool = False, experiment_dir
             try:
                 # Load proposal
                 input_file = data_manager.data_dir / proposal_file
+                print(f"DEBUG: Looking for proposal file at: {input_file}")
+                
+                if not input_file.exists():
+                    print(f"ERROR: Proposal file not found: {input_file}")
+                    raise FileNotFoundError(f"Proposal file not found: {input_file}")
+                
                 with open(input_file) as f:
                     data = json.load(f)
                     proposal = create_zoning_proposal(data)
+                
+                # Add proposal_id to the proposal for reference in the model
+                proposal["proposal_id"] = proposal_id
+                
+                print(f"DEBUG: Running simulation with proposal: {proposal_id}, region: {protocol.get('region', 'san_francisco')}")
                 
                 # Run simulation
                 result = await model.simulate_opinions(
                     region=protocol.get("region", "san_francisco"),
                     proposal=proposal
                 )
+                
+                print(f"DEBUG: Simulation completed. Result keys: {result.keys() if isinstance(result, dict) else 'Not a dict'}")
                 
                 # Copy ground truth files if provided in protocol
                 if "evaluation" in protocol and "ground_truth" in protocol["evaluation"]:
@@ -125,19 +141,32 @@ async def run_experiment(protocol: dict, eval_only: bool = False, experiment_dir
                             print(f"Warning: Ground truth file not found: {gt_file}")
                 
                 # Save results
-                input_path, output_path = data_manager.save_experiment_result(
-                    exp_dir=exp_dir,
-                    proposal=proposal,
-                    result=result,
-                    proposal_id=proposal_id,
-                    model_name=protocol["model"]
-                )
-                print(f"✓ Results saved for {proposal_id}")
-                print(f"  - Input: {input_path}")
-                print(f"  - Output: {output_path}")
+                print(f"DEBUG: Saving results for {proposal_id}")
+                try:
+                    result_paths = data_manager.save_experiment_result(
+                        exp_dir=exp_dir,
+                        proposal=proposal,
+                        result=result,
+                        proposal_id=proposal_id,
+                        model_name=protocol["model"]
+                    )
+                    
+                    # Handle different return types from save_experiment_result
+                    if isinstance(result_paths, tuple) and len(result_paths) == 2:
+                        input_path, output_path = result_paths
+                        print(f"✓ Results saved for {proposal_id}")
+                        print(f"  - Input: {input_path}")
+                        print(f"  - Output: {output_path}")
+                    else:
+                        print(f"✓ Results saved for {proposal_id}")
+                        print(f"  - Result paths: {result_paths}")
+                except Exception as save_error:
+                    print(f"Error saving results: {str(save_error)}")
+                    print(f"DEBUG: {traceback.format_exc()}")
                 
             except Exception as e:
                 print(f"Error processing {proposal_id}: {str(e)}")
+                print(f"DEBUG: {traceback.format_exc()}")
         
         # Save experiment metadata
         end_time = datetime.now()
@@ -178,6 +207,7 @@ def run_evaluation(exp_dir: Path, protocol: dict):
     
     except Exception as e:
         print(f"Error during evaluation: {str(e)}")
+        print(f"DEBUG: {traceback.format_exc()}")
 
 async def main():
     args = parse_args()

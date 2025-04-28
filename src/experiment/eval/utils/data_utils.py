@@ -88,6 +88,10 @@ class DataManager:
         Returns:
             Tuple[Path, Path]: Paths to the saved input and output files
         """
+        # Debug information
+        print(f"DEBUG save_experiment_result: proposal_id={proposal_id}, model_name={model_name}")
+        print(f"DEBUG save_experiment_result: result type={type(result)}")
+        
         # Save input proposal
         input_path = exp_dir / f"{proposal_id}_input.json"
         with open(input_path, "w") as f:
@@ -103,5 +107,6 @@ class DataManager:
             agents_path = exp_dir / f"{proposal_id}_agents.json"
             with open(agents_path, "w") as f:
                 json.dump(result["comments"], f, indent=2)
-                
+        
+        # Always return exactly two values (input_path, output_path)        
         return input_path, output_path 
