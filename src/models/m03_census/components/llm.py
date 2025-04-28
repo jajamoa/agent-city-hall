@@ -17,7 +17,7 @@ class OpenAILLM:
             raise ValueError("OPENAI_API_KEY environment variable is required")
         self.client = AsyncOpenAI(api_key=api_key)
     
-    async def generate(self, prompt: str, max_tokens: Optional[int] = None) -> str:
+    async def generate(self, prompt: str, max_tokens: Optional[int] = None, temperature: Optional[float] = 0.7) -> str:
         """
         Generate text using OpenAI API
         
@@ -33,7 +33,7 @@ class OpenAILLM:
                 model=self.model,
                 messages=[{"role": "user", "content": prompt}],
                 max_tokens=max_tokens,
-                temperature=0.7
+                temperature=temperature
             )
             return response.choices[0].message.content.strip()
         except Exception as e:
