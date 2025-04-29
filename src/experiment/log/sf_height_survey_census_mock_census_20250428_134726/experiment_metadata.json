@@ -1,0 +1,36 @@
+{
+  "name": "sf_height_survey_census_mock",
+  "model": "census",
+  "population": 100,
+  "region": "san_francisco",
+  "input": {
+    "proposals": [
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json",
+      "sf_rezoning_plan/processed/sf_proposal_2024_100m.json"
+    ]
+  },
+  "evaluation": {
+    "ground_truth": "sf_prolific_survey/processed/response_reactions_mapped.json",
+    "evaluators": [
+      "opinion_score",
+      "reason_match"
+    ]
+  },
+  "model_config": {
+    "agent_data_file": "src/models/m03_census/census_data/agents_100.json",
+    "temperature": 0.7,
+    "max_tokens": 800
+  },
+  "runtime": {
+    "start_time": "2025-04-28T13:47:26.831922",
+    "end_time": "2025-04-28T13:51:56.289667",
+    "duration_seconds": 269.457745
+  }
+}
