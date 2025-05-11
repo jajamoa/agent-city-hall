@@ -262,9 +262,6 @@ class Census(BaseModel):
         prompt = self._build_opinion_prompt(agent, proposal_desc, region)
         print(f"DEBUG: Prompt length: {len(prompt)} characters")
         
-        # Skip actual LLM call for testing if needed
-        # return self._generate_fallback_opinion(scenario_id)
-        
         # Generate response from LLM
         try:
             response = await self.llm.generate(
@@ -278,9 +275,9 @@ class Census(BaseModel):
             return self._generate_fallback_opinion(scenario_id)
         
         try:
-            # Parse the response to extract rating and reasons
-            rating, reasons = self._parse_opinion_response(response)
-            print(f"DEBUG: Extracted rating={rating}, reasons={reasons}")
+            # Parse the response to extract rating and reason scores
+            rating, reason_scores = self._parse_opinion_response(response)
+            print(f"DEBUG: Extracted rating={rating}, reason_scores={reason_scores}")
             
             # Format into the expected output structure
             return {
@@ -288,12 +285,11 @@ class Census(BaseModel):
                     scenario_id: rating
                 },
                 "reasons": {
-                    scenario_id: reasons
+                    scenario_id: reason_scores
                 }
             }
         except Exception as e:
             print(f"ERROR: Failed to parse response: {str(e)}")
-            # Generate fallback random data
             return self._generate_fallback_opinion(scenario_id)
     
     def _build_opinion_prompt(self, 
@@ -317,100 +313,124 @@ class Census(BaseModel):
         elif isinstance(agent, dict):
             agent_data = agent
         
-        prompt = f"""As a resident of {region} with the following characteristics, rate your opinion on the proposed housing policy change and provide reasons for your stance.
+        geo = agent.get("geo_content", {})
+        geo_narrative = geo.get("narrative", "")
+        neighborhood = geo.get("neighborhood", "unknown")
+        
+        # Extract more detailed demographic information
+        housing_status = agent_data.get("householder type", "unknown")
+        rent_burden = agent_data.get("Gross rent", "unknown")
+        mobility = agent_data.get("Geo Mobility", "unknown")
+        transportation = agent_data.get("means of transportation", "unknown")
+        marital_status = agent_data.get("marital status", "unknown")
+        has_children = agent_data.get("has children under 18", False)
+        children_age = agent_data.get("children age range", "No Children")
+        
+        prompt = f"""As a resident of {region} living in the {neighborhood} neighborhood, evaluate this housing policy proposal based on your personal circumstances and local context.
 
-Resident Information:
-- Age: {agent_data.get('age', 'unknown')}
+Your Personal Profile:
+- Age: {agent_data.get('age', 'unknown')} years old
 - Income: {agent_data.get('income', 'unknown')}
 - Occupation: {agent_data.get('occupation', 'unknown')}
-- Housing Status: {agent_data.get('householder type', 'unknown')}
-- Transportation: {agent_data.get('means of transportation', 'unknown')}
-- Family Type: {agent_data.get('family type', 'unknown')}
+- Housing: {housing_status} with {rent_burden} of income spent on housing
+- Mobility History: {mobility}
+- Transportation: {transportation}
+- Family: {marital_status}, {children_age if has_children else 'no children'}
 
-Housing Policy Proposal:
+Your Neighborhood Context:
+{geo_narrative}
+
+Proposed Housing Policy Changes:
 {proposal_desc}
 
-Consider how this proposal might affect:
-- Housing availability and affordability 
-- Neighborhood character and livability
-- Infrastructure and public services
-- Economic development and property values
-- Environmental impact
-- Equity and displacement issues
+Consider how this proposal might affect you and your community across multiple dimensions. Rate EACH of the following aspects on a scale of 1-5, where:
+1 = Very Negative Impact
+2 = Somewhat Negative Impact
+3 = Neutral/No Impact
+4 = Somewhat Positive Impact
+5 = Very Positive Impact
 
-Provide:
-1. A rating from 1-10 (where 1=strongly oppose, 5=neutral, 10=strongly support)
-2. 1-3 main reasons for your opinion using ONLY the codes below:
+Also provide an overall opinion rating from 1-10 where:
+1-2 = Strongly Oppose
+3-4 = Oppose
+5-6 = Neutral
+7-8 = Support
+9-10 = Strongly Support
 
-Reason Codes:
-A: Housing supply and availability
-B: Affordability for low- and middle-income residents
-C: Impact on neighborhood character
-D: Infrastructure and services capacity
-E: Economic development and job creation
-F: Environmental concerns
-G: Transit and transportation access
-H: Displacement of existing residents
-I: Equity and social justice
-J: Public space and amenities
-K: Property values and investment
-L: Historical preservation
+Required Response Format:
+Rating: [1-10]
+Reasons:
+A: [1-5] (Housing supply and availability)
+B: [1-5] (Affordability for low/middle-income residents)
+C: [1-5] (Neighborhood character impact)
+D: [1-5] (Infrastructure capacity)
+E: [1-5] (Economic development)
+F: [1-5] (Environmental impact)
+G: [1-5] (Transit access)
+H: [1-5] (Displacement risk)
+I: [1-5] (Equity and social justice)
+J: [1-5] (Public amenities)
+K: [1-5] (Property values)
+L: [1-5] (Historical preservation)
 
-Format your response EXACTLY as follows:
-Rating: 7
-Reasons: A,C,D
+Consider:
+1. Your personal housing situation and needs
+2. Your daily transportation and commute patterns
+3. Your neighborhood's character and amenities
+4. Local infrastructure and services
+5. Economic impacts on you and your community
+6. Environmental and quality of life effects
 
-Remember to:
-- Use ONLY the letter codes provided (A through L)
-- Include 1-3 reason codes
-- Maintain the exact format specified
+Format your response EXACTLY as shown above, with one rating (1-10) and twelve reason scores (1-5 each).
 """
-        
         return prompt
     
-    def _parse_opinion_response(self, response: str) -> Tuple[int, List[str]]:
-        """Parse the LLM response to extract rating and reason codes.
+    def _parse_opinion_response(self, response: str) -> Tuple[int, Dict[str, int]]:
+        """Parse the LLM response to extract rating and reason scores.
         
         Args:
             response: The response from the LLM.
             
         Returns:
-            A tuple of (rating, reason_codes).
+            A tuple of (rating, reason_scores).
         """
         rating = 5  # Default neutral rating
-        reasons = []
+        reason_scores = {
+            "A": 3, "B": 3, "C": 3, "D": 3, "E": 3,
+            "F": 3, "G": 3, "H": 3, "I": 3, "J": 3,
+            "K": 3, "L": 3
+        }  # Default neutral scores
         
-        lines = response.strip().split('\n')
-        for line in lines:
-            line = line.strip()
+        try:
+            lines = response.strip().split('\n')
+            for line in lines:
+                line = line.strip()
+                
+                # Extract overall rating
+                if line.lower().startswith("rating:"):
+                    try:
+                        rating_str = line.split(":", 1)[1].strip()
+                        rating = int(rating_str)
+                        rating = max(1, min(10, rating))  # Ensure 1-10 range
+                    except:
+                        pass
+                
+                # Extract reason scores
+                elif ":" in line and line[0] in reason_scores:
+                    try:
+                        reason_code = line[0]
+                        score_str = line.split(":", 1)[1].strip().split()[0]
+                        score = int(score_str)
+                        score = max(1, min(5, score))  # Ensure 1-5 range
+                        reason_scores[reason_code] = score
+                    except:
+                        pass
             
-            # Extract rating
-            if line.lower().startswith("rating:"):
-                try:
-                    rating_str = line.split(":", 1)[1].strip()
-                    rating = int(rating_str)
-                    # Ensure rating is in the 1-10 range
-                    rating = max(1, min(10, rating))
-                except:
-                    pass
-            
-            # Extract reason codes
-            elif line.lower().startswith("reasons:"):
-                try:
-                    reasons_str = line.split(":", 1)[1].strip()
-                    reasons = [code.strip() for code in reasons_str.split(",")]
-                    # Filter out any invalid codes
-                    valid_codes = set(REASON_MAPPING.values())
-                    reasons = [code for code in reasons if code in valid_codes]
-                except:
-                    pass
+        except Exception as e:
+            print(f"Error parsing response: {str(e)}")
+            # Keep default values if parsing fails
         
-        # If no reasons were extracted, generate random ones
-        if not reasons:
-            num_reasons = random.randint(1, 3)
-            reasons = random.sample(list(REASON_MAPPING.values()), num_reasons)
-        
-        return rating, reasons
+        return rating, reason_scores
     
     def _generate_fallback_opinion(self, scenario_id: str) -> Dict[str, Any]:
         """Generate a fallback random opinion and reasons for a scenario.
@@ -424,15 +444,16 @@ Remember to:
         # Generate random rating between 1 and 10
         rating = random.randint(3, 9)
         
-        # Generate 1-3 random reason codes
-        num_reasons = random.randint(1, 3)
-        reason_codes = random.sample(list(REASON_MAPPING.values()), num_reasons)
+        # Generate random scores for each reason (1-5)
+        reason_scores = {}
+        for code in REASON_MAPPING.values():
+            reason_scores[code] = random.randint(2, 4)
         
         return {
             "opinions": {
                 scenario_id: rating
             },
             "reasons": {
-                scenario_id: reason_codes
+                scenario_id: reason_scores
             }
         }

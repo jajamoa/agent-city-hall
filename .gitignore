@@ -202,3 +202,6 @@ ENV/
 # Experiment outputs
 eval/data/experiments/*
 !eval/data/experiments/.gitkeep
+
+# Ignore experiment logs
+src/experiment/log/

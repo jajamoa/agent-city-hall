@@ -1,9 +1,10 @@
 import csv
 import json
+import random
 
 def extract_housing_data(csv_file_path):
     """
-    Extract specific data from San Francisco Housing Survey CSV file and format it into JSON.
+    Extract demographic data from San Francisco Housing Survey CSV file and format it into JSON.
     
     Args:
         csv_file_path (str): Path to the CSV file
@@ -12,123 +13,109 @@ def extract_housing_data(csv_file_path):
         list: List of dictionaries containing formatted data
     """
     results = []
-    
+
+    # Valid San Francisco ZIP codes
+    valid_sf_zip_codes = [
+        "94124", "94127", "94131", "94133", "94132", "94134", "94102", 
+        "94158", "94103", "94104", "94105", "94107", "94108", "94109", "94110", 
+        "94111", "94112", "94114", "94115", "94116", "94117", "94118", "94121", 
+        "94122", "94123", "94129", "94130"
+    ]
+
+    # Default coordinates
+    default_coordinates = {"lat": 37.778250, "lng": -122.419944}
+
+    # ZIP code coordinate mapping
+    zip_coordinates = {
+        "94124": {"lat": 37.7299, "lng": -122.3854},
+        "94127": {"lat": 37.7362, "lng": -122.4577},
+        "94131": {"lat": 37.7436, "lng": -122.4375},
+        "94132": {"lat": 37.7219, "lng": -122.4783},
+        "94133": {"lat": 37.8002, "lng": -122.4091},
+        "94134": {"lat": 37.7149, "lng": -122.4130},
+        "94102": {"lat": 37.7786, "lng": -122.4156},
+        "94158": {"lat": 37.7704, "lng": -122.3880},
+        "94103": {"lat": 37.7752, "lng": -122.4144},
+        "94104": {"lat": 37.7915, "lng": -122.4022},
+        "94105": {"lat": 37.7866, "lng": -122.3890},
+        "94107": {"lat": 37.7621, "lng": -122.3971},
+        "94108": {"lat": 37.7929, "lng": -122.4079},
+        "94109": {"lat": 37.7916, "lng": -122.4223},
+        "94110": {"lat": 37.7485, "lng": -122.4158},
+        "94111": {"lat": 37.7976, "lng": -122.4004},
+        "94112": {"lat": 37.7200, "lng": -122.4369},
+        "94114": {"lat": 37.7599, "lng": -122.4346},
+        "94115": {"lat": 37.7857, "lng": -122.4358},
+        "94116": {"lat": 37.7435, "lng": -122.4892},
+        "94117": {"lat": 37.7692, "lng": -122.4449},
+        "94118": {"lat": 37.7811, "lng": -122.4617},
+        "94121": {"lat": 37.7786, "lng": -122.4892},
+        "94122": {"lat": 37.7599, "lng": -122.4828},
+        "94123": {"lat": 37.7991, "lng": -122.4340},
+        "94129": {"lat": 37.7983, "lng": -122.4701},
+        "94130": {"lat": 37.8232, "lng": -122.3693}
+    }
+
+    def add_coordinate_variation(base_coords):
+        """Add small variation to coordinates (approx. ±500m)"""
+        lat_variation = random.uniform(-0.003, 0.003)
+        lng_variation = random.uniform(-0.003, 0.003)
+        return {
+            "lat": base_coords["lat"] + lat_variation,
+            "lng": base_coords["lng"] + lng_variation
+        }
+
     with open(csv_file_path, 'r', encoding='utf-8') as file:
         reader = csv.DictReader(file)
-        
+
         for row in reader:
-            # Extract the required fields
-            data = {
-                "id": row["Prolific ID"],
-                "coordinates": {
-                    "lat": None,
-                    "lng": None
-                },
-                "agent": {
-                    "age": map_age_to_number(row["What is your age?"]),
-                    "Geo Mobility": map_mobility(row["Have you moved in the past year?"]),
-                    "householder type": map_housing_status(row["What best describes your housing status?"]),
-                    "Gross rent": map_rent_percentage(row["If you rent, what is your approximate monthly rent as a percentage of your income?"]),
-                    "means of transportation": map_transportation(row["What is your primary mode of transportation? (Please select all that apply)"]),
-                    "income": map_income(row["What is your annual household income?"]),
-                    "occupation": row["Which of the following best describes your occupation?"]
+            try:
+                zip_code_str = row["What is your ZIP code?"].strip()
+                zip_code = str(int(zip_code_str))  # make sure it's normalized (no decimals, no colons)
+
+                if zip_code in valid_sf_zip_codes:
+                    coordinates = add_coordinate_variation(zip_coordinates[zip_code])
+                else:
+                    coordinates = add_coordinate_variation(default_coordinates)
+
+                data = {
+                    "id": row["Prolific ID"],
+                    "coordinates": coordinates,
+                    "agent": {
+                        "age": int(row["What is your age?"]),
+                        "Geo Mobility": row["Have you moved in the past year?"],
+                        "householder type": row["What best describes your housing status?"],
+                        "Gross rent": row["If you rent, what is your approximate monthly rent as a percentage of your income?"],
+                        "means of transportation": row["What is your primary mode of transportation? (Please select all that apply)"],
+                        "income": row["What is your annual household income?"],
+                        "occupation": row["Which of the following best describes your occupation?"],
+                        "marital status": row["What's your marital status?"],
+                        "has children under 18": "Yes" in row["Do you have any children under the age of 18 living with you?"],
+                        "children age range": row["What is the age range of your children under 18 years old? (You may select more than one option.)"],
+                        "ZIP code": int(row["What is your ZIP code?"]),
+                        "approximate address": row["What's your home address?\nIf you are not comfortable of providing the accurate location, you don’t have to give your exact address. Just something nearby is great — like a street corner, the name of a shop, or your building (no unit number needed). Anywhere within 50 meters of your home works!"]
+                    }
                 }
-            }
-            
-            results.append(data)
-    
+
+                results.append(data)
+
+            except Exception as e:
+                print(f"⚠️ Skipping row due to error: {e}")
+
     return results
-
-def map_age_to_number(age_range):
-    """Map age range to a representative number"""
-    age_mapping = {
-        "18-24": 21,
-        "25-29": 27,
-        "30-34": 32,
-        "35-39": 37,
-        "40-44": 42,
-        "45-49": 47,
-        "50-54": 52,
-        "55-59": 57,
-        "60-64": 62,
-        "65-69": 67,
-        "70-74": 72,
-        "75+": 77
-    }
-    return age_mapping.get(age_range, 29)  # Default to 29 if not found
-
-def map_mobility(mobility_status):
-    """Map mobility status to the required format"""
-    if "Same house" in mobility_status:
-        return "Did not move"
-    else:
-        return "Moved from different state"  # Default value as per requirements
-
-def map_housing_status(status):
-    """Map housing status to the required format"""
-    if "Renter" in status:
-        return "Renter occupied"
-    elif "Owner" in status:
-        return "Owner occupied"
-    else:
-        return "Renter occupied"  # Default to renter occupied
-
-def map_rent_percentage(percentage):
-    """Map rent percentage to the required format"""
-    percentage_mapping = {
-        "Less than 15.0 percent": "Less than 15.0 percent",
-        "15.0 to 19.9 percent": "15.0-19.9 percent",
-        "20.0 to 24.9 percent": "20-24.9 percent",
-        "25.0 to 29.9 percent": "25.0-29.9 percent",
-        "30.0 to 34.9 percent": "30.0-34.9 percent",
-        "35.0 percent or more": "35.0 percent or more"
-    }
-    return percentage_mapping.get(percentage, "20-24.9 percent")  # Default to 20-24.9 percent if not found
-
-def map_transportation(transportation):
-    """Map transportation to the required format"""
-    if "Public transit" in transportation:
-        return "Public transportation"
-    elif "Bicycle" in transportation:
-        return "Bicycle"
-    elif "Walk" in transportation:
-        return "Walked"
-    elif "Drive" in transportation or "Car" in transportation:
-        return "Car, truck, or van"
-    elif "work from home" in transportation.lower() or "remote" in transportation.lower():
-        return "Worked from home"
-    else:
-        return "Worked from home"  # Default to worked from home as per requirements
-
-def map_income(income):
-    """Map income to the required format"""
-    if "$200,000 or more" in income:
-        return "With income:!!$200,000 or more"
-    elif "$150,000" in income:
-        return "With income:!!$150,000 to $199,999"
-    elif "$100,000" in income:
-        return "With income:!!$100,000 to $149,999"
-    elif "$50,000" in income:
-        return "With income:!!$75,000 or more"
-    elif "$25,000" in income:
-        return "With income:!!$25,000 to $49,999"
-    elif "Less than $25,000" in income:
-        return "With income:!!Less than $25,000"
-    else:
-        return "With income:!!$75,000 or more"  # Default to $75,000 or more as per requirements
 
 def main():
     # Define the path to your CSV file
-    csv_file_path = "./response.csv" # TODO: change to the path of the csv file
+    csv_file_path = "./SF_version2_5.4_responses.csv"  # TODO: change to the path of the csv file
     
     # Extract data
     extracted_data = extract_housing_data(csv_file_path)
     
     # Write to JSON file
-    with open("responses.json", 'w', encoding='utf-8') as json_file:
+    with open("responses_5.4.json", 'w', encoding='utf-8') as json_file:
         json.dump(extracted_data, json_file, indent=4)
     
-    print(f"Extraction complete. Data saved to responses.json")
+    print(f"Extraction complete. Data saved to responses_5.4.json")
     print(f"Total records processed: {len(extracted_data)}")
     
     # Print the first record as an example

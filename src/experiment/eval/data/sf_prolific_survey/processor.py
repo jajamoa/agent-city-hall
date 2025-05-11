@@ -3,6 +3,8 @@ import json
 import pandas as pd
 from pathlib import Path
 import re
+import argparse
+
 
 class SurveyDataProcessor:
     def __init__(self, input_dir=None, output_dir=None, mapping_file=None):
@@ -68,7 +70,10 @@ class SurveyDataProcessor:
         """
         try:
             # Read the CSV file
-            df = pd.read_csv(csv_file)
+            df = pd.read_csv(csv_file).astype(object)
+            df.columns = [col.replace('\n', ' ').strip() for col in df.columns]
+
+
             
             # Extract participant IDs from "Prolific ID" column
             if 'Prolific ID' in df.columns:
@@ -140,7 +145,8 @@ class SurveyDataProcessor:
                 
                 # Find all scenario columns
                 scenario_pattern = r'^Scenario (\d+\.\d+)'
-                reason_pattern = r'^Scenario (\d+\.\d+): Select the reasons'
+                reason_pattern = r'^Scenario (\d+\.\d+):.*?\[(.+?)\]'
+
                 
                 # Extract opinions (numeric ratings)
                 for col in df.columns:
@@ -153,42 +159,31 @@ class SurveyDataProcessor:
                             reactions[pid]['opinions'][scenario_id] = value
                             reactions_mapped[pid]['opinions'][scenario_id] = value
                 
-                # Extract reasons
+                # Extract reason ratings from Likert-scale fields
                 for col in df.columns:
-                    # Match scenario columns for reasons
-                    reason_match = re.match(reason_pattern, col)
-                    if reason_match:
-                        scenario_id = reason_match.group(1)  # Extract just the number (e.g., "1.1")
-                        if col in participant_data.columns:
-                            reasons_text = participant_data[col].iloc[0]
+                    match = re.match(r'^Scenario (\d+\.\d+).*?\[(.*?)\]', col)
+                    if match:
+                        scenario_id = match.group(1)
+                        reason_label = match.group(2).strip()
+                        
+                        # Map to code (e.g., "A", "B", ...)
+                        reason_code = self.reason_mapping.get(reason_label, reason_label)
+                        
+                        # Extract value
+                        try:
+                            value = int(participant_data[col].iloc[0])
+                        except (ValueError, TypeError):
+                            continue  # skip if not a valid int
                             
-                            # Parse reasons into a list
-                            if isinstance(reasons_text, str):
-                                # Instead of just splitting by comma, extract each complete reason phrase
-                                reasons_list = []
-                                for category in reason_categories:
-                                    if category in reasons_text:
-                                        reasons_list.append(category)
-                                
-                                # If we didn't find any matches using the predefined list,
-                                # fall back to simple splitting as a last resort
-                                if not reasons_list and ',' in reasons_text:
-                                    reasons_list = [reason.strip() for reason in reasons_text.split(',')]
-                                
-                                # Apply mapping to reasons
-                                mapped_reasons = []
-                                for reason in reasons_list:
-                                    if reason in self.reason_mapping:
-                                        mapped_reasons.append(self.reason_mapping[reason])
-                                    else:
-                                        # If not in mapping, keep original
-                                        mapped_reasons.append(reason)
-                                
-                                reactions[pid]['reasons'][scenario_id] = reasons_list
-                                reactions_mapped[pid]['reasons'][scenario_id] = mapped_reasons
-                            else:
-                                reactions[pid]['reasons'][scenario_id] = reasons_text
-                                reactions_mapped[pid]['reasons'][scenario_id] = reasons_text
+                        # Save to reactions_mapped
+                        if scenario_id not in reactions_mapped[pid]["reasons"]:
+                            reactions_mapped[pid]["reasons"][scenario_id] = {}
+                        reactions_mapped[pid]["reasons"][scenario_id][reason_code] = value
+
+                        # Save full label version too
+                        if scenario_id not in reactions[pid]["reasons"]:
+                            reactions[pid]["reasons"][scenario_id] = {}
+                        reactions[pid]["reasons"][scenario_id][reason_label] = value
             
             # Save extracted data to JSON files
             base_name = csv_file.stem
@@ -196,17 +191,18 @@ class SurveyDataProcessor:
             # Save demographics
             demographics_file = self.output_dir / f"{base_name}_demographics.json"
             with open(demographics_file, 'w') as f:
-                json.dump(demographics, f, indent=2)
+                json.dump(demographics, f, indent=2, default=str)  # add default=str
             
             # Save reactions with text labels
             reactions_file = self.output_dir / f"{base_name}_reactions.json"
             with open(reactions_file, 'w') as f:
-                json.dump(reactions, f, indent=2)
+                json.dump(reactions, f, indent=2, default=str)
+
                 
             # Save reactions with mapped codes
             reactions_mapped_file = self.output_dir / f"{base_name}_reactions_mapped.json"
             with open(reactions_mapped_file, 'w') as f:
-                json.dump(reactions_mapped, f, indent=2)
+                json.dump(reactions_mapped, f, indent=2, default=str)
                 
             print(f"Successfully processed {csv_file.name}.")
             print(f"Demographic data saved to {demographics_file}")
@@ -217,5 +213,24 @@ class SurveyDataProcessor:
             print(f"Error processing {csv_file.name}: {str(e)}")
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Process a specific survey CSV file.")
+    parser.add_argument(
+        "--csv", 
+        type=str, 
+        help="Path to a specific CSV file to process (relative or absolute)."
+    )
+    args = parser.parse_args()
+
+    # Create processor
     processor = SurveyDataProcessor()
-    processor.process_csv_files() 
+
+    if args.csv:
+        csv_path = Path(args.csv)
+        if csv_path.exists() and csv_path.suffix == '.csv':
+            processor._process_single_file(csv_path)
+        else:
+            print(f"❌ File {args.csv} does not exist or is not a CSV.")
+    else:
+        processor.process_csv_files()
+
+  
